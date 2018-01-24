@@ -1,4 +1,4 @@
 # Bachelorarbeit
 My Bachelorarbeit
-About RRT* with Autonomous Cars
-More Documentation comes later
+About RRT* with Autonomous Cars.  <br>
+More Documentation comes later.
