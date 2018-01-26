@@ -74,10 +74,12 @@ def drawSolutionPath(goal_node, list_of_nodes, pygame, screen):
         node=parent
             
 def unit_vector(vector):
-    #u cant normalize 0-vector
-    if np.linalg.norm(vector)==0:
+    try:
+        unitvector=vector/np.linalg.norm(vector)
+    except ZeroDivisionError:
+        print "you can normalise 0-vector"
         return vector
-    return vector/np.linalg.norm(vector)
+    return unitvector
 
 def cos_angle(v1,v2):
     v1_u = unit_vector(v1)
@@ -138,22 +140,25 @@ def set_orientation(new_node, parent):
     orientation[1]==1 can result in negativ sqrt
     if ori[1]==1 ori[0]==0 anyway
     """    
-    if not orientation[1]**2>1:
+    try:
         x_coor=sqrt(1-((orientation[1])**2))
         orientation[0]=x_coor
-        """
-        sqrt operations can lead to to different solutions for each x_coor and y_coor
-        The correct orientation has the same angle to d as o to d (dot product is the same)
-        np.around rounds to the 8th postion, needed cause IEEE Standard of representing doubles and compare them with == is error-prone
-        """
-        if not np.around(np.dot(orientation,d),8) == np.around(np.dot(o,d), decimals=8):
-            orientation[0]= -x_coor
-            if not np.around(np.dot(orientation,d),8) == np.around(np.dot(o,d), decimals=8):                
-                orientation[1]=-y_coor
-                if not np.around(np.dot(orientation,d),8) == np.around(np.dot(o,d), decimals=8):                    
-                    orientation[0]=x_coor
-                    if not np.around(np.dot(orientation,d),8) == np.around(np.dot(o,d), decimals=8):                        
-                        print " You failed hard."
+    except ArithmeticError:
+        print "1^2 were bigger than one"
+        orientation[1]=1
+    """
+    sqrt operations can lead to to different solutions for each x_coor and y_coor
+    The correct orientation has the same angle to d as o to d (dot product is the same)
+    np.around rounds to the 8th postion, needed cause IEEE Standard of representing doubles and compare them with == is error-prone
+    """
+    if not np.around(np.dot(orientation,d),8) == np.around(np.dot(o,d), decimals=8):
+        orientation[0]= -x_coor
+        if not np.around(np.dot(orientation,d),8) == np.around(np.dot(o,d), decimals=8):                
+            orientation[1]=-y_coor
+            if not np.around(np.dot(orientation,d),8) == np.around(np.dot(o,d), decimals=8):                    
+                orientation[0]=x_coor
+                if not np.around(np.dot(orientation,d),8) == np.around(np.dot(o,d), decimals=8):                        
+                    print " You failed hard."
                     
 
     """ orientation is saved as int in list of nodes """
