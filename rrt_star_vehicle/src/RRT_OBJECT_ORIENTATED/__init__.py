@@ -260,33 +260,7 @@ def main():
         select_random_node    
     """
     
-    
-#     #list_of_nodes.append(Node(XDIM/2.0,YDIM/2.0)) # Start in the center
-#     list_of_nodes.append(Node(0.0,160.0)) # Start in the corner
-#     start=list_of_nodes[0]
-#     goal=Node(275.0,270.0)
-#     for node_count in range(NUMNODES):
-#         rand = Node(random.random()*XDIM, random.random()*YDIM)
-#         nn = list_of_nodes[0]
-#         for p in list_of_nodes:
-#             if dist([p.x,p.y],[rand.x,rand.y]) < dist([nn.x,nn.y],[rand.x,rand.y]):
-#                 nn = p
-#         interpolatedNode= step_from_to([nn.x,nn.y],[rand.x,rand.y])
-#     
-#         newnode = Node(interpolatedNode[0],interpolatedNode[1])
-#         if checkIntersect(nn,rand,OBS):
-#             [newnode,nn]=chooseParent(nn,newnode,list_of_nodes);
-#             list_of_nodes.append(newnode)
-#             pygame.draw.line(screen,black,[nn.x,nn.y],[newnode.x,newnode.y])
-#             list_of_nodes=reWire(list_of_nodes,newnode,pygame,screen)
-#             pygame.display.update()
-#         #print node_count, "    ", list_of_nodes
-#         for e in pygame.event.get():
-#             if e.type == QUIT or (e.type == KEYUP and e.key == K_ESCAPE):
-#                 sys.exit("Leaving because you requested it.")
-#     drawSolutionPath(start,goal,list_of_nodes,pygame,screen)
-#     pygame.display.update()
-# if python says run, then we should run
+
 if __name__ == '__main__':
     main()
     running = True
