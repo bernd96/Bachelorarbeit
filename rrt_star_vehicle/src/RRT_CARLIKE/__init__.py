@@ -27,7 +27,7 @@ ROWS = 6
 RADIUS=20
 
 START_NODE = np.array([0,YDIM/2,0,1,0,-1])
-area = [(630,520,1,1)]
+area = [(630,520,20,20)]
 OBS=[(130,220,50,100)]
 
 def is_in_area(node, area):
