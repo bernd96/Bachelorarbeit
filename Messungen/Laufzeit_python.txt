@@ -1,0 +1,53 @@
+XDIM = 960
+YDIM = 640
+
+MAX_STEERING_ANGLE_RADIUS = 4 
+STEPSIZE = 7
+
+START_NODE = np.array([0,YDIM/2,0,1,0,-1])
+area = [(630,520,20,20)]
+""" A x B Matrix: NUM_NODES x ROWS """
+NUM_NODES = 10000
+ROWS = 6
+RADIUS=20
+
+
+Time for 0 iteration:0.0019998550415s
+Time for 500 iteration:5.45700001717s
+Time for 1000 iteration:13.6330001354s
+Time for 1500 iteration:28.8589999676s
+Time for 2000 iteration:37.0080001354s
+Time for 2500 iteration:45.496999979s
+Time for 3000 iteration:58.9069998264s
+Time for 3500 iteration:60.856000185s
+Time for 4000 iteration:82.7789998055s
+Time for 4500 iteration:80.1160001755s
+Time for 5000 iteration:99.5839998722s
+Time for 5500 iteration:109.901000023s
+Time for 6000 iteration:117.611000061s
+Time for 6500 iteration:129.976000071s
+Time for 7000 iteration:141.603999853s
+Time to End: 153
+Time for full algorithm: 1156.32099986 seconds.
+
+DEBUG:
+Time for 0 iteration:0.00699996948242s
+Time for 500 iteration:8.83400011063s
+Time for 1000 iteration:27.0429999828s
+Time for 1500 iteration:41.0929999352s
+Time for 2000 iteration:63.989000082s
+Time for 2500 iteration:84.5369999409s
+Time for 3000 iteration:99.5439999104s
+Time for 3500 iteration:137.866000175s
+Time for 4000 iteration:153.739999771s
+Time for 4500 iteration:163.407999992s
+Time for 5000 iteration:207.156000137s
+Time for 5500 iteration:207.177999973s
+Time for 6000 iteration:199.608999968s
+Time for 6500 iteration:221.203000069s
+Time for 7000 iteration:238.794000149s
+Time for 7500 iteration:276.467999935s
+Time for 8000 iteration:305.349999905s
+Time for 8500 iteration:288.100000143s
+Time for 9000 iteration:288.757999897s
+Time for 9500 iteration:327.753000021s
