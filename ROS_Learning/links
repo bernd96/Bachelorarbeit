@@ -1,0 +1,7 @@
+passing arguments
+via cmd:            http://wiki.ros.org/ROS/YAMLCommandLine
+
+ROS services:       http://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams
+
+rostopic:           http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics
+                    http://wiki.ros.org/rostopic
