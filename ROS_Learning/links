@@ -2,6 +2,12 @@ passing arguments
 via cmd:            http://wiki.ros.org/ROS/YAMLCommandLine
 
 ROS services:       http://wiki.ros.org/ROS/Tutorials/UnderstandingServicesParams
+                    http://wiki.ros.org/rosservice
 
 rostopic:           http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics
                     http://wiki.ros.org/rostopic
+
+rosparam (globale
+Variablen):         http://wiki.ros.org/Parameter%20Server
+                    http://wiki.ros.org/Parameter Server
+                    http://wiki.ros.org/ROS/Tutorials/UnderstandingTopics
