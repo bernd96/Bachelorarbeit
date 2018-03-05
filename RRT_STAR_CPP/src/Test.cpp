@@ -11,7 +11,6 @@ namespace std {
 
 Test::Test() {
 	// TODO Auto-generated constructor stub
-
 }
 
 Test::~Test() {

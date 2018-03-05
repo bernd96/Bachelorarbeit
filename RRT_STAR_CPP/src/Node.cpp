@@ -17,7 +17,6 @@ Node::~Node() {
 	// TODO Auto-generated destructor stub
 }
 void calculate_coordinates_with_stepsize(int bla){
-
 	bla=5;
 }
 
