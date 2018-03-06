@@ -14,6 +14,21 @@ Calculator::Calculator() {
 
 }
 
+bool Calculator::is_in_area(Node*, Obstacle*) {
+}
+
+float Calculator::get_length(float x, float y) {
+}
+
+void Calculator::unit_vector(float* vector) {
+}
+
+float Calculator::cos_angle(float* v1, float* v2) {
+}
+
+float Calculator::get_distance(Node*, Node*) {
+}
+
 Calculator::~Calculator() {
 	// TODO Auto-generated destructor stub
 }

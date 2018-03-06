@@ -27,7 +27,7 @@ public:
 	float ori_x;
 	float ori_y;
 
-	Node();
+	Node(float,float,float,float);
 
 
 	Node* get_parent_pointer();
@@ -36,10 +36,10 @@ public:
 	void set_parent_pointer(Node*);
 	void set_valid(int);
 
-	int calculate_and_set_cost(Node*);
+	int calculate_and_set_cost(Node*, Calculator*);
 
 	void calculate_coordinates_with_stepsize(int);
-	bool is_reachable();
+	bool is_reachable(Node*);
 	int is_valid();
 
 
