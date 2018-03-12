@@ -38,6 +38,7 @@ public:
 
 	int calculate_and_set_cost(Node*, Calculator*);
 
+
 	void calculate_coordinates_with_stepsize(int);
 	bool is_reachable(Node*);
 	int is_valid();
