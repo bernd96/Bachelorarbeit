@@ -32,13 +32,6 @@ int Node::get_validation() {
 	return 0;
 }
 
-void Node::_init_(const Eigen::Vector2f& coor, const Eigen::Vector2f& ori) {
-	coordinates=coor;
-	orientation=ori;
+
+Node::~Node() {
 }
-
-Node::~Node() {}
-
-
-
-

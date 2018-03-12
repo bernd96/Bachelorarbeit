@@ -30,7 +30,6 @@ public:
 
 	Node* get_parent_pointer();
 	int get_cost();
-	void _init_(const Eigen::Vector2f&,const Eigen::Vector2f&);
 	void set_parent_pointer(Node*);
 	void set_validation(int);
 

@@ -53,8 +53,9 @@ int main(int argc, char* argv[]){
 	Vector2f start_pos = Vector2f::Random();
 	start_pos=(start_pos+1)*500;
 	Vector2f start_ori(1,0);
-	Node start=new Node();
-	start._init_(&start_pos, start_ori);
+	Node* start=new Node();
+	*start->coordinates=&start_pos;
+	*start->orientation=&start_ori;
 	//main
 	for (int i = 0; i < 500; ++i) {
 		Vector2f coor=Vector2f::Random();
@@ -62,22 +63,22 @@ int main(int argc, char* argv[]){
 		Vector2f ori=Vector2f::Random();
 
 		//create_random_node();
-		Node new_node = new Node();
-		new_node._init_(&coor,&ori);
-
+		Node* new_node = new Node();
+		*new_node->coordinates=&coor;
+		*new_node->orientation=&ori;
 
 
 		//check_if_valid();
-		if (!calc.is_reachable(&start,&new_node)){
+		if (!calc.is_reachable(start,new_node)){
 			continue;
 		}
 		//find_parent_with_min_cost();
 
-		project_to parent();
-		check_if_still_valid_and_set_parent();
-		calculate_orientation();
-		calculate_cost();
-		check_if_goal_reached();
+		//project_to parent();
+		//check_if_still_valid_and_set_parent();
+		//calculate_orientation();
+		//calculate_cost();
+		//check_if_goal_reached();
 	}
 
 	//Zeitmessung Auswertung
