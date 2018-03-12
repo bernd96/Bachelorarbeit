@@ -38,3 +38,8 @@ Calculator::~Calculator() {
 }
 
 } /* namespace std */
+
+bool std::Calculator::is_reachable(Node* parent, Node* new_node) {
+
+	return true;
+}

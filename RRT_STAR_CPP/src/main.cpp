@@ -11,19 +11,17 @@
 #include <time.h>
 #include <cstdlib>
 #include <ctime>
-#include <eigen3/Eigen/src/Core/Array.h>
+#include <eigen3/Eigen/Dense>
+
 
 using namespace std;
+using namespace Eigen;
 
-void get_position(float pos[]){
+void get_position(Vector2d*pos){
 	float tmp[4]={5,7,2,1};
 	pos=tmp;
 }
-void printarray (float arg[], int length) {
-	  for (int n=0; n<length; ++n)
-	    cout << arg[n] << ' ';
-	  cout << '\n';
-	}
+
 const int STEPSIZE=10;
 int main(int argc, char* argv[]){
 	//Systemkonstanten festlegen:
@@ -32,7 +30,8 @@ int main(int argc, char* argv[]){
 	//Auto - Lenkwinkel in Grad? oder Vektor/radius des Lenkkreises?
 	const float STEERING_ANGLE= 45;
 	//Auto - Position
-	float pos[4]={1,2,3,4};
+	//TODO insert correct get_value function
+	Vector2f position(1,2);
 	//Radius Rewiring/Parentsuche
 	const float RADIUS=20;
 
@@ -47,15 +46,39 @@ int main(int argc, char* argv[]){
 	struct timespec mytime;
 	clock_gettime(CLOCK_MONOTONIC,&mytime);
 	float starttime= mytime.tv_nsec;
-
+	//Calculator
+	Calculator calc=new Calculator();
 	//Startknoten
-	std::srand(std::time(nullptr)); // use current time as seed for random generator
-	    float rand = (float)std::rand()/(float)2147483.647;
-	    float rand2=(float)std::rand()/2147483.647;
-
+	// Random initialisiert zwischen -1 und 1, wird danach normalisiert auf 0-1000
+	Vector2f start_pos = Vector2f::Random();
+	start_pos=(start_pos+1)*500;
+	Vector2f start_ori(1,0);
+	Node start=new Node();
+	start._init_(&start_pos, start_ori);
 	//main
-	printarray(pos,4);
+	for (int i = 0; i < 500; ++i) {
+		Vector2f coor=Vector2f::Random();
+		coor=(coor+1)*500;
+		Vector2f ori=Vector2f::Random();
 
+		//create_random_node();
+		Node new_node = new Node();
+		new_node._init_(&coor,&ori);
+
+
+
+		//check_if_valid();
+		if (!calc.is_reachable(&start,&new_node)){
+			continue;
+		}
+		//find_parent_with_min_cost();
+
+		project_to parent();
+		check_if_still_valid_and_set_parent();
+		calculate_orientation();
+		calculate_cost();
+		check_if_goal_reached();
+	}
 
 	//Zeitmessung Auswertung
 	clock_gettime(CLOCK_MONOTONIC,&mytime);

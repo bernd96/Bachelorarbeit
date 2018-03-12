@@ -8,15 +8,9 @@
 #include "Node.h"
 #include <float.h>
 
-Node::Node(float x, float y, float ox, float oy){
-	x_coor=x;
-	y_coor=y;
-	ori_x=ox;
-	ori_y=oy;
-	parent=0;
-	cost=3400000000000000000;
-	isvalid=-1;
-}
+using namespace Eigen;
+
+Node::Node(){}
 
 Node* Node::get_parent_pointer() {
 	return parent;
@@ -30,12 +24,17 @@ void Node::set_parent_pointer(Node* parent_pointer) {
 	parent=parent_pointer;
 }
 
-void Node::set_valid(int valid) {
-	isvalid=valid;
+void Node::set_validation(int valid) {
+	is_valid=valid;
 }
 
-int Node::is_valid() {
+int Node::get_validation() {
 	return 0;
+}
+
+void Node::_init_(const Eigen::Vector2f& coor, const Eigen::Vector2f& ori) {
+	coordinates=coor;
+	orientation=ori;
 }
 
 Node::~Node() {}

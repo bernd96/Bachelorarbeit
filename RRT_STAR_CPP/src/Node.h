@@ -5,7 +5,7 @@
  *      Author: Arbeit
  */
 
-
+#include <eigen3/Eigen/Dense>
 #ifndef NODE_H_
 #define NODE_H_
 
@@ -15,28 +15,26 @@ private:
 
 	//3 possibilities: unkown:-1, valid:1, invalid:0
 	//if the node is invalid, it will be deleted after init
-	int isvalid;
+	int is_valid;
 
 	//costs to get to that node
 	float cost;
 public:
+	Node();
 	//absolut euklid coordinates
-	float x_coor;
-	float y_coor;
+	Eigen::Vector2f coordinates;
 	//absolut orientation vector
-	float ori_x;
-	float ori_y;
+	Eigen::Vector2f orientation;
 
-	Node(float,float,float,float);
 
 
 	Node* get_parent_pointer();
 	int get_cost();
-
+	void _init_(const Eigen::Vector2f&,const Eigen::Vector2f&);
 	void set_parent_pointer(Node*);
-	void set_valid(int);
+	void set_validation(int);
 
-	int is_valid();
+	int get_validation();
 
 
 	virtual ~Node();
