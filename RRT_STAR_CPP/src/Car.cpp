@@ -7,12 +7,17 @@
 
 #include "Car.h"
 
-car::car() {
+Car::Car() {
 	// TODO Auto-generated constructor stub
 
 }
 
-car::~car() {
+float* Car::get_position() {
+return 0;
+
+}
+
+Car::~Car() {
 	// TODO Auto-generated destructor stub
 }
 

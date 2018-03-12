@@ -84,6 +84,9 @@
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.54644987" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
 								<option id="gnu.cpp.compiler.option.include.paths.299218895" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/RRT_STAR_CPP/src}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/eigen3/Eigen"/>
+									<listOptionValue builtIn="false" value="/home/name-not-found/Dokumente/eigen-eigen-5a0156e40feb/Eigen/"/>
+									<listOptionValue builtIn="false" value="/home/name-not-found/Dokumente/eigen-eigen-5a0156e40feb/Eigen/src"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.2053472952" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="_cplusplus=201103L"/>
@@ -122,8 +125,22 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="RRT_STAR_CPP.cdt.managedbuild.target.gnu.mingw.exe.1450079154" name="Executable" projectType="cdt.managedbuild.target.gnu.mingw.exe"/>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/RRT_STAR_CPP"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/RRT_STAR_CPP"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.502308436;cdt.managedbuild.config.gnu.mingw.exe.release.502308436.;cdt.managedbuild.tool.gnu.cpp.compiler.base.54644987;cdt.managedbuild.tool.gnu.cpp.compiler.input.1197553365">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.2020331445;cdt.managedbuild.config.gnu.mingw.exe.debug.2020331445.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.1308946002;cdt.managedbuild.tool.gnu.c.compiler.input.1112986684">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
@@ -136,16 +153,8 @@
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.502308436;cdt.managedbuild.config.gnu.mingw.exe.release.502308436.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release.186900039;cdt.managedbuild.tool.gnu.c.compiler.input.509643149">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.502308436;cdt.managedbuild.config.gnu.mingw.exe.release.502308436.;cdt.managedbuild.tool.gnu.c.compiler.base.548586373;cdt.managedbuild.tool.gnu.c.compiler.input.859412917">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-	<storageModule moduleId="refreshScope" versionNumber="2">
-		<configuration configurationName="Debug">
-			<resource resourceType="PROJECT" workspacePath="/RRT_STAR_CPP"/>
-		</configuration>
-		<configuration configurationName="Release">
-			<resource resourceType="PROJECT" workspacePath="/RRT_STAR_CPP"/>
-		</configuration>
-	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

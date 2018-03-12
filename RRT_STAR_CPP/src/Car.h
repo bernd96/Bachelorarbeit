@@ -9,16 +9,17 @@
 #ifndef CAR_H_
 #define CAR_H_
 
-class car {
+class Car {
 private:
 	float MAX_STEERING_ANGLE_RADIUS;
 	float x_coor;
 	float y_coor;
 public:
 
-	int* get_position();
-	car();
-	virtual ~car();
+	float* get_position();
+
+	Car();
+	virtual ~Car();
 };
 
 #endif /* CAR_H_ */

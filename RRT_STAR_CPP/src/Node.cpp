@@ -34,20 +34,8 @@ void Node::set_valid(int valid) {
 	isvalid=valid;
 }
 
-int Node::calculate_and_set_cost(Node* parent) {
-	//TODO cost is more then just euklid. Think about steering angle
-	float parentcost= *parent->cost;
-	float distance=
-}
-
-void Node::calculate_coordinates_with_stepsize(int stepsize) {
-}
-
-bool Node::is_reachable(Node* parent) {
-
-}
-
 int Node::is_valid() {
+	return 0;
 }
 
 Node::~Node() {}
