@@ -7,13 +7,15 @@
 
 #include "Car.h"
 
-Car::Car() {
+Car::Car(Eigen::Vector2f pos, Eigen::Vector2f ori, float angle_rad,
+		float l, float w) :
+		position(pos), orientation(ori), MAX_STEERING_ANGLE_RADIUS(angle_rad),length(l), width(w)  {
 	// TODO Auto-generated constructor stub
 
 }
 
 float* Car::get_position() {
-return 0;
+	return 0;
 
 }
 

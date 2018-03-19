@@ -5,88 +5,74 @@
  *      Author: Arbeit
  */
 #include <Calculator.h>
+#include <time.h>
 #include <Car.h>
 #include <Node.h>
 #include <iostream>
+#include <array>
+#include <list>
 #include <time.h>
 #include <cstdlib>
 #include <ctime>
 #include <eigen3/Eigen/Dense>
 
-
-using namespace std;
-using namespace Eigen;
-
-void get_position(Vector2d*pos){
-	float tmp[4]={5,7,2,1};
-	pos=tmp;
-}
-
-const int STEPSIZE=10;
-int main(int argc, char* argv[]){
-	//Systemkonstanten festlegen:
-	//Schrittweite in welcher einheit?
-
-	//Auto - Lenkwinkel in Grad? oder Vektor/radius des Lenkkreises?
-	const float STEERING_ANGLE= 45;
-	//Auto - Position
-	//TODO insert correct get_value function
-	Vector2f position(1,2);
-	//Radius Rewiring/Parentsuche
-	const float RADIUS=20;
-
-	/*
-	 * Der Cosinus des befahrbaren Winkels, ausgehend
-	 * vom Auto. Alle Punkte außerhalb sind nicht erreichbar,
-	 * nahe Punkte innerhalb begrenzt durch den Lenkwinkel.
-	 */
-	const float COS_ANGLE = STEPSIZE/(2*STEERING_ANGLE);
+//Systemkonstanten festlegen:
+//Schrittweite in welcher einheit?
+const int STEPSIZE = 10;
+//Radius Rewiring/Parentsuche
+const float RADIUS = 20;
+//Auto - Lenkwinkel in Grad? oder Vektor/radius des Lenkkreises?
+const float STEERING_ANGLE = 45;
+/*
+ * Der Cosinus des befahrbaren Winkels, ausgehend
+ * vom Auto. Alle Punkte außerhalb sind nicht erreichbar,
+ * nahe Punkte innerhalb begrenzt durch den Lenkwinkel.
+ */
+const float COS_ANGLE = STEPSIZE / (2 * STEERING_ANGLE);
+int number_of_nodes=500;
+int main(int argc, char* argv[]) {
 
 	//Zeitmessung Start
 	struct timespec mytime;
-	clock_gettime(CLOCK_MONOTONIC,&mytime);
-	float starttime= mytime.tv_nsec;
-	//Calculator
-	Calculator calc=new Calculator();
-	//Startknoten
-	// Random initialisiert zwischen -1 und 1, wird danach normalisiert auf 0-1000
-	Vector2f start_pos = Vector2f::Random();
-	start_pos=(start_pos+1)*500;
-	Vector2f start_ori(1,0);
-	Node* start=new Node();
-	*start->coordinates=&start_pos;
-	*start->orientation=&start_ori;
+	clock_gettime(CLOCK_MONOTONIC, &mytime);
+	float starttime = mytime.tv_nsec;
+
+	//Auto - Position
+	//TODO insert correct get_value function
+	Eigen::Vector2f position(0, 0);
+	Eigen::Vector2f orientation(1, 0);
+	Car car(position, orientation, STEERING_ANGLE, 0.3, 0.15);
+
+	Node start(position, orientation);
 	//main
-	for (int i = 0; i < 500; ++i) {
-		Vector2f coor=Vector2f::Random();
-		coor=(coor+1)*500;
-		Vector2f ori=Vector2f::Random();
 
+	std::vector<std::list<Node>> list_of_y_coor(number_of_nodes/10);
+
+	for (int i = 0; i < number_of_nodes; ++i) {
 		//create_random_node();
-		Node* new_node = new Node();
-		*new_node->coordinates=&coor;
-		*new_node->orientation=&ori;
-
+		Eigen::Vector2f coor = Eigen::Vector2f::Random();
+		coor = coor*number_of_nodes;
+		Eigen::Vector2f ori = Eigen::Vector2f::Random();
+		//TODO Konstruktor schön machen
+		Node node(coor);
 
 		//check_if_valid();
-		if (!calc.is_reachable(start,new_node)){
-			continue;
+		node.set_validation(Val::valid);
+		if(node.get_validation()==Val::valid){
+			//find_parent_with_min_cost();
+			node.calculate_parent(list_of_y_coor, number_of_nodes);
+			//project_to parent();
+			//check_if_still_valid_and_set_parent();
+			//calculate_orientation();
+			//calculate_cost();
+			//check_if_goal_reached()
 		}
-		//find_parent_with_min_cost();
-
-		//project_to parent();
-		//check_if_still_valid_and_set_parent();
-		//calculate_orientation();
-		//calculate_cost();
-		//check_if_goal_reached();
 	}
 
 	//Zeitmessung Auswertung
-	clock_gettime(CLOCK_MONOTONIC,&mytime);
-	float secs = ((float)(mytime.tv_nsec)-(float)(starttime))/1000000;
-	cout <<"Time for algorithm: "<< secs << " MiliSeconds.";
+	clock_gettime(CLOCK_MONOTONIC, &mytime);
+	float secs = ((float) (mytime.tv_nsec) - (float) (starttime)) / 1000000;
+	std::cout << "Time for algorithm: " << secs << " MiliSeconds." << std::endl;
 
 }
-
-
 

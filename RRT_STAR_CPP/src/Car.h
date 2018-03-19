@@ -4,7 +4,8 @@
  *  Created on: 01.03.2018
  *      Author: name-not-found
  */
-#include <Calculator.h>
+
+#include <eigen3/Eigen/Dense>
 
 #ifndef CAR_H_
 #define CAR_H_
@@ -12,13 +13,14 @@
 class Car {
 private:
 	float MAX_STEERING_ANGLE_RADIUS;
-	float x_coor;
-	float y_coor;
+	Eigen::Vector2f position;
+	Eigen::Vector2f orientation;
+	float length;
+	float width;
 public:
 
-	float* get_position();
-
-	Car();
+	void set_position();
+	Car(Eigen::Vector2f, Eigen::Vector2f, float, float, float);
 	virtual ~Car();
 };
 

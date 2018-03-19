@@ -17,8 +17,8 @@ public:
 
 	Calculator();
 	bool is_in_area(Node*,Obstacle*);
-	float get_length(float x, float y);
-	float get_distance(Node*,Node*);
+	float get_length(float x, float y) const;
+	float get_distance(Node*,Node*) const;
 	void unit_vector(float* vector);
 	float cos_angle(float* v1, float* v2);
 	int calculate_and_set_cost(Node*,Node*, Calculator*);

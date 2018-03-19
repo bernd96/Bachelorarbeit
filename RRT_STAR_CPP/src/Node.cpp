@@ -7,31 +7,109 @@
 
 #include "Node.h"
 #include <float.h>
+#include <iostream>
 
 using namespace Eigen;
 
-Node::Node(){}
-
-Node* Node::get_parent_pointer() {
+Node::Node() {
+}
+Node::Node(const Vector2f& coor) :
+		coordinates(coor) {
+}
+Node::Node(const Vector2f& coor, const Vector2f& ori, Node&par,
+		int valid, float c) :
+		coordinates(coor), orientation(ori), parent(&par), validation(valid), cost(
+				c) {
+}
+Node::Node(const Vector2f& coor, Vector2f& ori) :
+		coordinates(coor), orientation(ori) {
+}
+auto Node::get_parent_pointer() const ->Node* {
 	return parent;
 }
 
-int Node::get_cost() {
+auto Node::get_cost() const->int {
 	return cost;
 }
 
-void Node::set_parent_pointer(Node* parent_pointer) {
-	parent=parent_pointer;
+void Node::set_parent_pointer(Node& parent_pointer) {
+	parent = parent_pointer.parent;
 }
 
-void Node::set_validation(int valid) {
-	is_valid=valid;
+auto Node::calculate_parent(
+		std::vector<std::list<Node> >& construct_of_nodes, int number_of_nodes)->void {
+	Vector2i node_pos = this->insert_node(construct_of_nodes);
+	bool parent_found=false;
+	bool construct_searched=false;
+	float distance=5000000000;
+	Node* tmp = NULL;
+	int local_restrict=node_pos[0];
+	for (int i = 0; i < number_of_nodes/10 || (construct_searched && parent_found) ; ++i) {
+		if (i%2!=0){
+			local_restrict=node_pos[0]+(i+1)/2;
+		} else {
+			local_restrict=node_pos[0]- i/2;
+			std::cout<< "Local restrict index in calculate:parent: " << local_restrict << std::endl;
+		}
+		for (auto &iter : construct_of_nodes[local_restrict]) {
+			Vector2f dist_vec=iter.coordinates-this->coordinates;
+			float tmp_distance=dist_vec.norm();
+			if (distance<tmp_distance){
+				continue;
+			} else {
+				if(this->is_reachable(iter)){
+					parent_found=true;
+					distance=tmp_distance;
+					tmp=iter;
+				}
+			}
+		}
+		if(local_restrict==-1){
+			construct_searched=true;
+		}
+	}
+	if (tmp!=NULL){
+		this->parent=tmp;
+	} else {
+		std::cout << "Node is deleted."<< std::endl;
+	}
+
+
 }
 
-int Node::get_validation() {
-	return 0;
+auto Node::set_validation(Val enumVal)->void {
 }
 
+auto Node::insert_node(
+		std::vector<std::list<Node>>& construct_of_nodes)->Vector2i {
+	/*
+	 * construct_of_nodes ist ein vector aus Listen.
+	 * Jede Liste deckt einen Bereich von aufeinanderfolgenden x-Koordinaten ab, e.g. von 0-19 oder von 80-99.
+	 * Jede Liste enthält Knoten in ihrem x-Wertbereich, aufsteigend nach y-Werten sortiert.
+	 * Knoten Einfügen:
+	 * Auswahl der Liste nach x-Wert
+	 * Durchiterieren der Liste bis y-Wert höher ist -> davor einfügen (emplace())
+	 */
+	int x_pos = ((this->coordinates[0]) / 20) * 25;
+	Vector2i insert_pos(x_pos,0);
+	//wenn Liste leer: Element anfügen
+	if (construct_of_nodes[x_pos].empty()){
+		construct_of_nodes[x_pos].push_back(*this);
+	} else {
+		for (std::list<Node>::iterator iter = construct_of_nodes[x_pos].begin();
+			iter != construct_of_nodes[x_pos].end(); ++iter) {
+			if (this->coordinates[1] > iter->coordinates[1]) {
+				construct_of_nodes[x_pos].emplace(iter, this);
+				insert_pos[1]=iter-1;
+			}
+		}
+	}
+	return insert_pos;
+}
+auto Node::is_reachable(Node& parent)->bool {
+
+}
 
 Node::~Node() {
 }
+
