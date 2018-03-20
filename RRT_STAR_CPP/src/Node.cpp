@@ -6,11 +6,16 @@
  */
 
 #include "Node.h"
+#include <limits.h>
 
-
-Node::Node() {
-	// TODO Auto-generated constructor stub
-
+Node::Node(float x,float y, float ox, float oy) {
+	x_coor=x;
+	y_coor=y;
+	ori_x=ox;
+	ori_y=oy;
+	isvalid=-1;
+	parent =0;
+	cost = limits();
 }
 
 Node::~Node() {

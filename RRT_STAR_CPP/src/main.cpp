@@ -13,7 +13,14 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 
-	cout << "hi ";
+	int iterations=1000;
+	Car car = new Car();
+	car.set_position();
+	car.set_orientation();
+	Node startnode= new Node(car.x_coor, car.y_coor, car.ori_x, car.ori_y);
+	for (int i = 0; i < iterations; ++i) {
+
+	}
 	return 0;
 }
 

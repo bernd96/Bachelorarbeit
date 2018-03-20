@@ -7,12 +7,12 @@
 
 #include "Car.h"
 
-car::car() {
+Car::Car() {
 	// TODO Auto-generated constructor stub
 
 }
 
-car::~car() {
+Car::~Car() {
 	// TODO Auto-generated destructor stub
 }
 
