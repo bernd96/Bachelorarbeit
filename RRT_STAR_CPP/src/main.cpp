@@ -4,7 +4,6 @@
  *  Created on: 19.02.2018
  *      Author: Arbeit
  */
-#include <Calculator.h>
 #include <time.h>
 #include <Car.h>
 #include <Node.h>
@@ -30,38 +29,37 @@ const float STEERING_ANGLE = 45;
  */
 const float COS_ANGLE = STEPSIZE / (2 * STEERING_ANGLE);
 int number_of_nodes=500;
-int main(int argc, char* argv[]) {
+int main() {
 
 	//Zeitmessung Start
 	struct timespec mytime;
 	clock_gettime(CLOCK_MONOTONIC, &mytime);
 	float starttime = mytime.tv_nsec;
-
+	std::cout << "bla";
 
 	//Auto - Position
-	//TODO insert correct get_value function
-	Eigen::Vector2f position(0, 0);
-	Eigen::Vector2f orientation(1, 0);
-	Car car(position, orientation, STEERING_ANGLE, 0.3, 0.15);
+	//TODO insert correct get_value function;
+	Car car(Eigen::Vector2f(0,0),Eigen::Vector2f(1,0), STEERING_ANGLE, 0.3, 0.15);
+	Eigen::Vector2f Test(1,1);
 
-	Node start(position, orientation);
+	Node start{Test,Test};
 	//main
 
-	std::vector<std::list<Node>> list_of_y_coor(number_of_nodes/10);
-
+	std::vector<std::list<Node>> list_of_nodes(number_of_nodes/10);
+	start.insert_node(list_of_nodes);
 	for (int i = 0; i < number_of_nodes; ++i) {
 		//create_random_node();
 		Eigen::Vector2f coor = Eigen::Vector2f::Random();
 		coor = coor*number_of_nodes;
-		Eigen::Vector2f ori = Eigen::Vector2f::Random();
+		Eigen::Vector2f ori;
 		//TODO Konstruktor schön machen
-		Node node(coor);
+		Node node{coor};
 
 		//check_if_valid();
 		node.set_validation(Val::valid);
 		if(node.get_validation()==Val::valid){
 			//find_parent_with_min_cost();
-			node.calculate_parent(list_of_y_coor, number_of_nodes);
+			node.calculate_parent(list_of_nodes, number_of_nodes);
 			//project_to parent();
 			//check_if_still_valid_and_set_parent();
 			//calculate_orientation();
@@ -75,5 +73,6 @@ int main(int argc, char* argv[]) {
 	float secs = ((float) (mytime.tv_nsec) - (float) (starttime)) / 1000000;
 	std::cout << "Time for algorithm: " << secs << " MiliSeconds." << std::endl;
 
+	return 0;
 }
 

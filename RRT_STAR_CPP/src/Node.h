@@ -12,36 +12,38 @@
 
 enum class Val{invalid, valid, unknown};
 class Node {
-private:
-	Node* parent;
-	//3 possibilities: unkown:-1, valid:1, invalid:0
-	Val validation;
-	//costs to get to that node
-	float cost;
-	//absolut euklid coordinates
-	Eigen::Vector2f coordinates;
-	//absolut orientation vector
-	Eigen::Vector2f orientation;
-public:
-	//Überlegung: Delegieren von Konstruktoren. Dazu müsste man allerdings überall Standartwerte angeben...
-	Node();
-	Node(const Eigen::Vector2f& coor);
-	Node(const Eigen::Vector2f& coor, Eigen::Vector2f& ori);
-	Node(const Eigen::Vector2f& coor,const Eigen::Vector2f& ori, Node&, int,float);
+	private:
+		Node* parent;
+		//3 possibilities: unkown:-1, valid:1, invalid:0
+		Val validation;
+		//costs to get to that node
+		float cost;
+		//absolut euklid coordinates
+		Eigen::Vector2f coordinates;
+		//absolut orientation vector
+		Eigen::Vector2f orientation;
+	public:
 
-	auto calculate_parent(std::vector<std::list<Node>>&, int)-> void;
-	auto set_validation(Val)->void;
-	auto insert_node(std::vector<std::list<Node>>&)->Eigen::Vector2i;
-	auto is_reachable(Node& parent)->bool;
-	auto search_parent(std::vector<std::list<Node>>&)-> void;
+		//Überlegung: Delegieren von Konstruktoren. Dazu müsste man allerdings überall Standartwerte angeben...
+		Node(const Eigen::Vector2f& coor);
 
-	auto get_parent_pointer() const -> Node*;
-	auto get_cost() const -> int;
-	auto get_validation() const -> Val;
+		Node(const Eigen::Vector2f& coor,const  Eigen::Vector2f& ori);
 
-	void set_parent_pointer(Node*);
+		auto calculate_parent(std::vector<std::list<Node>>&, int)-> void;
+		auto insert_node(std::vector<std::list<Node>>&)->Eigen::Vector2i;
 
-	virtual ~Node();
+		auto is_reachable(const Node& parent)->bool;
+
+		auto cos_angle(Eigen::Vector2f)-> float;
+
+		auto search_parent(std::vector<std::list<Node>>&)-> void;
+		auto set_validation(Val)->void;
+		auto get_parent_pointer() const -> Node*;
+		auto get_cost() const -> int;
+		auto get_validation() const -> Val;
+
+
+		virtual ~Node();
 };
 
 #endif /* NODE_H_ */
