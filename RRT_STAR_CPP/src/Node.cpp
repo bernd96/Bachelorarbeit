@@ -6,24 +6,22 @@
  */
 
 #include "Node.h"
-#include <float>
 #include <iostream>
 #include <eigen3/Eigen/Dense>
 
 using namespace Eigen;
 
-Node::Node() {
-}
 Node::Node(const Vector2f& coor) :
 		coordinates(coor) {
+	if (coor.isZero()){
+		std::cout << "Warning: Node is initialized with 0"<<std::endl;
+	}
 }
-Node::Node(const Vector2f& coor, const Vector2f& ori, Node&par,
-		int valid, float c) :
-		coordinates(coor), orientation(ori), parent(&par), validation(valid), cost(
-				c) {
-}
-Node::Node(const Vector2f& coor, Vector2f& ori) :
+Node::Node(const Vector2f& coor, const Vector2f& ori) :
 		coordinates(coor), orientation(ori) {
+	if (coor.isZero()){
+			std::cout << "Warning: Node is initialized with 0"<<std::endl;
+		}
 }
 auto Node::get_parent_pointer() const ->Node* {
 	return parent;
@@ -33,13 +31,9 @@ auto Node::get_cost() const->int {
 	return cost;
 }
 
-void Node::set_parent_pointer(Node& parent_pointer) {
-	parent = parent_pointer.parent;
-}
-
 auto Node::calculate_parent(
 		std::vector<std::list<Node> >& construct_of_nodes, int number_of_nodes)->void {
-	Vector2i node_pos = this->insert_node(construct_of_nodes);
+	Vector2i node_pos =this->insert_node(construct_of_nodes);
 	bool parent_found=false;
 	bool construct_searched=false;
 	float distance=5000000000;
@@ -61,7 +55,7 @@ auto Node::calculate_parent(
 				if(this->is_reachable(iter)){
 					parent_found=true;
 					distance=tmp_distance;
-					tmp=iter;
+					tmp=&iter;
 				}
 			}
 		}
@@ -79,6 +73,7 @@ auto Node::calculate_parent(
 }
 
 auto Node::set_validation(Val enumVal)->void {
+	validation=enumVal;
 }
 
 auto Node::insert_node(
@@ -100,15 +95,26 @@ auto Node::insert_node(
 		for (std::list<Node>::iterator iter = construct_of_nodes[x_pos].begin();
 			iter != construct_of_nodes[x_pos].end(); ++iter) {
 			if (this->coordinates[1] > iter->coordinates[1]) {
-				construct_of_nodes[x_pos].emplace(iter, this);
-				insert_pos[1]=iter-1;
+				//construct_of_nodes[x_pos].emplace(iter, this);
+				insert_pos[1]=std::distance(construct_of_nodes[x_pos].begin(), iter)-1;
+
 			}
 		}
 	}
 	return insert_pos;
 }
-auto Node::is_reachable(Node& parent)->bool {
+auto Node::is_reachable(const Node& parent)->bool {
+	return false;
+}
 
+auto Node::cos_angle(Eigen::Vector2f parent)->float {
+	Eigen::Vector2f direction(this->coordinates-parent);
+	direction.normalize();
+	this->orientation.normalize();
+	return direction.dot(this->orientation);
+}
+auto Node::get_validation()const->Val{
+	return validation;
 }
 
 Node::~Node() {

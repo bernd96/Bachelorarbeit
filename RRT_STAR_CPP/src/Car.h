@@ -19,10 +19,13 @@ private:
 	float length;
 	float width;
 public:
-
-	void set_position();
-	Car(Eigen::Vector2f, Eigen::Vector2f, float, float, float);
+	Car(const Eigen::Vector2f& pos, const Eigen::Vector2f& ori, float, float, float);
 	virtual ~Car();
+
+	auto get_position()->Eigen::Vector2f&;
+	auto get_orientation()->Eigen::Vector2f&;
+
+
 };
 
 #endif /* CAR_H_ */
