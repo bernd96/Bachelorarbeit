@@ -1,0 +1,4 @@
+export ROS_HOSTNAME=own ip
+export ROS_MASTER_URI=http://carIP:11311
+export ROS_IP=own ip
+

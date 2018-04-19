@@ -1,0 +1,7 @@
+\subsubsection usage Usage
+\verbatim
+<node name="fub_controller" pkg="fub_controller" type="fub_controller">
+  <param name="execution_frequency" type="double" value="100.0" />
+</node>
+\endverbatim
+

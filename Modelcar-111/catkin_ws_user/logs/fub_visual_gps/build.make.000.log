@@ -1,0 +1,4 @@
+[35m[1mScanning dependencies of target fub_visual_gps_minarea[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/fub_visual_gps_minarea.dir/src/misc/minarea.cpp.o[0m
+[100%] [32m[1mLinking CXX executable /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_visual_gps/lib/fub_visual_gps/fub_visual_gps_minarea[0m
+[100%] Built target fub_visual_gps_minarea

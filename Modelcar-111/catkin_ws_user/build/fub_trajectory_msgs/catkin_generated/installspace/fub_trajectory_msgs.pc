@@ -1,0 +1,8 @@
+prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
+
+Name: fub_trajectory_msgs
+Description: Description of fub_trajectory_msgs
+Version: 0.0.1
+Cflags: -I/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/include
+Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
+Requires: geometry_msgs message_runtime
