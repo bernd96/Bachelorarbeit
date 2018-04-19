@@ -18,7 +18,7 @@ class ImageHandler:
             self.image_pub_marked = rospy.Publisher("/assignment6/image_marked_ang", Image, queue_size=200, latch=True)
         else:
             self.image_pub_marked = None
-        self.odom_pub = rospy.Publisher("/assignment6/odom", Odometry, queue_size=200)
+        self.odom_pub = rospy.Publisher("/visual_gps/odom", Odometry, queue_size=200)
         self.bridge = CvBridge()
         self.image_sub = rospy.Subscriber("/usb_cam/image_raw", Image, self.callback, queue_size=1, buff_size=2**24)
         self.detector = BalloonDetector()

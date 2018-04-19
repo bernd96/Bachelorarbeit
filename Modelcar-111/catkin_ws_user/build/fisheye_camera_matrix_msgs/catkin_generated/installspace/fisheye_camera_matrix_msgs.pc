@@ -1,0 +1,8 @@
+prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
+
+Name: fisheye_camera_matrix_msgs
+Description: Description of fisheye_camera_matrix_msgs
+Version: 0.1.0
+Cflags: -I/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/include
+Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
+Requires: 

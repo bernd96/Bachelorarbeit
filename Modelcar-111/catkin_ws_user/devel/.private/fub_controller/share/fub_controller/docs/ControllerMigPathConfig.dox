@@ -1,0 +1,12 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~steering_lookahead_time" : \b [double] time [s] to look ahead on the plan min: 0.0, default: 1.0, max: 5.0
+- \b "~steering_min_lookahead_dist" : \b [double] min distance [m] to look ahead on the plan min: 0.0, default: 0.2, max: 10.0
+- \b "~velocity_lookahead_time" : \b [double] time [s] to look ahead on the plan min: 0.0, default: 0.0, max: 5.0
+- \b "~velocity_lookahead_dist_error_factor" : \b [double] factor for adjusting velocity to distance between closest point in space and lookahead min: 0.0, default: 0.2, max: 5.0
+- \b "~velocity_max_offset" : \b [double] maximum offset to velocity in plan [m/s]. min: 0.0, default: 1.0, max: 10.0
+- \b "~static_wanted_speed" : \b [double] static wanted speed for debug 700 rpm=0.47 m/a min: 0.0, default: 0.5, max: 1.5
+- \b "~use_static_wanted_speed" : \b [bool] whether to use the static speed min: False, default: False, max: True
+

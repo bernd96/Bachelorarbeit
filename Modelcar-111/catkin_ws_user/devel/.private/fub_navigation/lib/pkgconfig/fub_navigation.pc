@@ -1,0 +1,8 @@
+prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_navigation
+
+Name: fub_navigation
+Description: Description of fub_navigation
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_navigation/lib 
+Requires: 

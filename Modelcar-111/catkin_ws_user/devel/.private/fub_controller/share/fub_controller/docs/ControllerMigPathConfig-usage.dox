@@ -1,0 +1,13 @@
+\subsubsection usage Usage
+\verbatim
+<node name="fub_controller" pkg="fub_controller" type="fub_controller">
+  <param name="steering_lookahead_time" type="double" value="1.0" />
+  <param name="steering_min_lookahead_dist" type="double" value="0.2" />
+  <param name="velocity_lookahead_time" type="double" value="0.0" />
+  <param name="velocity_lookahead_dist_error_factor" type="double" value="0.2" />
+  <param name="velocity_max_offset" type="double" value="1.0" />
+  <param name="static_wanted_speed" type="double" value="0.5" />
+  <param name="use_static_wanted_speed" type="bool" value="False" />
+</node>
+\endverbatim
+
