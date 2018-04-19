@@ -2,3 +2,12 @@ export ROS_HOSTNAME=own ip
 export ROS_MASTER_URI=http://carIP:11311
 export ROS_IP=own ip
 
+im auto
+ssh verbindung zum auto
+ssh root@192.168.43.103
+pw: elfmeter
+
+camera helligkeit (video0==usb_cam?)
+v4l2-ctl --device=/dev/usb_cam --set-ctrl exposure_auto=1
+v4l2-ctl --device=/dev/video0 --set-ctrl exposure_absolute=1
+
