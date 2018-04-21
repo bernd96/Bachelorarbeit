@@ -32,6 +32,5 @@
 	//Ursprung ist "unten rechts", (x,y,Ausdehnung Richtung X, Ausdehnung Richtung Y)
 	const Eigen::Vector4d GOAL_AREA(5,7, 3,3);
 
-	ros::Publisher TrajectoryPublisher;
 
 #endif /* SRC_MAIN_H_ */

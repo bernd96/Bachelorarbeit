@@ -19,13 +19,12 @@
 
 using namespace Eigen;
 
-auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->Returnclass {
+auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msgs {
 	std::random_device rn;
 	std::mt19937 engine(rn());
 	std::uniform_real_distribution<double> randoms(1.0, RANGE);
 	list_of_nodes.push_front(start);
 	Vector2d coor;
-	Returnclass traject;
 	for (int i = 0; i < NUMBER_OF_NODES; ++i) {
 		double a = randoms(engine);
 		double b = randoms(engine);
@@ -77,14 +76,13 @@ int main() {
 	struct timespec mytime;
 	clock_gettime(CLOCK_MONOTONIC, &mytime);
 	float starttime = mytime.tv_nsec;
-
 	ros::init(argc, argv, "rrt_star");
 	ros::NodeHandle n;
 
 	ros::Publisher TrajectoryPublisher;
 
 
-	TrajectoryPublisher = n.advertise<trajectory_msgs>("planned_path", %Wert%);
+	TrajectoryPublisher = n.advertise<fub_trajectory_msgs>("planned_path", 10);
 	//TODO insert correct get_value function for Auto - Position
 	Vector2d pos(1, 1);
 	Vector2d ori(1, 0);
@@ -93,7 +91,7 @@ int main() {
 	 //std::vector<std::list<Node>> list_of_nodes(NUMBER_OF_NODES / 10);
 	 //start.insert_node(list_of_nodes);
 	 */
-	fub_trajectory_mgsgs::trajectmsg;
+	fub_trajectory_msgs trajectmsg;
 	std::list<Node> list_of_nodes;
 	trajectmsg = RRT_simple(list_of_nodes, start);
 
