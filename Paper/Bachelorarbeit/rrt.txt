@@ -1,0 +1,10 @@
+GENERATE_RRT(x_init, K, delta_t)
+T.init(x_init);
+for k=1 to K do
+	x_rand = RANDOM_STATE();
+	x_near = NEAREST_NEIGHBOR(x_rand, T);
+	u = SELECT_INPUT(x_rand, x_near);
+	x_new = NEW_STATE(x_near, u, delta_t);
+	T.add_vertex(x_new);
+	T.add_edge(x_near,x_new,u);
+Return T
