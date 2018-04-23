@@ -8,9 +8,6 @@
 
 # modified environment variables
 export CMAKE_PREFIX_PATH="/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_trajectory_msgs:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_trajectory_msgs/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_trajectory_msgs/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD="/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/build/fub_trajectory_msgs"
-export PYTHONPATH="/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_trajectory_msgs/lib/python2.7/dist-packages:$PYTHONPATH"
 export ROSLISP_PACKAGE_DIRECTORIES="/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_trajectory_msgs/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
 export ROS_PACKAGE_PATH="/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_trajectory_msgs:$ROS_PACKAGE_PATH"

@@ -46,7 +46,7 @@ def timed(f):
 
 
 class BalloonDetector(object):
-    def __init__(self, blur_amount=0, max_cluster_dist=2, min_samples=5,
+    def __init__(self, blur_amount=0, max_cluster_dist=2, min_samples=4,
                  hsv_range_min=(0, 130, 110), hsv_range_max=(181, 255, 255)):
         # how much to blur saturation before thresholding
         self.blur_amount = blur_amount
