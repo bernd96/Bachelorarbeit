@@ -12,6 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   nav_msgs
   std_msgs
   fub_trajectory_msgs
+  roscpp
+  tf
 )
 
 ## System dependencies are found with CMake's conventions

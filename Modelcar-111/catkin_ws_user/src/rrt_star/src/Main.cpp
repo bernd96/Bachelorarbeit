@@ -6,25 +6,26 @@
  */
 #include <time.h>
 #include <Car.h>
-#include <Node.h>
 #include <iostream>
 #include <array>
-#include <list>
 #include <cstdlib>
 #include <ctime>
-#include <eigen3/Eigen/Dense>
 #include <Main.h>
 #include <fub_trajectory_msgs/Trajectory.h>
 #include <fub_trajectory_msgs/TrajectoryPoint.h>
+#include "ros/ros.h"
+#include <nodelet/nodelet.h>
+
 
 using namespace Eigen;
 
-auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msgs {
+auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msgs::Trajectory {
 	std::random_device rn;
 	std::mt19937 engine(rn());
 	std::uniform_real_distribution<double> randoms(1.0, RANGE);
 	list_of_nodes.push_front(start);
 	Vector2d coor;
+	Node goal;
 	for (int i = 0; i < NUMBER_OF_NODES; ++i) {
 		double a = randoms(engine);
 		double b = randoms(engine);
@@ -32,8 +33,6 @@ auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msg
 		Node node { coor };
 		if (node.easy_look_for_parent(list_of_nodes)) {
 			if (node.project_to_parent(list_of_nodes)) {
-
-				//check_if_still_valid_and_set_parent();
 				//Hier werden auch gleich die Kosten gesetzt.
 				//Ändern falls diese von mehr als nur Entfernung abhängen!
 				if (node.easy_set_parent(list_of_nodes)) {
@@ -44,34 +43,64 @@ auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msg
 							list_of_nodes.push_front(node);
 							if (node.reached_goal()) {
 								std::cout << "Geschafft! Und nun?" << std::endl;
+								goal=node;
 							}
 						} else {
-							std::cout << "calculate_orientation faild with i="
+							std::cout << "calculate_orientation failed with i="
 									<< i << std::endl;
 						}
 
 					} else {
-						std::cout << "get_validation faild with i=" << i
+						std::cout << "get_validation failed with i=" << i
 								<< std::endl;
 					}
 
 				} else {
-					std::cout << "easy_set_parent faild with i=" << i
+					std::cout << "easy_set_parent failed with i=" << i
 							<< std::endl;
 				}
 
 			} else {
-				std::cout << "project_to_parent faild with i=" << i
+				std::cout << "project_to_parent failed with i=" << i
 						<< std::endl;
 			}
 		} else {
-			std::cout << "Easy lookout fail with i=" << i << std::endl;
+			std::cout << "Easy lookout failed with i=" << i << std::endl;
 		}
 	}				//for loop
-	return traject;
+	fub_trajectory_msgs::Trajectory trajectory;
+
+	Eigen::Quaternionf quaternion;
+
+	std::list<Node>traject_to_goal;
+	traject_to_goal[0]=goal;
+	Node tmp=goal;
+	for(int j=0;tmp.get_parent_pointer()!=nullptr;++j){
+		traject_to_goal[j]=tmp;
+		tmp=*tmp.get_parent_pointer();
+	}
+	traject_to_goal.reverse();
+
+
+	int j=0;
+	for (auto &iter : traject_to_goal){
+		trajectory.trajectory[j].pose.position.x = iter.get_coordinates()[0];
+		trajectory.trajectory[j].pose.position.y = iter.get_coordinates()[1];
+		quaternion= Eigen::Quaternion::Quaternion(iter.get_orientation().array());
+		trajectory.trajectory[j].pose.orientation.x = quaternion.x();
+		trajectory.trajectory[j].pose.orientation.y = quaternion.y();
+		trajectory.trajectory[j].pose.orientation.z = quaternion.z();
+		trajectory.trajectory[j].pose.orientation.w = quaternion.w();
+		++j;
+	}
+	return trajectory;
+}
+void callback(const nav_msgs::Odometry odom){
+	start_position=odom;
+	return;
 }
 
-int main() {
+int main(int argc, char **argv) {
 	//Zeitmessung Start
 	struct timespec mytime;
 	clock_gettime(CLOCK_MONOTONIC, &mytime);
@@ -79,25 +108,35 @@ int main() {
 	ros::init(argc, argv, "rrt_star");
 	ros::NodeHandle n;
 
-	ros::Publisher TrajectoryPublisher;
+	ros::Publisher trajectoryPublisher = n.advertise<fub_trajectory_msgs::Trajectory>("planned_path", 10);
 
+	//Auto - get Position and Orientation and write to start_position
+	ros::Subscriber sub =n.subscribe("visual_gps\odom",100, callback);
+	Vector2d pos;
+	pos[0]=start_position.pose.pose.position.x;
+	pos[1]=start_position.pose.pose.position.y;
+	Vector2d ori;
+	Eigen::Quaternionf q;
+	q[0]=start_position.pose.pose.orientation.x;
+	q[1]=start_position.pose.pose.orientation.y;
+	q[2]=start_position.pose.pose.orientation.z;
+	q[3]=start_position.pose.pose.orientation.w;
+	//transfer from Quaternion to eulerangles to read the yaw vector
+	auto euler = q.toRotationMatrix().eulerAngles(0,1,2);
+	ori[0]=euler[2][0];
+	ori[1]=euler[2][1];
+	Node start(pos, ori, nullptr, Val::valid, 0);
 
-	TrajectoryPublisher = n.advertise<fub_trajectory_msgs>("planned_path", 10);
-	//TODO insert correct get_value function for Auto - Position
-	Vector2d pos(1, 1);
-	Vector2d ori(1, 0);
-	Node start(pos, ori, &start, Val::valid, 0);
-	/*Datenstruktur:
-	 //std::vector<std::list<Node>> list_of_nodes(NUMBER_OF_NODES / 10);
-	 //start.insert_node(list_of_nodes);
-	 */
-	fub_trajectory_msgs trajectmsg;
+	start.print_node();
+
+	fub_trajectory_msgs::Trajectory trajectmsg;
 	std::list<Node> list_of_nodes;
 	trajectmsg = RRT_simple(list_of_nodes, start);
 
 	for (auto &iter : list_of_nodes) {
 		iter.print_node();
 	}
+	trajectoryPublisher.publish(trajectmsg);
 	//Zeitmessung Auswertung
 	clock_gettime(CLOCK_MONOTONIC, &mytime);
 	double msecs = ((float) (mytime.tv_nsec) - (float) (starttime)) / 1000000;
