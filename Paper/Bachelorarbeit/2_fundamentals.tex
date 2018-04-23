@@ -1,16 +1,20 @@
 % !TeX encoding = UTF-8
 \section{Grundlagen}
-Aufgreifen der Weiterführung zum nächsten Kapitel, kurze Erklärung wozu dieses Kapitel da ist.
-\subsection{Verwendete Grundlegende Algorithmen}
+Dieses Kapitel führt die verwendeten Algorithmen und Berechnungen ein.
 
-\subsubsection{RRT}
-\subsubsection{RRT*}
-\subsubsection{(RRT*-Smart)}
+\subsection{RRT}
+Der grundlegende, hier verwendete Algorithmus ist RRT. Dieser wurde von Steven LaValle schon vor 20 Jahren, 1998, eingeführt [TODO Literaturverweis]. Die Probleme der damaligen Algorithmen war die fehlende Allgemeingültigkeit, oft lösten sie nur sehr spezifische Probleme und waren nicht auf andere Probleme übertragbar [TODO Zitat/Beleg]. Eine weitere Einschränkung war die fehlende Skalierbarkeit vieler Algorithmen, die zu kompliziert wurden, sobald die Systeme komplexer wurden. Beispiele dafür sind \textit{dynamsche Umgebungen} und \textit{nonholonomic Robots}.\\
+RRT hingegen ist einfach gehalten und daher skalierbar [TODO Beleg], der Algorithmus kann direkt auf \textit{nonholonomic} und \textit{kinodynamic planning} angewendet werden.
+[TODO in Quellcode formatieren]
+BAUE_RRT(x_init, K, delta t)
 
+
+\subsection{RRT*}
+
+\subsection{Abstandsmetrik und Gültigkeit}
 \subsection{Weitere wichtige Grundlagen}
 Doppellung mit Glossar/Erklärung zu Fachwörtern?
 
-\subsection{Begriffserklärungen}
-Ditos
+
 
 Überleitung zum nächsten Kapitel
