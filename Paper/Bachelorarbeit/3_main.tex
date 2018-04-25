@@ -1,10 +1,14 @@
 % !TeX encoding = UTF-8
 \section{Umsetzung}
-Aufgreifen der Überleitung zum nächsten Kapitel
+Zunächst werden wir die notwendigen Anpassungen des \textit{RRT*}-Algorithmus behandeln, bevor wir uns mit der Wahl einer geeigneten Metrik und Kostenfunktion beschäftigen. Zum Schluss dieses Kapitels werden die zur Umsetzung notwendigen technischen Grundlagen erläutert, es wird also neben der verwendeten Hardware auch das Framework ROS - Robotik Operating Systems - vorgestellt.
 
-\subsection{ROSCORE}
-\subsubsection{Softwarearchitektur}
-\subsubsection{APIs}
+
+Dazu sind Änderungen besonders an zwei Stellen nötig: 
+\begin{enumerate}
+\item Es muss bei der Auswahl des Vaterknotens überprüft werden, ob der eingefügte Knoten über den Vaterknoten überhaupt erreicht werden kann.
+\item Beim Rewiring - dem Neuverknüpfen der Knoten - wird nicht die alte Verbindung zum Vaterknoten gelöscht. Stattdessen wird ein neuer Knoten erzeugt, der als Vaterknoten den eingefügten Knoten \verb|x_new| hat. Dies ist nötig, weil 
+\end{enumerate}
+
 
 \subsection{Algorithmen - zentrale Elemente der Software}
 \subsubsection{Benutzeroberfläche - GUI??}
@@ -18,5 +22,9 @@ Aufgreifen der Überleitung zum nächsten Kapitel
 \subsection{Verwendete Metriken}
 \subsection{Beschreibung besonderer Schwierigkeiten und wie diese umgangen wurden}
 \subsection{(Evaluation - nur wenn ich dafür Zeit habe)}
+\subsection{ROSCORE}
+\subsubsection{Softwarearchitektur}
+\subsubsection{APIs}
+
 \subsubsection{Tests und Testdatensätze/Szenarien für die Software)}
 \subsubsection{Korrektheitsbeweise}
