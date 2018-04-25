@@ -1,0 +1,1 @@
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/beginner_tutorials/share/roseus/ros/beginner_tutorials/manifest.l

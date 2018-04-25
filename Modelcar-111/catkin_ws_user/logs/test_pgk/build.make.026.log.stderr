@@ -1,0 +1,5 @@
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:13:18:[m[K [01;31m[Kfatal error: [m[KNode.h: No such file or directory
+compilation terminated.
+make[2]: *** [CMakeFiles/sub.dir/src/sub.cpp.o] Error 1
+make[1]: *** [CMakeFiles/sub.dir/all] Error 2
+make: *** [all] Error 2

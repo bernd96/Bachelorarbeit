@@ -1,0 +1,1 @@
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/beginner_tutorials/lib/python2.7/dist-packages/beginner_tutorials/__init__.py

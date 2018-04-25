@@ -1,0 +1,47 @@
+[ 25%] [32mBuilding CXX object CMakeFiles/sub.dir/src/sub.cpp.o[0m
+[ 75%] Built target talker
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:39:2:[m[K [01;31m[Kerror: [m[K‘[01m[Kfub_trajectory_msgs[m[K’ has not been declared
+  fub_trajectory_msgs::Trajectory trajectory;
+[01;32m[K  ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:49:18:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator[][m[K’ (operand types are ‘[01m[Kstd::__cxx11::list<Node>[m[K’ and ‘[01m[Kint[m[K’)
+   traject_to_goal[i]=tmp;
+[01;32m[K                  ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:52:11:[m[K [01;31m[Kerror: [m[K‘[01m[Kgoal[m[K’ was not declared in this scope
+  Node tmp=goal;
+[01;32m[K           ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:54:18:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator[][m[K’ (operand types are ‘[01m[Kstd::__cxx11::list<Node>[m[K’ and ‘[01m[Kint[m[K’)
+   traject_to_goal[j]=tmp;
+[01;32m[K                  ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:62:3:[m[K [01;31m[Kerror: [m[K‘[01m[Ktrajectory[m[K’ was not declared in this scope
+   trajectory.trajectory[j].pose.position.x = iter.get_coordinates()[0];
+[01;32m[K   ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:64:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kquaternion[m[K’ was not declared in this scope
+   quaternion= Eigen::Quaternion::Quaternion(iter.get_orientation().array());
+[01;32m[K   ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:64:3:[m[K [01;36m[Knote: [m[Ksuggested alternative:
+In file included from [01m[K/usr/include/boost/math/common_factor_ct.hpp:13:0[m[K,
+                 from [01m[K/usr/include/boost/variant/variant.hpp:43[m[K,
+                 from [01m[K/usr/include/boost/signals2/slot_base.hpp:22[m[K,
+                 from [01m[K/usr/include/boost/signals2/detail/tracked_objects_visitor.hpp:18[m[K,
+                 from [01m[K/usr/include/boost/signals2/slot.hpp:22[m[K,
+                 from [01m[K/usr/include/boost/signals2/connection.hpp:23[m[K,
+                 from [01m[K/usr/include/boost/signals2/signal.hpp:22[m[K,
+                 from [01m[K/usr/include/boost/signals2.hpp:19[m[K,
+                 from [01m[K/opt/ros/kinetic/include/tf/tf.h:45[m[K,
+                 from [01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:12[m[K:
+[01m[K/usr/include/boost/math_fwd.hpp:23:11:[m[K [01;36m[Knote: [m[K  ‘[01m[Kboost::math::quaternion[m[K’
+     class quaternion;
+[01;32m[K           ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:64:22:[m[K [01;31m[Kerror: [m[K‘[01m[Ktemplate<class Scalar, int Options> class Eigen::Quaternion[m[K’ used without template parameters
+   quaternion= Eigen::Quaternion::Quaternion(iter.get_orientation().array());
+[01;32m[K                      ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:64:50:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass Node[m[K’ has no member named ‘[01m[Kget_orientation[m[K’
+   quaternion= Eigen::Quaternion::Quaternion(iter.get_orientation().array());
+[01;32m[K                                                  ^[m[K
+CMakeFiles/sub.dir/build.make:62: recipe for target 'CMakeFiles/sub.dir/src/sub.cpp.o' failed
+make[2]: *** [CMakeFiles/sub.dir/src/sub.cpp.o] Error 1
+make[1]: *** [CMakeFiles/sub.dir/all] Error 2
+CMakeFiles/Makefile2:1320: recipe for target 'CMakeFiles/sub.dir/all' failed
+Makefile:138: recipe for target 'all' failed
+make: *** [all] Error 2

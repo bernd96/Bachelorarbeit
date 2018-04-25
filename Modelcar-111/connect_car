@@ -11,3 +11,16 @@ camera helligkeit (video0==usb_cam?)
 v4l2-ctl --device=/dev/usb_cam --set-ctrl exposure_auto=1
 v4l2-ctl --device=/dev/video0 --set-ctrl exposure_absolute=1
 
+ssh auf auto
+/opt/ros/model_car3.1/autostart.sh
+
+
+	void callback_reconfigure(fub_atlas_road_follower::AtlasRoadFollowerConfig &config, uint32_t level) {
+
+		// create / update up the timer
+		ros::Duration timerPeriod = ros::Duration(1.0 / config.execution_frequency);
+		if (not mTimer.isValid()) {
+			mTimer = getMTNodeHandle().createTimer(timerPeriod, &AtlasRoadFollower::callbackTimer, this);
+		} else {
+			mTimer.setPeriod(timerPeriod);
+		}

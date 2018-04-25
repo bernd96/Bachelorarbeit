@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/sub.dir/src/Subandpub.cpp.o"
+  "CMakeFiles/sub.dir/src/sub.cpp.o"
   "/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/test_pgk/lib/test_pgk/sub.pdb"
   "/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/test_pgk/lib/test_pgk/sub"
 )

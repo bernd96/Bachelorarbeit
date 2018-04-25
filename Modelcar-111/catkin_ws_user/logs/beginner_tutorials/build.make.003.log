@@ -1,0 +1,7 @@
+[ 25%] [32mBuilding CXX object CMakeFiles/talker.dir/src/talker.cpp.o[0m
+[35m[1mScanning dependencies of target listener[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/listener.dir/src/listener.cpp.o[0m
+[ 75%] [32m[1mLinking CXX executable /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/beginner_tutorials/lib/beginner_tutorials/talker[0m
+[ 75%] Built target talker
+[100%] [32m[1mLinking CXX executable /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/beginner_tutorials/lib/beginner_tutorials/listener[0m
+[100%] Built target listener

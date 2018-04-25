@@ -1,8 +1,0 @@
-[35m[1mScanning dependencies of target fub_remap_joystick_nodelet[0m
-[ 25%] [32mBuilding CXX object CMakeFiles/fub_remap_joystick_nodelet.dir/src/remap_joystick.cpp.o[0m
-[ 50%] [32m[1mLinking CXX shared library /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_remap_joystick/lib/libfub_remap_joystick_nodelet.so[0m
-[ 50%] Built target fub_remap_joystick_nodelet
-[35m[1mScanning dependencies of target fub_remap_joystick[0m
-[ 75%] [32mBuilding CXX object CMakeFiles/fub_remap_joystick.dir/src/main.cpp.o[0m
-[100%] [32m[1mLinking CXX executable /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_remap_joystick/lib/fub_remap_joystick/fub_remap_joystick[0m
-[100%] Built target fub_remap_joystick

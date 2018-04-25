@@ -19,6 +19,7 @@
 	const double RADIUS= 0.6;
 	//Auto - Lenkwinkel in Grad? oder Vektor/radius des Lenkkreises?
 	const double STEERING_ANGLE_RADIUS= 0.3;
+	const double MAX_ANGLE = M_PI;
 	/*
 	 * Der Cosinus des befahrbaren Winkels, ausgehend
 	 * vom Auto. Alle Punkte außerhalb sind nicht erreichbar,
@@ -35,8 +36,10 @@
 	const double ACCURACY=0.0001;
 	//Ursprung ist "unten rechts", (x,y,Ausdehnung Richtung X, Ausdehnung Richtung Y)
 	const Eigen::Vector4d GOAL_AREA(5,7, 3,3);
+	//for startposition
+	Vector2d pos;
+	double yaw;
 
-	nav_msgs::Odometry start_position;
 
 
 #endif /* SRC_MAIN_H_ */
