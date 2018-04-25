@@ -68,10 +68,11 @@ auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msg
 			std::cout << "Easy lookout failed with i=" << i << std::endl;
 		}
 	}				//for loop
+
 	fub_trajectory_msgs::Trajectory trajectory;
 
 	Eigen::Quaternionf quaternion;
-
+	//Baue Trajectorie vom Ziel zum Start auf und drehe sie um
 	std::list<Node>traject_to_goal;
 	traject_to_goal[0]=goal;
 	Node tmp=goal;
@@ -95,7 +96,7 @@ auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msg
 	}
 	return trajectory;
 }
-void callback(const nav_msgs::Odometry odom){
+void callback(const nav_msgs::Odometry & odom){
 	start_position=odom;
 	return;
 }

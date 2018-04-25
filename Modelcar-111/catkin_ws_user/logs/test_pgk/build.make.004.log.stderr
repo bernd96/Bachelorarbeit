@@ -1,0 +1,10 @@
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/Subandpub.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/Subandpub.cpp:46:8:[m[K [01;31m[Kerror: [m[K‘[01m[Keuler[m[K’ does not name a type
+   auto euler = q.toRotationMatrix().eulerAngles(0,1,2);
+[01;32m[K        ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/Subandpub.cpp:47:10:[m[K [01;31m[Kerror: [m[K‘[01m[Keuler[m[K’ was not declared in this scope
+   ori[0]=euler[2][0];
+[01;32m[K          ^[m[K
+make[2]: *** [CMakeFiles/sub.dir/src/Subandpub.cpp.o] Error 1
+make[1]: *** [CMakeFiles/sub.dir/all] Error 2
+make: *** [all] Error 2
