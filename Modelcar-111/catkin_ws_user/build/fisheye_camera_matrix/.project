@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>fisheye_camera_matrix</name>
-	<comment></comment>
+	<comment />
 	<projects>
 	</projects>
 	<buildSpec>
@@ -23,7 +22,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.arguments</key>
-					<value></value>
+					<value />
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.command</key>
@@ -39,15 +38,15 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.target.clean</key>
-					<value>-c &quot;catkin --force-color clean `basename ${project_loc}`;${workspace_loc:/}/bin/make-eclipse-projects.sh `basename ${project_loc}`&quot;</value>
+					<value>-c "catkin --force-color clean `basename ${project_loc}`;${workspace_loc:/}/bin/make-eclipse-projects.sh `basename ${project_loc}`"</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.target.inc</key>
-					<value>-c &quot;catkin build --force-color --status-rate 1 `basename ${project_loc}`&quot;</value>
+					<value>-c "catkin build --force-color --status-rate 1 `basename ${project_loc}`"</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value></value>
+					<value />
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
@@ -79,7 +78,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.environment</key>
-					<value>VERBOSE=1|ROS_ROOT=/opt/ros/kinetic/share/ros|ROS_PACKAGE_PATH=/opt/ros/kinetic/share|PYTHONPATH=/opt/ros/kinetic/lib/python2.7/dist-packages|PATH=/opt/ros/kinetic/bin:/home/name-not-found/bin:/home/name-not-found/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games|LD_LIBRARY_PATH=/opt/ros/kinetic/lib|PKG_CONFIG_PATH=/opt/ros/kinetic/lib/pkgconfig|CMAKE_PREFIX_PATH=/opt/ros/kinetic|</value>
+					<value>VERBOSE=1|ROS_ROOT=/opt/ros/kinetic/share/ros|ROS_PACKAGE_PATH=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/beginner_tutorials:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fisheye_camera_matrix_msgs:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_navigation:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_remap_joystick:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_trajectory_msgs:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_visual_gps:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fu_line_detection:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/lisa_visual_gps:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/map_publisher:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/odom_validation:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_model_car:/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk:/opt/ros/kinetic/share|PYTHONPATH=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/lib/python2.7/dist-packages:/opt/ros/kinetic/lib/python2.7/dist-packages|PATH=/opt/ros/kinetic/bin:/home/name-not-found/bin:/home/name-not-found/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games|LD_LIBRARY_PATH=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/lib:/opt/ros/kinetic/lib|PKG_CONFIG_PATH=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/lib/pkgconfig:/opt/ros/kinetic/lib/pkgconfig|CMAKE_PREFIX_PATH=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel:/opt/ros/kinetic|</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>

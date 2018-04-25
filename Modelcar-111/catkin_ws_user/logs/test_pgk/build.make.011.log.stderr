@@ -1,0 +1,106 @@
+CMakeFiles/talker.dir/src/talker.cpp.o: In function `main':
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:27: undefined reference to `ros::init(int&, char**, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int)'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:34: undefined reference to `ros::NodeHandle::NodeHandle(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::map<std::__cxx11::basic_string<char, std::char_traits<char>,CMakeFiles/sub.dir/src/sub.cpp.o: In function `callback(boost::shared_ptr<std_msgs::String_<std::allocator<void> > const> const&)':
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:20: undefined reference to `ros::console::g_initialized'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:20: undefined reference to `ros::console::initialize()'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:20: undefined reference to `ros::console::initializeLogLocation(ros::console::LogLocation*, std::__cxx11::basic_string<char, std::char_traits<char>, std:: allocatorstd<char:>: allocator>< charconst>& ,> ,ros :std::console::__cxx11::levels::basic_string:<Levelchar,) 'std
+:/:homechar_traits/<namechar->not,- foundstd/:Dokumente:/allocatorBachelorarbeit</charModelcar>- 111>/,catkin_ws_user /stdsrc:/:test_pgkless/<srcstd/:sub.cpp::__cxx1120::: basic_stringundefined< charreference,  tostd :`:roschar_traits:<:charconsole>:,: setLogLocationLevelstd(:ros::allocator:<consolechar:>: LogLocation>* ,> ,ros :std::console::allocator:<levelsstd:::Level:)pair'<
+std/:home:/__cxx11name:-:notbasic_string-<foundchar/,Dokumente /stdBachelorarbeit:/:Modelcarchar_traits-<111char/>catkin_ws_user,/ stdsrc:/:test_pgkallocator/<srcchar/>sub.cpp :>20 :const ,undefined  stdreference: :to__cxx11 :`:rosbasic_string:<:charconsole:,: checkLogLocationEnabledstd(:ros::char_traits:<consolechar:>:,LogLocation *std):':
+allocator/<homechar/>name ->not ->found/ Dokumente>/ Bachelorarbeit>/ Modelcarconst-&111)/'catkin_ws_user
+//srchome//test_pgkname/-srcnot/-sub.cppfound:/20Dokumente:/ Bachelorarbeitundefined/ Modelcarreference- 111to/catkin_ws_user /`srcros/:test_pgk:console/:src:/printtalker.cpp(:ros62::: consoleundefined: :referenceFilterBase *to,  `voidros*:,: okros():':
+console/:home:/levelsname:-:notLevel-,found /charDokumente const/*Bachelorarbeit, int, char const*, char const*, ...)'
+CMakeFiles/sub.dir/src/sub.cpp.o: In function `main':
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:26: undefined reference to `ros::init(int&, char**, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int)'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:27: undefined reference to `ros::NodeHandle::NodeHandle(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::map<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::less<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > >, std::allocator<std::pair<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > > const&)'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:30: undefined reference to `ros::spin()'
+/home/name-not-found/Dokumente//Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:73: undefined reference to `ros::console::g_initialized'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:73: undefined reference to `ros::console::initialize()Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:29: undefined'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src reference to `ros::Subscriber::~/talker.cpp:73: undefined reference to `ros::console::initializeLogLocation(ros::console::Subscriber()'LogLocation*, std::
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::Level)'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:73: undefined reference to `ros::console::setLogLocationLevel(ros::console::LogLocation*, ros::console::levels::Level)'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:73: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:73: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...)'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:83: undefined reference to `ros::spinOnce()'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:53: undefined reference to `ros::Publisher::~Publisher()'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:34: undefined reference to `ros::NodeHandle::~NodeHandle()'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:53: undefined reference to `ros::Publisher::~Publisher()'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/talker.cpp:34: undefined reference to `ros::NodeHandle::~NodeHandle()'
+CMakeFiles/talker.dir/src/talker.cpp.o: In function `ros::Publisher ros::NodeHandle::advertise<std_msgs::String_<std::allocator<void> > >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, bool)':
+/opt/ros/kinetic/include/ros/node_handle.h:254: undefined reference to `ros::NodeHandle::advertise(ros::AdvertiseOptions&)'
+CMakeFiles/talker.dir/src/talker.cpp.o: In function `void ros::Publisher::publish<std_msgs::String_<std::allocator<void> > >(std_msgs::String_<std::allocator<void> > const&) const':
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::g_initialized'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::initialize()'
+/opt-111/catkin_ws_user/src/test_pgk/src/sub.cpp:27: undefined reference to `ros:/ros/:NodeHandle::~NodeHandle()'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:29: undefined reference to `ros::Subscriber::~Subscriber()'
+/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:27: undefined reference to `ros::NodeHandle::~NodeHandle()'
+CMakeFiles/sub.dir/src/sub.cpp.o: In function `ros::Subscriber ros::NodeHandle::subscribe<std_msgs::String_<std::allocator<void> > >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned int, void (*)(boost::shared_ptr<std_msgs::String_<std::allocator<void> > const> const&), ros::TransportHints const&)'kinetic:
+//opt/ros/kinetic/include/include/ros/rosnode_handle.h/:publisher.h709::102 :undefined  undefinedreference  referenceto  `ros::NodeHandle:to: subscribe`(rosros::::consoleSubscribeOptions:&:)'initializeLogLocation(
+CMakeFilesros:/sub.dir:console/src::/sub.cpp.o:LogLocation *In,  functionstd :`:ros__cxx11::::SubscriptionCallbackHelperTbasic_string<<boostchar, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::::Levelshared_ptr<)'std_msgs::
+/String_<stdopt:/:allocator<rosvoid/>kinetic /> includeconst/> ros/constpublisher.h:&, void>102::: deserializeundefined( rosreference: :toSubscriptionCallbackHelperDeserializeParams  const&`ros:)':console:
+/:opt:/setLogLocationLevelros(/roskinetic:/:includeconsole/:ros/:LogLocationsubscription_callback_helper.h*:,126 :ros :undefined: consolereference: :tolevels: :`Levelros):':
+console/:opt:g_initialized'
+//rosopt//kineticros//kinetic/includeinclude//rosros//publisher.hsubscription_callback_helper.h:126:: 102: undefined referenceundefined to  `ros:reference:console: :initialize(to)' `
+/rosopt::/consoleros/:kinetic:/checkLogLocationEnabledinclude(/rosros:/subscription_callback_helper.h::console126:::LogLocation undefined* )reference' 
+to/opt /`rosros:/kinetic:/console:include:/rosinitializeLogLocation/publisher.h(:102ros::: consoleundefined :reference :to LogLocation*`ros, std::::console__cxx11:::print:basic_string(<roschar:,: consolestd::::char_traits<FilterBase*char>,,  stdvoid:*:,allocator <roschar>::console >: :constlevels&:, :Level,ros: :charconsole :const:*levels,: :intLevel,) 'char
+ /constopt/*, ros/char kinetic/const*,include/ros /.subscription_callback_helper.h:..)'126: 
+undefined /referenceopt /toros /`kineticros/:include:console:/ros:setLogLocationLevel/publisher.h(ros::102: undefined reference to `ros::console::g_initialized'
+/opt/ros:console::LogLocation*, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/subscription_callback_helper.h:126: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/opt/ros/kinetic/include/ros/subscription_callback_helper.h:126: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...)'
+/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::initialize()'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::initializeLogLocation(ros::console::LogLocation*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::setLogLocationLevel(ros::console::LogLocation*, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...)'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::g_initialized'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::initialize()'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::initializeLogLocation(ros::console::LogLocation*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::Level)'
+/collect2: error: ld returned 1 exit status
+opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::setLogLocationLevel(ros::console::LogLocation*, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/opt/ros/kinetic/include/ros/publisher.h:102: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...make[2]: *** [/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/test_pgk/lib/test_pgk/sub] Error 1
+)'
+/opt/ros/kinetic/include/make[1]: *** [CMakeFiles/sub.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+ros/publisher.h:106: undefined reference to `ros::Publisher::Impl::isValid() const'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::g_initialized'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::initialize()'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::initializeLogLocation(ros::console::LogLocation*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::setLogLocationLevel(ros::console::LogLocation*, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::g_initialized'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::initialize()'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::initializeLogLocation(ros::console::LogLocation*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::setLogLocationLevel(ros::console::LogLocation*, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::g_initialized'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::initialize()'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::initializeLogLocation(ros::console::LogLocation*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::setLogLocationLevel(ros::console::LogLocation*, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/opt/ros/kinetic/include/ros/publisher.h:108: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::g_initialized'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::initialize()'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::initializeLogLocation(ros::console::LogLocation*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::setLogLocationLevel(ros::console::LogLocation*, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::g_initialized'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::initialize()'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::initializeLogLocation(ros::console::LogLocation*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::setLogLocationLevel(ros::console::LogLocation*, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::g_initialized'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::initialize()'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::initializeLogLocation(ros::console::LogLocation*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::setLogLocationLevel(ros::console::LogLocation*, ros::console::levels::Level)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::checkLogLocationEnabled(ros::console::LogLocation*)'
+/opt/ros/kinetic/include/ros/publisher.h:112: undefined reference to `ros::console::print(ros::console::FilterBase*, void*, ros::console::levels::Level, char const*, int, char const*, char const*, ...)'
+/opt/ros/kinetic/include/ros/publisher.h:118: undefined reference to `ros::Publisher::publish(boost::function<ros::SerializedMessage ()> const&, ros::SerializedMessage&) const'
+collect2: error: ld returned 1 exit status
+make[2]: *** [/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/test_pgk/lib/test_pgk/talker] Error 1
+make[1]: *** [CMakeFiles/talker.dir/all] Error 2
+make: *** [all] Error 2

@@ -15,6 +15,7 @@
 #include <fub_trajectory_msgs/TrajectoryPoint.h>
 #include "ros/ros.h"
 #include <nodelet/nodelet.h>
+#include <tf/tf.h>
 
 
 using namespace Eigen;
@@ -38,7 +39,7 @@ auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msg
 				if (node.easy_set_parent(list_of_nodes)) {
 					node.set_validation(Val::valid);
 					if ((node.get_validation() == Val::valid)) {
-						if (node.calculate_orientation()) {
+						if (node.calculate_yaw()) {
 							//TODO check_if_goal_reached()
 							list_of_nodes.push_front(node);
 							if (node.reached_goal()) {
@@ -46,7 +47,7 @@ auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msg
 								goal=node;
 							}
 						} else {
-							std::cout << "calculate_orientation failed with i="
+							std::cout << "calculate yaw failed with i="
 									<< i << std::endl;
 						}
 
@@ -68,10 +69,11 @@ auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msg
 			std::cout << "Easy lookout failed with i=" << i << std::endl;
 		}
 	}				//for loop
+
 	fub_trajectory_msgs::Trajectory trajectory;
 
 	Eigen::Quaternionf quaternion;
-
+	//Baue Trajectorie vom Ziel zum Start auf und drehe sie um
 	std::list<Node>traject_to_goal;
 	traject_to_goal[0]=goal;
 	Node tmp=goal;
@@ -81,7 +83,7 @@ auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msg
 	}
 	traject_to_goal.reverse();
 
-
+	//TODO calculate correct quaternion from yaw angle
 	int j=0;
 	for (auto &iter : traject_to_goal){
 		trajectory.trajectory[j].pose.position.x = iter.get_coordinates()[0];
@@ -95,8 +97,13 @@ auto RRT_simple(std::list<Node>& list_of_nodes, Node& start)->fub_trajectory_msg
 	}
 	return trajectory;
 }
-void callback(const nav_msgs::Odometry odom){
+void callback(const nav_msgs::Odometry & odom){
+	nav_msgs::Odometry start_position;
 	start_position=odom;
+	pos[0]=start_position.pose.pose.position.x;
+	pos[1]=start_position.pose.pose.position.y;
+	yaw=tf::getYaw(start_position.pose.pose.orientation);
+	yaw+=M_PI;
 	return;
 }
 
@@ -111,21 +118,8 @@ int main(int argc, char **argv) {
 	ros::Publisher trajectoryPublisher = n.advertise<fub_trajectory_msgs::Trajectory>("planned_path", 10);
 
 	//Auto - get Position and Orientation and write to start_position
-	ros::Subscriber sub =n.subscribe("visual_gps\odom",100, callback);
-	Vector2d pos;
-	pos[0]=start_position.pose.pose.position.x;
-	pos[1]=start_position.pose.pose.position.y;
-	Vector2d ori;
-	Eigen::Quaternionf q;
-	q[0]=start_position.pose.pose.orientation.x;
-	q[1]=start_position.pose.pose.orientation.y;
-	q[2]=start_position.pose.pose.orientation.z;
-	q[3]=start_position.pose.pose.orientation.w;
-	//transfer from Quaternion to eulerangles to read the yaw vector
-	auto euler = q.toRotationMatrix().eulerAngles(0,1,2);
-	ori[0]=euler[2][0];
-	ori[1]=euler[2][1];
-	Node start(pos, ori, nullptr, Val::valid, 0);
+	ros::Subscriber sub =n.subscribe("/odom",100, callback);
+	Node start(pos, yaw, nullptr, Val::valid, 0);
 
 	start.print_node();
 
