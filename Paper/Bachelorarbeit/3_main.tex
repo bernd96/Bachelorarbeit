@@ -1,30 +1,73 @@
 % !TeX encoding = UTF-8
 \section{Umsetzung}
-Zunächst werden wir die notwendigen Anpassungen des \textit{RRT*}-Algorithmus behandeln, bevor wir uns mit der Wahl einer geeigneten Metrik und Kostenfunktion beschäftigen. Zum Schluss dieses Kapitels werden die zur Umsetzung notwendigen technischen Grundlagen erläutert, es wird also neben der verwendeten Hardware auch das Framework ROS - Robotik Operating Systems - vorgestellt.
+Bevor wir uns den notwendigen Anpassungen des \textit{RRT*}-Algorithmus widmen können, müssen wir die kinematischen und physikalischen Beschränkungen des Autos analysieren. Anschließend wird das verwendete Framework ROS - Robot Operating Systems - vorgestellt, bevor wir uns mit der Wahl einer geeigneten Metrik und Kostenfunktion beschäftigen.
+\subsection{Hardwareausstattung der Autos}
+Das Dahlem Center for Machine Learning and Robotics arbeitet mittlerweile mit dem Modelfahrzeug "AutoNOMOS Mini v3" (1:10). Der Hauptcomputer auf dem Auto ist ein \textit{Odroid}(XU4 64GB) mit Ubuntu Linux als Betriebssystem und ROS (Robot Operation Systems) als Steuerungssystem \citep{fubAuto}. \\ [TODO Bild einfügen]
+Motorisiert ist das Auto mit einem bürstenlosen [TODO??] DC-Servomotor FAULHABER 2232. Die Lenkung wird von dem Servomotor HS-645-MG übernommen, beide Motoren werden mithilfe einer \textit{Arduino Nano} Platine gesteuert. \\
+Zur Wahrnehmung der Umgebung besitzt das AutoNOMOS Mini v3 mit dem RPLIDAR A2 360 einen rotierenden Laserscanner, der in der Lage ist, die Umgebung des Autos auf Hindernisse zu überprüfen. Als Rückgabewert liefert der RPLIDAR pro Gradwinkel den Wert, wie weit das nächste Hindernis in dieser Richtung entfernt ist, also insgesamt 360 Werte (einen pro Winkel). \\
+Auf dem oberen Teil des Autos befestigt ist das \textit{Kinect-type stereoscopic system} (Intel RealSense SR300), welches eine Wolke aus 3D Punkten liefert, die dazu benutzt werden kann, Hindernisse zu erkennen. Außerdem kann die Kamera des \textit{Kinect-type} Sensors dazu benutzt werden, Fahrbahnmarkierungen und Objekte direkt vor dem Auto zu lokalisieren.\\
+Der letzte äußere Sensor, auch am oberen Teil des Autos angebracht, ist die Fischaugen-Kamera. Diese zeigt nach oben, zur Decke, und kann dazu benutzt werden bestimmte markante, feststehende Objekte zu lokalisieren, damit das AutoNOMOS Mini v3 sich auch innerhalb von Räumen orientieren kann. Dazu kann eine GPS Navigationseinheit simuliert werden, indem die an der Decke angebrachten vier Lampen in unterschiedlichen Farben leuchten. \\
+Die Sensoren sind entweder via USB 3.0 an der Hauptplatine oder direkt am \textit{Odroid} angeschlossen. \\
+An inneren Sensoren besitzt das AutoNOMOS Mini v3 eine MPU6050, die einen Beschleunigungssensor und ein \textit{Gyroskop} enthält. Mithilfe dieser MPU kann das AutoNOMOS Mini v3 seine Orientierung, seine Richtung im Raum bestimmen. Außerdem können Messungen zur \textit{Odometrie} ergänzt werden.\\
+Das AutoNOMOS Mini v3 wird über eine 14,8 V Batterie mit Energie versorgt.
+
+\subsection{Software: ROS - Robot Operating Systems}
+ROS stellt Bibliotheken und Werkzeuge zur Verfügung, die Software-Entwicklern helfen sollen, Robotik Anwendungen zu kreieren \citep{ROS}. Unter anderem beinhaltet ROS Gerätetreiber, Bibliotheken, Visualisierungswerkzeuge, Paketmanagement und vieles mehr. ROS ist Open Source und unter der BSD Lizenz verfügbar.
+\subsubsection{Architektur}
+Mithilfe von ROS können so genannte \textit{Nodes}, ausführbare Programme, erzeugt werden, die über so genannte \textit{Topics} kommunizieren können. Dies passiert über einen anonymisierten Publisher/Subscriber Mechanismus, das heißt Daten generierende Knoten können auf relevanten \textit{Topics} Nachrichten senden, und interessierte Knoten können von relevanten \textit{Topics} Nachrichten empfangen. \\
+Für jedes \textit{Topic} ist dabei auch die Nachrichtenart definiert, die für dieses \textit{Topic} veröffentlicht und von diesem \textit{Topic} empfangen werden. Dies können neben simplen Datentypen auch komplexe, selbst definierte Datenstrukturen sein. Dabei wird nur dieser eine, vorher festgelegte Datentyp der Nachricht vom \textit{Topic} akzeptiert.
+\textit{Topics} stellen nur eine unidirektionale Verbindung zur Verfügung. Für die Abwicklung von zum Beispiel \textit{Remote Procedure Calls} sind sogenannte Services zuständig. Diese ermögliche, eine Antwort auf eine bestimmte Anfrage nach dem Client Server Prinzip zurückzusenden.
+\subsection{APIs und Einbettung zu bereits vorhandene Knoten}
+Das Dahlem Center for Machine Learning and Robotics entwickelte ROS-Pakete für die Steuerung autonomer Autos. Diese Pakete und daraus resultierenden ROS-Nodes können dazu genutzt werden, den von mir entwickelten RRT*-Pfadplaner möglichst gut einzubetten. So kann durch das visuelle indoor GPS die Position des Autos bestimmt werden, die der Pfadplaner für seine Berechnungen braucht. Die resultierende \textit{Trajektorie}, die der Pfadplaner entwickelt, wird einem Steuerungsknoten übergeben, der diese \textit{Trajektorie} in Motorbefehle, also Beschleunigungen und Lenkungen, umsetzt. 
+\subsubsection{Bestimmung der Odometry und visual GPS}
+[TODO was benutzte ich jetzt?]
+\subsubsection{Steuerungsknoten fubMigController}
+Dieser Knoten lauscht auf das \textit{Topic} \verb|"planned_path"|. Auf \verb|"planned_path"| kann eine \textit{Trajektorie} publiziert werden, die dann mithilfe des Steuerungsknotens vom Auto abgefahren wird. Dabei kümmert sich dieser Steuerungsknoten allerdings nicht um etwagige Hindernisse, die mit dem Auto kollidieren könnten. Somit muss der Pfadplaner selbst alle Kollisionen mit Hindernissen ausschließen. \\
+Das Format der \textit{Trajektorie} wurde von der Arbeitsgruppe der FU Berlin definiert und besteht aus
+\begin{itemize}
+\item \verb|std_msgs/Header|: Hier wird die aktuelle Zeit gespeichert.
+\item \verb|string child_frame_id|: [TODO]
+\item \verb|fub_trajectory_msgs/TrajectoryPoint[] trajectory|: Eine Liste aus Trajektorie-Punkten.
+\end{itemize}
+Ein Trajektorien-Punkt symbolisiert einen abzufahrenden Knotenpunkt und wiederum besteht aus
+\begin{itemize}
+\item \verb|geometry_msgs/Pose pose|: Hier sind Position und Orientierung des Autos gespeichert.
+\item \verb|geometry_msgs/Twist velocity|:Hier wird die Geschwindigkeit des Autos an diesem Punkt gespeichert.
+\item \verb|geometry_msgs/Twist acceleration| Hier wird die Beschleunigung des Autos an diesem Punkt gespeichert.
+\end{itemize}
+Die Position wird in x-Position und y-Position angegeben, ausgehend von einer Ecke des Raumes. Die Orientierung wird durch ein \textit{Quaternion} dargestellt, bei dem durch vier Werte die Drehung in jeder Richtung des Raumes genau bestimmt ist. Allerdings genügt uns die Drehung um die z-Achse, also die Drehrichtung über die Vertikalachse, weshalb dieses Quaternion in einen Winkel, der sogenannten Gierung, umgerechnet wird.
+\\
+Nachdem die notwendige Infrastruktur erläutert wurde, folgt eine kurze Betrachtung der kinematischen und physikalischen Einschränkungen, denen das AutoNOMOS Mini v3 unterworfen ist. Anschließend können wir uns endlich dem Kernstück der Arbeit, dem eigentlichen RRT*-Pfadplaner, widmen.
+
+\subsection{Kinematische und physikalische Einschränkungen}
 
 
+\subsection{RRT*-Pfadplaner}
+
+\subsubsection{RRT* }
 Dazu sind Änderungen besonders an zwei Stellen nötig: 
 \begin{enumerate}
 \item Es muss bei der Auswahl des Vaterknotens überprüft werden, ob der eingefügte Knoten über den Vaterknoten überhaupt erreicht werden kann.
 \item Beim Rewiring - dem Neuverknüpfen der Knoten - wird nicht die alte Verbindung zum Vaterknoten gelöscht. Stattdessen wird ein neuer Knoten erzeugt, der als Vaterknoten den eingefügten Knoten \verb|x_new| hat. Dies ist nötig, weil 
 \end{enumerate}
 
-
-\subsection{Algorithmen - zentrale Elemente der Software}
-\subsubsection{Benutzeroberfläche - GUI??}
-\subsubsection{Zentraler Quellcode}
 \begin{itemize}
 \item  Datenstruktur Nodes
 \item Berechnung der Orientierung
 \item Rewiring
 \end{itemize}
+\subsection{Metrik und Kostenfunktion}
+Bestrafen für harte Lenkung bzw. (starke) Lenkänderung
+Belohnung für geradeausfahren und kurze Wege
+
+
+
+
 \subsection{Dokumentation der Durchführung und entstandener Artefakte}
 \subsection{Verwendete Metriken}
 \subsection{Beschreibung besonderer Schwierigkeiten und wie diese umgangen wurden}
 \subsection{(Evaluation - nur wenn ich dafür Zeit habe)}
-\subsection{ROSCORE}
-\subsubsection{Softwarearchitektur}
-\subsubsection{APIs}
+
 
 \subsubsection{Tests und Testdatensätze/Szenarien für die Software)}
 \subsubsection{Korrektheitsbeweise}

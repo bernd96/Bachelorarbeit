@@ -1,14 +1,20 @@
 % !TeX encoding = UTF-8
 \section{Einleitung}
-Schon die Griechen der Antike träumten von autonomen, selbstfahrenden Fahrzeugen [TODO Literaturverweis]. Mittlerweile ist die Forschung in diesen Bereichen so weit fortgeschritten, dass dieser Traum schon bald Wirklichkeit werden könnte. Dabei werden unterschiedliche Ansätze verfolgt, das Auto sicher durch den Straßenverkehr zu bringen. Dabei heißt sicher, dass das Auto während der Fahrt weder sich noch andere Verkehrsteilnehmer gefährdet. Neben der Sicherheit ist jedoch auch das Erreichen des Ziels wichtig, bei dem das Auto seinen Weg durch eine Umgebung mit statischen und dynamischen, das heißt sich bewegenden Hindernissen finden muss. \\
-Um dies zu erreichen, existieren unterschiedliche Algorithmen, die dafür zuständig sind, dem Auto bei gegebenen Ziel eine passende \textit{Trajektorie} vorzuschlagen. Die Algorithmen unterscheiden sich in Ausführungszeit, Genauigkeit und berechnen unterschiedlich optimale Pfade.  \\
-Die Arbeitsgruppe Robotik der Freien Universität Berlin benutzt in ihren Forschungen hauptsächlich das Prinzip elastischer Bänder zur Erzeugung von \textit{Trajektorien} (Time-Elastic-Bands, \citep[vgl.][]{RoeHoBe}).Doch auch die Untersuchung und Analyse anderer Algorithmen ist interessant, um zu überprüfen ob sich vertiefte Forschung in diesen Bereichen lohnt. \\ 
-Diese Bachelorarbeit untersucht einen dieser Algorithmen, \textit{RRT*}, auf seine Tauglichkeit, über eine vorgegebene Fahrbahn mit Hindernissen eine abfahrbare und möglichst gute \textit{Trajektorie} zu finden. 
-
-
+Schon die Griechen der Antike träumten von autonomen, selbstfahrenden Fahrzeugen [TODO Literaturverweis]. Mittlerweile ist die Forschung in diesen Bereichen so weit fortgeschritten, dass dieser Traum schon bald Wirklichkeit werden könnte. Dabei werden unterschiedliche Ansätze verfolgt, das Auto sicher durch den Straßenverkehr zu bringen. Dabei heißt sicher, dass das Auto während der Fahrt weder sich noch andere Verkehrsteilnehmer gefährdet. Neben der Sicherheit ist jedoch auch das Erreichen des Ziels wichtig, bei dem das Auto seinen Weg durch eine Umgebung mit statischen und dynamischen, das heißt sich bewegenden Hindernissen finden muss. Dies wird durch einen Pfadplaner gewährleistet, der -informell gesprochen - aus der eigenen Position, dem Zielbereich und unter Berücksichtigung aller statischen und sich bewegenden Hindernissen einen sicheren Pfad zum Ziel findet. Dieser Pfad ist dann durch das Auto abfahrbar.\\
+Um diese Aufgabe zu meistern, existieren unterschiedliche Ansätze, um dem Auto je nach Anwendungsfall bei gegebenen Ziel eine \textit{Trajektorie} vorzuschlagen. Die jeweiligen Algorithmen unterscheiden sich in Ausführungszeit, Genauigkeit, Sicherheit und berechnen unterschiedlich optimale Pfade.  \\
+Das Dahlem Center for Machine Learning and Robotics untersucht maschinelles Lernen und Anwendungen intelligenter Systeme. Dazu haben sich vier Arbeitsgruppen der Freien Universität Berlin zusammengeschlossen:
+\begin{itemize}
+\item Intelligent Systems and Robotics (Prof. Dr. Raúl Rojas)
+\item Autonomos Cars (Prof. Dr. Daniel Göhring)
+\item Artifical and Collective Intelligence (Prof. Dr. Tim Landgraf)
+\item Logic and automatic proofs (Christoph Benzmüller)
+\end{itemize}
+Ein Forschungsgebiet ist die Entwicklung und Analyse autonomer Autos. Zur Pfadplanung wird hauptsächlich das Prinzip elastischer Bänder (Time-Elastic-Bands, \citep[vgl.][]{RoeHoBe}) zur Erzeugung von \textit{Trajektorien} benutzt. Doch auch die Untersuchung und Analyse anderer Algorithmen ist interessant, um zu überprüfen ob sich eine vertiefte Forschung in diesen Bereichen lohnt. \\ 
+Diese Bachelorarbeit untersucht einen dieser Algorithmen zur Pfadplanung, \textit{RRT*}, auf seine Tauglichkeit, über eine vorgegebene Fahrbahn mit Hindernissen eine abfahrbare, sichere und möglichst optimale \textit{Trajektorie} zu finden. 
 
 \subsection{Aufbau der Arbeit}
-(Arbeitstitel) \\
+(Arbeitstitel)
+[TODO doppelung mit struktur] \\ 
 \subsubsection{Problemanalyse}
 Diese Arbeit untersucht die Effizienz des\textit{ RRT*}-Algorithmus unter Anwendung bei autonomen Autos. Dazu fährt das Auto eine vorgegebene Strecke ab [TODO Bild einfügen]. Auf dieser Strecke werden erst statische, dann sich bewegende Hindernisse platziert. \\
 Das Auto soll diese Strecke in möglichst kurzer Zeit mit einem möglichst optimalen Pfad abfahren, ohne eines dieser Hindernisse zu berühren. Dazu sollte das Auto den Algorithmus idealerweise 30 Mal pro Sekunde ausführen, mindestens aber vier Mal pro Sekunde. \\
@@ -39,6 +45,11 @@ Kinodynamic planning & Beschreibt eine Klasse von Problemen bei der physikalisch
 hochdimensionale Probleme & [TODO]\\
 randomisierte Algorithmen & [TODO]\\
 Kinematik & \\
+Odroid & \\
+Arduino Nano & \\
+Gyroskop & \\
+Odometrie & \\
+Remote Procedure Call & \\
 
 \end{tabularx} 
 \subsubsection{Struktur}
