@@ -11,6 +11,7 @@
 #include "ros/ros.h"
 #include <std_msgs/Int16.h>
 #include <std_msgs/Float32.h>
+#include <std_msgs/UInt8.h>
 
 namespace fub {
 namespace controller {
@@ -24,7 +25,7 @@ void ControllerMig::onInit()
     // advertise publishers (before subscribing to the vehicle state / setting up timer)
     mWantedNormSteerAnglePublisher = getNodeHandle().advertise<std_msgs::Float32>("command/normalized_steering_angle", 10);
     mWantedSpeedPublisher          = getNodeHandle().advertise<std_msgs::Int16>("manual_control/speed", 10);
-    mWantedSteeringAnglePublisher  = getNodeHandle().advertise<std_msgs::Int16>("manual_control/steering", 10);
+    mWantedSteeringAnglePublisher  = getNodeHandle().advertise<std_msgs::UInt8>("/steering", 10);
 
 
     // set up dynamic reconfigure service (before any configuration is used) - this will start the timer
@@ -132,14 +133,14 @@ void ControllerMig::publish(VehicleState const & vehicleState)
 
 void ControllerMig::publishWantedSpeedAndFrontWheelAngle(double speed, double wheelAngle)
 {
-    // publish wanted speed
+    // publish wanted speed 1489.36
         std_msgs::Int16 wantedSpeedMsg;
-        wantedSpeedMsg.data        = static_cast<int16_t>(speed *(-1489.36));
+        wantedSpeedMsg.data        = (speed *(1000));
         mWantedSpeedPublisher.publish(wantedSpeedMsg);
 
     // publish wanted steering angle
-        std_msgs::Int16 wantedAngleMsg;
-        wantedAngleMsg.data = static_cast<int16_t>(90.0 * wheelAngle) + 90;
+        std_msgs::UInt8 wantedAngleMsg;
+        wantedAngleMsg.data = (90.0 * wheelAngle) + 90;
         mWantedSteeringAnglePublisher.publish(wantedAngleMsg);
 }
 

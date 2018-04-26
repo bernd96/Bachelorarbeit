@@ -1,0 +1,50 @@
+In file included from [01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/PathFollower.h:5:0[m[K,
+                 from [01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.h:8[m[K,
+                 from [01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.cpp:1[m[K:
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/util/Spline.h:73:29:[m[K [01;35m[Kwarning: [m[Knon-static data member initializers only available with -std=c++11 or -std=gnu++11
+     double mFirstParam   = -1.0;
+[01;32m[K                             ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/util/Spline.h:74:29:[m[K [01;35m[Kwarning: [m[Knon-static data member initializers only available with -std=c++11 or -std=gnu++11
+     double mLastParam    = -1.0;
+[01;32m[K                             ^[m[K
+In file included from [01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.h:9:0[m[K,
+                 from [01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.cpp:1[m[K:
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/SteerController.h:35:29:[m[K [01;35m[Kwarning: [m[Knon-static data member initializers only available with -std=c++11 or -std=gnu++11
+     double mSteerIntegral = 0.0;
+[01;32m[K                             ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/SteerController.h:36:29:[m[K [01;35m[Kwarning: [m[Knon-static data member initializers only available with -std=c++11 or -std=gnu++11
+     double mOldSteerError = 0.0;
+[01;32m[K                             ^[m[K
+In file included from [01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.cpp:1:0[m[K:
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.h:30:23:[m[K [01;35m[Kwarning: [m[Kdefaulted and deleted functions only available with -std=c++11 or -std=gnu++11
+     ControllerMig() = default;
+[01;32m[K                       ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.h:32:32:[m[K [01;35m[Kwarning: [m[Kdefaulted and deleted functions only available with -std=c++11 or -std=gnu++11
+     virtual ~ControllerMig() = default;
+[01;32m[K                                ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.h:36:25:[m[K [01;35m[Kwarning: [m[Koverride controls (override/final) only available with -std=c++11 or -std=gnu++11
+     virtual void onInit() override;
+[01;32m[K                         ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.h:46:92:[m[K [01;35m[Kwarning: [m[Koverride controls (override/final) only available with -std=c++11 or -std=gnu++11
+     void configurationCallback(fub_controller::ControllerMigConfig & config, uint32_t level) override;
+[01;32m[K                                                                                            ^[m[K
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.cpp:[m[K In member function ‘[01m[Kvoid fub::controller::mig::ControllerMig::publishWantedSpeedAndFrontWheelAngle(double, double)[m[K’:
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.cpp:138:83:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Kstd_msgs::Int16_<std::allocator<void> >::Int16_(double)[m[K’
+         wantedSpeedMsg.data        = static_cast<std_msgs::Int16>(speed *(1489.36));
+[01;32m[K                                                                                   ^[m[K
+In file included from [01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.cpp:12:0[m[K:
+[01m[K/opt/ros/kinetic/include/std_msgs/Int16.h:29:3:[m[K [01;36m[Knote: [m[Kcandidate: std_msgs::Int16_<ContainerAllocator>::Int16_(const ContainerAllocator&) [with ContainerAllocator = std::allocator<void>]
+   Int16_(const ContainerAllocator& _alloc)
+[01;32m[K   ^[m[K
+[01m[K/opt/ros/kinetic/include/std_msgs/Int16.h:29:3:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kdouble[m[K’ to ‘[01m[Kconst std::allocator<void>&[m[K’
+[01m[K/opt/ros/kinetic/include/std_msgs/Int16.h:26:3:[m[K [01;36m[Knote: [m[Kcandidate: std_msgs::Int16_<ContainerAllocator>::Int16_() [with ContainerAllocator = std::allocator<void>]
+   Int16_()
+[01;32m[K   ^[m[K
+[01m[K/opt/ros/kinetic/include/std_msgs/Int16.h:26:3:[m[K [01;36m[Knote: [m[K  candidate expects 0 arguments, 1 provided
+[01m[K/opt/ros/kinetic/include/std_msgs/Int16.h:22:8:[m[K [01;36m[Knote: [m[Kcandidate: std_msgs::Int16_<std::allocator<void> >::Int16_(const std_msgs::Int16_<std::allocator<void> >&)
+ struct Int16_
+[01;32m[K        ^[m[K
+[01m[K/opt/ros/kinetic/include/std_msgs/Int16.h:22:8:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kdouble[m[K’ to ‘[01m[Kconst std_msgs::Int16_<std::allocator<void> >&[m[K’
+make[2]: *** [CMakeFiles/fub_controller_mig_nodelet.dir/src/controller_mig/ControllerMig.cpp.o] Error 1
+make[1]: *** [CMakeFiles/fub_controller_mig_nodelet.dir/all] Error 2
+make: *** [all] Error 2

@@ -1,0 +1,16 @@
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:52:30:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator=[m[K’ (operand types are ‘[01m[Kfub_trajectory_msgs::TrajectoryPoint_<std::allocator<void> >::_time_from_start_type {aka ros::Duration}[m[K’ and ‘[01m[Kint[m[K’)
+    traj_point.time_from_start=i;
+[01;32m[K                              ^[m[K
+In file included from [01m[K/opt/ros/kinetic/include/ros/time.h:57:0[m[K,
+                 from [01m[K/opt/ros/kinetic/include/ros/ros.h:38[m[K,
+                 from [01m[K/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/src/sub.cpp:8[m[K:
+[01m[K/opt/ros/kinetic/include/ros/duration.h:108:20:[m[K [01;36m[Knote: [m[Kcandidate: ros::Duration& ros::Duration::operator=(const ros::Duration&)
+ class ROSTIME_DECL Duration : public DurationBase<Duration>
+[01;32m[K                    ^[m[K
+[01m[K/opt/ros/kinetic/include/ros/duration.h:108:20:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kint[m[K’ to ‘[01m[Kconst ros::Duration&[m[K’
+[01m[K/opt/ros/kinetic/include/ros/duration.h:108:20:[m[K [01;36m[Knote: [m[Kcandidate: ros::Duration& ros::Duration::operator=(ros::Duration&&)
+[01m[K/opt/ros/kinetic/include/ros/duration.h:108:20:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kint[m[K’ to ‘[01m[Kros::Duration&&[m[K’
+make[2]: *** [CMakeFiles/sub.dir/src/sub.cpp.o] Error 1
+make[1]: *** [CMakeFiles/sub.dir/all] Error 2
+make: *** [all] Error 2

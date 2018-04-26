@@ -1,0 +1,8 @@
+prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_cmake
+
+Name: fub_cmake
+Description: Description of fub_cmake
+Version: 1.0.0
+Cflags: 
+Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_cmake/lib 
+Requires: 
