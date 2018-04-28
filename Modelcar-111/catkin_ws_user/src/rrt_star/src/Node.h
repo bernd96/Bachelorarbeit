@@ -7,6 +7,7 @@
 
 #include <eigen3/Eigen/Dense>
 #include <list>
+#include <ListOfNodes.h>
 #ifndef NODE_H_
 #define NODE_H_
 
@@ -46,10 +47,10 @@ class Node {
 
 		auto calculate_dir_vector(Node& node)->Vector2d;
 		auto calculate_yaw()->bool;
-		auto project_to_parent(std::list<Node>& list_of_nodes)->bool;
-		auto easy_set_parent(std::list<Node>& list_of_nodes)->bool;
+		auto project_to_parent(ListOfNodes& construct)->bool;
+		auto easy_set_parent(ListOfNodes& construct)->bool;
 
-		auto easy_look_for_parent(std::list<Node>& list_of_nodes)->bool;
+		auto easy_look_for_parent(ListOfNodes& construct)->bool;
 		auto not_to_near(Node& parent)->bool;
 		auto reached_goal()->bool;
 		auto is_reachable(Node& parent,const Vector2d& dir_vector)->bool;
