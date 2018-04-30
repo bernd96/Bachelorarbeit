@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
 		ros::Time now = ros::Time::now();
 		trajectory.header.stamp=now;
 		trajectory.header.frame_id="odom";
-		trajectory.child_frame_id="/base_link";
+		trajectory.child_frame_id="base_link";
 		traj.publish(trajectory);
 		ros::spinOnce();
 		loop_rate.sleep();

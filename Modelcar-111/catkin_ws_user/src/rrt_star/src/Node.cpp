@@ -12,6 +12,7 @@
 #include <math.h>
 #include <iomanip>
 
+
 using namespace Eigen;
 
 
@@ -55,10 +56,11 @@ auto calculate_yaw_from_vec(Vector2d vec)->double{
 	return yaw;
 }
 
-auto Node::easy_set_parent(std::list<Node>& list_of_nodes) ->bool {
+auto Node::easy_set_parent(ListOfNodes & construct, std::list<Node>&parents) ->bool {
 	Vector2d dir_vector(0, 0);
-	bool parent_found;
 	double min_cost = RANGE * 2;
+	bool parent_found = construct.find_parents(*this,parents);
+
 	for (auto &iter : list_of_nodes) {
 		dir_vector = calculate_dir_vector(iter);
 		if (dir_vector.norm() < RADIUS) {

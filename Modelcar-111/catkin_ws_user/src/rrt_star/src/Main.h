@@ -20,6 +20,11 @@
 	//Auto - Lenkwinkel in Grad? oder Vektor/radius des Lenkkreises?
 	const double STEERING_ANGLE_RADIUS= 0.3;
 	const double MAX_ANGLE = M_PI;
+
+	//
+	const int StructSize = 50;
+	const int StructRange=5;
+
 	/*
 	 * Der Cosinus des befahrbaren Winkels, ausgehend
 	 * vom Auto. Alle Punkte außerhalb sind nicht erreichbar,
