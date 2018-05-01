@@ -1,6 +1,7 @@
 % !TeX encoding = UTF-8
 \section{Umsetzung}
-Bevor wir uns den notwendigen Anpassungen des \textit{RRT*}-Algorithmus widmen können, müssen wir die kinematischen und physikalischen Beschränkungen des Autos analysieren. Anschließend wird das verwendete Framework ROS - Robot Operating Systems - vorgestellt, bevor wir uns mit der Wahl einer geeigneten Metrik und Kostenfunktion beschäftigen.
+\label{Umsetzung}
+Bevor wir uns den notwendigen Anpassungen des \textit{RRT*}-Algorithmus widmen können, müssen wir die kinematischen und physikalischen Beschränkungen des Autos analysieren. Anschließend wird das verwendete Framework ROS - Robot Operating Systems - vorgestellt, wonach wir uns mit der Wahl einer geeigneten Metrik und Kostenfunktion beschäftigen.
 \subsection{Hardwareausstattung der Autos}
 Das Dahlem Center for Machine Learning and Robotics arbeitet mittlerweile mit dem Modelfahrzeug AutoNOMOS Mini v3 (1:10). Der Hauptcomputer auf dem Auto ist ein \textit{Odroid}(XU4 64GB) mit Ubuntu Linux als Betriebssystem und ROS (Robot Operation Systems) als Steuerungssystem \citep{fubAuto}. [TODO Bild einfügen] \\
 Motorisiert ist das Auto mit einem bürstenlosen [TODO??] DC-Servomotor FAULHABER 2232. Die Lenkung wird von dem Servomotor HS-645-MG übernommen, beide Motoren werden mithilfe einer \textit{Arduino Nano} Platine gesteuert. \\
@@ -16,9 +17,9 @@ ROS stellt Bibliotheken und Werkzeuge zur Verfügung, die Software-Entwicklern h
 \subsubsection{Architektur}
 Mithilfe von ROS können so genannte \textit{Nodes}, ausführbare Programme, erzeugt werden, die über so genannte \textit{Topics} kommunizieren können. Dies passiert über einen anonymisierten Publisher/Subscriber Mechanismus, das heißt Daten generierende Knoten können auf relevanten \textit{Topics} Nachrichten senden, und interessierte Knoten können von relevanten \textit{Topics} Nachrichten empfangen. \\
 Für jedes \textit{Topic} ist dabei auch die Nachrichtenart definiert, die für dieses \textit{Topic} veröffentlicht und von diesem \textit{Topic} empfangen werden. Dies können neben simplen Datentypen auch komplexe, selbst definierte Datenstrukturen sein. Dabei wird nur dieser eine, vorher festgelegte Datentyp der Nachricht vom \textit{Topic} akzeptiert.
-\textit{Topics} stellen nur eine unidirektionale Verbindung zur Verfügung. Für die Abwicklung von zum Beispiel \textit{Remote Procedure Calls} sind sogenannte Services zuständig. Diese ermögliche, eine Antwort auf eine bestimmte Anfrage nach dem Client Server Prinzip zurückzusenden.
+\textit{Topics} stellen nur eine unidirektionale Verbindung zur Verfügung. Für die Abwicklung von zum Beispiel Remote Procedure Calls sind sogenannte Services zuständig. Diese ermöglichen, eine Antwort auf eine bestimmte Anfrage nach dem Client Server Prinzip zurückzusenden.
 \subsection{APIs und Einbettung zu bereits vorhandene Knoten}
-Das Dahlem Center for Machine Learning and Robotics entwickelte ROS-Pakete für die Steuerung autonomer Autos. Diese Pakete und daraus resultierenden ROS-Nodes können dazu genutzt werden, den von mir entwickelten RRT*-Pfadplaner möglichst gut einzubetten. So kann durch das visuelle indoor GPS die Position des Autos bestimmt werden, die der Pfadplaner für seine Berechnungen braucht. Die resultierende \textit{Trajektorie}, die der Pfadplaner entwickelt, wird einem Steuerungsknoten übergeben, der diese \textit{Trajektorie} in Motorbefehle, also Beschleunigungen und Lenkungen, umsetzt. 
+Das Dahlem Center for Machine Learning and Robotics entwickelte ROS-Pakete für die Steuerung ihrer autonomer Fahrzeuge. Diese Pakete und daraus resultierenden ROS-Nodes können dazu genutzt werden, den von mir entwickelten RRT*-Pfadplaner möglichst gut einzubetten. So kann durch das visuelle indoor GPS die Position des Autos bestimmt werden, die der Pfadplaner für seine Berechnungen braucht. Die resultierende \textit{Trajektorie}, die der Pfadplaner entwickelt, wird einem Steuerungsknoten übergeben, der diese \textit{Trajektorie} in Motorbefehle, also Beschleunigungen und Lenkungen, umsetzt. 
 \subsubsection{Bestimmung der Odometry und visual GPS}
 [TODO was benutzte ich jetzt?]
 
@@ -45,11 +46,11 @@ Im Gegensatz zu holonomischen Fahrzeugen sind die Möglichen Pfade eines Autos n
 Die mathematischen Definitionen der Randbedingungen und des Autos sind in der Bachelorarbeit von Lukas Gödicke \citep{Goedicke18} gut beschrieben und werden hier (übersetzt) übernommen. \\
 \subsubsection{Randbedingungen}
 Die Position des Autos bezieht sich auf den Mittelpunkt zwischen den Hinterrädern mit den Koordinaten x und y. Der Winkel $\theta \in S,  S=[0,2\pi]$ steht für die Ausrichtung des Autos, der Winkel $\phi \in S$ für die Ausrichtung der Räder (=Lenkwinkel). Wir nehmen an, dass das Auto sich auf einer flachen Ebene bewegt. Somit ist der Arbeitsraum definiert durch $C =  \mathbb{R \times S}$. Ein Zustand des Autos wird beschrieben durch $q \in C = (x,y,\theta)$.\\
-Zur Vereinfachung der Rechnungen wird angenommen, dass die Räder bei Bedarf sich sofort, ohne Zeitverlust, in die gewünschte Position begeben. Da der Lenkwinkel keinen Einfluss auf den Momentanzustand des Autos hat wird dieser in der Zustandsbeschreibung nicht aufgeführt. Zusätzlich zu diesen Definitionen aus \citep{Goedicke18} kommt noch hinzu, dass das Auto zur Testzwecken bestimmte Geschwindigkeiten nicht überschreiten darf, sodass der minimale Kurvenradius nur durch den Lenkwinkel beschränkt ist. \\
+Zur Vereinfachung der Rechnungen wird angenommen, dass die Räder bei Bedarf sich sofort, ohne Zeitverlust, in die gewünschte Position begeben. Da der Lenkwinkel keinen Einfluss auf den Momentanzustand des Autos hat wird dieser in der Zustandsbeschreibung nicht aufgeführt. Zusätzlich kommt noch hinzu, dass das Auto zur Testzwecken bestimmte Geschwindigkeiten nicht überschreiten darf, sodass der minimale Kurvenradius nur durch den Lenkwinkel beschränkt ist. \\
 
 \subsubsection{Einschränkungen durch das Auto}
 Ein Auto hat eine Möglichkeit sich fortzubewegen: Es kann beschleunigen. Eine negative Beschleunigung wäre Bremsen oder sogar Rückwärtsfahren. Zusätzlich zu dieser einen Möglichkeit, den Zustand des Autos zu ändern, kann das Auto das Resultat der Beschleunigung ändern, indem der Lenkwinkel angepasst wird. Dieser reicht von $\phi_{max}$ bis $-\phi_{max}$, den maximalen Lenkwinkeln des Autos.
-Je nach Lenkwinkel $i_{\phi}$, Geschwindigkeit $i_g$ und Ausrichtung des Autos $\theta$ ändern sich verschiedene Parameter des Zustandes $(x,y, \theta) $: \\
+Je nach Lenkwinkel $i_{\phi}$, Geschwindigkeit $i_g$ und Anfangsausrichtung des Autos $\theta$ ändern sich verschiedene Parameter des Zustandes $q(x,y, \theta) $: \\
 \begin{center}
 $ \dot{x} = i_g cos \phi $ \\
 $ \dot{y} = i_g sin \phi$ \\
@@ -58,7 +59,7 @@ $ \dot{{\theta}} = \frac{i_g}{L} tan (i_{\phi}) $
 L ist hierbei der Radstand, also der Abstand zwischen Vorder- und Hinterachse.
 
 \subsubsection{Konsequenzen}
-Ein normaler RRT* besitzt Trajektorien zum Ziel, die für ein Auto aufgrund der oben benannten Beschränkungen nicht abfahrbar sind. So entstehen beispielsweise diskrete Ecken und Kanten die für ein sich kontinuierlich bewegendes Auto unmöglich zu bewältigen ist. Somit ist die erste Aufgabe, die Pfade im RRT* für das Auto irgendwie abfahrbar zu machen.\\
+Ein normaler \textit{RRT*} besitzt \textit{Trajektorien} zum Ziel, die für ein Auto aufgrund der oben benannten Beschränkungen nicht abfahrbar sind. So entstehen beispielsweise diskrete Ecken und Kanten die für ein sich kontinuierlich bewegendes Auto unmöglich zu bewältigen ist. Somit ist die erste Aufgabe, die Pfade im \textit{RRT*} für das Auto irgendwie abfahrbar zu machen.\\
 Dazu hatte ich am Anfang unterschiedliche Ansätze:
 \begin{enumerate}
 \item RRT* normal ausführen. Sobald ein Pfad zum Ziel gefunden: Diesen so bearbeiten, dass dieser vom Auto zu bewältigen ist
@@ -70,9 +71,10 @@ Die zweite Variante war Thema der Bachelorarbeit meines oben bereits erwähnten 
 Deshalb entschloss ich mich für die dritte Variante: 
 
 \subsection{RRT*-Pfadplaner für Automobile}
+\label{Metrik}
 Diese beinhaltete, bei der Erstellung des RRT* vom Auto nicht erreichbare Knoten gar nicht erst zuzulassen. Das Auto sollte also von einem Knoten zum nächsten mit nur einer Lenkeinstellung direkt fahren können. Dies sollte die Berechnungszeit stark verringern. \\
 Zum Auschluss der Knoten verwendete ich zuerst eine Heuristik: Ein nächster Nachbar N für einen neu hinzugefügten Knoten K kam nur dann in Frage, falls dieser den neu hinzugefügten Knoten K auch erreiche konnte. Dazu wurde die Ausrichtung des Autos im potentenziellen Elternknoten N mit dem Richtungsvektor zwischen den beiden Knoten verglichen [TODO Zeichnung]. Somit war K gültig, falls der Winkel $\alpha$ zwischen der Ausrichtung von N und dem direktem Weg zum Knoten K (Richtungsvektor) einen bestimmten Wert $\omega$ nicht überschritt. Ungültige Knoten wurde verworfen. [TODO in Formel zsmfassen]\\
-Als nächster Schritt wird, wie im zweiten Kapitel [TODO Querverweis] geschildert, der Knoten K an den nächsten (gültigen) Nachbarn N projiziert und der Vaterknoten bestimmt. 
+Als nächster Schritt wird, wie in Kapitel \ref{RRT*} geschildert, der Knoten K an den nächsten (gültigen) Nachbarn N projiziert und der Vaterknoten bestimmt. 
 
 \subsubsection{Bestimmung des Vaterknotens}
 Dabei muss bemerkt werden, dass alle Punkte außerhalb der Wendekreise des Autos theoretisch mit einer Lenkeinstellung erreichbar sind. Allerdings fährt dabei das Auto sehr große Kreise und Umwege, die nicht nur weniger effizient sind, sondern auch Probleme bei der Hindernisvermeidung aufwerfen. Um dafür zu sorgen, dass das Auto diese großen Kreise meidet, wird die maximale Distanz zwischen zwei verbundenen Knoten so hinunter gesetzt, das nicht mehr als rechtwinklige Drehungen der Ausrichtung des Autos möglich sind [TODO Bild mit erreichbarem Raum + Bild mit beschränktem Raum]. \\
@@ -115,7 +117,7 @@ Aufgrund dieser Einschränkungen wurde keine komplizierte, unter Umständen bess
 \subsection{Dokumentation der Durchführung und entstandener Artefakte}
 \subsection{Beschreibung besonderer Schwierigkeiten und wie diese umgangen wurden}
 [TODO]
-Erwähnung technischer schwierigkeiten a la visual gps, fub controller	+++++++++++++++++++++++++++++++++++++
+Erwähnung technischer schwierigkeiten a la visual gps, fub controller	
 \subsubsection{Tests und Testdatensätze/Szenarien für die Software)}
 \subsubsection{Korrektheitsbeweise}
 \subsection{(Evaluation - nur wenn ich dafür Zeit habe)}

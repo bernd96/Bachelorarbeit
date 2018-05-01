@@ -1,6 +1,6 @@
 % !TeX encoding = UTF-8
 \section{Einleitung}
-Schon die Griechen der Antike träumten von autonomen, selbstfahrenden Fahrzeugen [TODO Literaturverweis]. Mittlerweile ist die Forschung in diesen Bereichen so weit fortgeschritten, dass dieser Traum schon bald Wirklichkeit werden könnte. Dabei werden unterschiedliche Ansätze verfolgt, das Auto sicher durch den Straßenverkehr zu bringen. Dabei heißt sicher, dass das Auto während der Fahrt weder sich noch andere Verkehrsteilnehmer gefährdet. Neben der Sicherheit ist jedoch auch das Erreichen des Ziels wichtig, bei dem das Auto seinen Weg durch eine Umgebung mit statischen und dynamischen, das heißt sich bewegenden Hindernissen finden muss. Dies wird durch einen Pfadplaner gewährleistet, der -informell gesprochen - aus der eigenen Position, dem Zielbereich und unter Berücksichtigung aller statischen und sich bewegenden Hindernissen einen sicheren Pfad zum Ziel findet. Dieser Pfad ist dann durch das Auto abfahrbar.\\
+Schon die Griechen der Antike träumten von autonomen, selbstfahrenden Fahrzeugen, wie in Homers Ilias geschildert. Mittlerweile ist die Forschung in diesen Bereichen so weit fortgeschritten, dass dieser Traum schon bald Wirklichkeit werden könnte. Zuvor müssen jedoch etliche Herausforderungen bewältigt werden. Eine davon ist, das Auto sicher durch den Straßenverkehr zu bringen. Dabei heißt sicher, dass das Auto während der Fahrt weder sich noch andere Verkehrsteilnehmer gefährdet. Neben der Sicherheit ist jedoch auch das möglichst schnelle Erreichen des Ziels wichtig, bei dem das Auto seinen Weg durch eine Umgebung mit statischen und dynamischen, das heißt sich bewegenden Hindernissen finden muss. Dies wird durch einen Pfadplaner gewährleistet, der -informell gesprochen - aus der eigenen Position, dem Zielbereich und unter Berücksichtigung aller statischen und sich bewegenden Hindernissen einen sicheren Pfad zum Ziel findet. Dieser Pfad ist dann durch das Auto abfahrbar.\\
 Um diese Aufgabe zu meistern, existieren unterschiedliche Ansätze, um dem Auto je nach Anwendungsfall bei gegebenen Ziel eine \textit{Trajektorie} vorzuschlagen. Die jeweiligen Algorithmen unterscheiden sich in Ausführungszeit, Genauigkeit, Sicherheit und berechnen unterschiedlich optimale Pfade.  \\
 Das Dahlem Center for Machine Learning and Robotics untersucht maschinelles Lernen und Anwendungen intelligenter Systeme. Dazu haben sich vier Arbeitsgruppen der Freien Universität Berlin zusammengeschlossen:
 \begin{itemize}
@@ -9,12 +9,12 @@ Das Dahlem Center for Machine Learning and Robotics untersucht maschinelles Lern
 \item Artifical and Collective Intelligence (Prof. Dr. Tim Landgraf)
 \item Logic and automatic proofs (Christoph Benzmüller)
 \end{itemize}
-Ein Forschungsgebiet ist die Entwicklung und Analyse autonomer Autos. Zur Pfadplanung wird hauptsächlich das Prinzip elastischer Bänder (Time-Elastic-Bands, \citep[vgl.][]{RoeHoBe}) zur Erzeugung von \textit{Trajektorien} benutzt. Doch auch die Untersuchung und Analyse anderer Algorithmen ist interessant, um zu überprüfen ob sich eine vertiefte Forschung in diesen Bereichen lohnt. \\ 
-Diese Bachelorarbeit untersucht einen dieser Algorithmen zur Pfadplanung, \textit{RRT*}, auf seine Tauglichkeit, über eine vorgegebene Fahrbahn mit Hindernissen eine abfahrbare, sichere und möglichst optimale \textit{Trajektorie} zu finden. 
+Ein Forschungsgebiet ist die Entwicklung und Analyse autonomer Autos. Zur oben beschriebenen Pfadplanung wird in der Arbeitsgruppe hauptsächlich das Prinzip elastischer Bänder (Time-Elastic-Bands, \citep[vgl.][]{RoeHoBe}) zur Erzeugung abfahrbarer \textit{Trajektorien} benutzt. Doch auch die Untersuchung und Analyse anderer Algorithmen ist interessant, um zu überprüfen, ob sich eine vertiefte Forschung in diesen Bereichen lohnt. \\ 
+Diese Bachelorarbeit untersucht einen dieser anderen Algorithmen zur Pfadplanung, \textit{RRT*}, auf seine Tauglichkeit, über eine vorgegebene Fahrbahn mit Hindernissen eine abfahrbare, sichere und möglichst optimale \textit{Trajektorie} zu finden. 
 
-\subsection{Aufbau der Arbeit}
-(Arbeitstitel)
-[TODO doppelung mit struktur]  \\ 
+\subsection{Aufbau und Struktur}
+[TODO Querverweise]
+Nach einer kurzen Hinführung zum Thema werden zuallererst die Grundlagen (\ref{Grundlagen}) besprochen, um das Verständnis der nachfolgenden Kapitel zu erleichtern. Danach wird die Umsetzung des Algorithmus auf das Auto sowie die technischen Details und Hintergründe beschrieben (\ref{Umsetzung}). Im vierten Kapitel (\ref{Zusammenfassung}) werden die Ergebnisse der Testfahrten vorgestellt und bewertet. Zum Schluss werden in einem Fazit alle Schlussfolgerungen nochmals zusammengefasst und ein Ausblick auf weitere mögliche Forschungsmöglichkeiten gegeben. \\ 
 \subsubsection{Problemanalyse}
 Diese Arbeit untersucht die Effizienz des\textit{ RRT*}-Algorithmus unter Anwendung bei autonomen Autos. Dazu fährt das Auto eine vorgegebene Strecke ab [TODO Bild einfügen]. Auf dieser Strecke werden erst statische, dann sich bewegende Hindernisse platziert. \\
 Das Auto soll diese Strecke in möglichst kurzer Zeit mit einem möglichst optimalen Pfad abfahren, ohne eines dieser Hindernisse zu berühren. Dazu sollte das Auto den Algorithmus idealerweise 30 Mal pro Sekunde ausführen, mindestens aber vier Mal pro Sekunde. \\
@@ -35,8 +35,8 @@ wurden im Gegensatz zum restlichen Text in kursiver Schrift formatiert.
  \textbf{Begriff}  & \textbf{Erklärung}  \\
 \hline Trajektorie & Die Strecke, die dem Low-Level-Planer des Autos übergeben wird\\
 Low-Level-Planer & Steuert direkt die Motoren des Autos, Lenkung und Antrieb, um eine vorgegebene Trajektorie möglichst genau abzufahren. \\
-RRT & Rapidly-Exploring Random Tree \citep{Lav98}, ein Algorithmus zur Findung eines Pfades zum Ziel durch unbekanntes Gelände, wird bei [Querverweis] noch weiter erläutert\\
-RRT* & Eine verbesserte Variante des RRT, bei dem die Pfade optimiert werden. Asymptoptisch optimal \citep{Bernd} \\
+RRT & Rapidly-Exploring Random Tree \citep{Lav98}, ein Algorithmus zur Findung eines Pfades zum Ziel durch unbekanntes Gelände, wird in Kapitel \ref{RRT} noch weiter erläutert\\
+RRT* & Eine verbesserte Variante des RRT, bei dem die Pfade optimiert werden. Asymptoptisch optimal, erläutert in Kapitel \ref{RRT*} \\
 ROS & Robot Operating Systems, eine Open-Source Sammlung an Software-Bibliotheken und Werkzeugen zur 	Kreation von Anwendungen zur Robotik. \\
 Lidar & Light detection and ranging; Radarscanner am Auto, für Abstandsmessung zu Hindernissen.\\
 Nonholonomic Robots & Roboter, die gewissen kinematischen Einschränkungen unterworfen sind. Ein Auto zum Beispiel kann sich nicht in jede beliebige Richtung bewegen, sondern ist z.B. durch den maximalen Lenkwinkel und den Wenderadius eingeschränkt und kann nicht jeden beliebigen Punkt sofort, mit nur einem Schritt, erreichen.  \\
@@ -55,9 +55,6 @@ k-nearest neighbour & \\
 radius k-nearest neighbour & \\
 
 \end{tabularx} 
-\subsubsection{Struktur}
-[TODO Querverweise]
-Nach einer kurzen Hinführung zum Thema werden zuallererst die Grundlagen besprochen, um das Verständnis der nachfolgenden Kapitel zu erleichtern. Danach wird die Umsetzung des Algorithmus auf das Auto sowie die technischen Details und Hintergründe beschrieben. Im vierten Kapitel werden die Ergebnisse der Testfahrten vorgestellt und bewertet. Zum Schluss werden in einem Fazit alle Schlussfolgerungen nochmals zusammengefasst und ein Ausblick auf weitere mögliche Forschungsmöglichkeiten gegeben.
 
 \subsubsection{Wichtige Quellen und deren Beitrag zum Thema}
 Es existieren[TODO RRT-Quellen \citep[vgl][]{Lav98}, RRT*-Quellen, Übersichtsliteratur]
