@@ -3,7 +3,12 @@
 \label{Umsetzung}
 Bevor wir uns den notwendigen Anpassungen des \textit{RRT*}-Algorithmus widmen können, müssen wir die kinematischen und physikalischen Beschränkungen des Autos analysieren. Anschließend wird das verwendete Framework ROS - Robot Operating Systems - vorgestellt, wonach wir uns mit der Wahl einer geeigneten Metrik und Kostenfunktion beschäftigen.
 \subsection{Hardwareausstattung der Autos}
-Das Dahlem Center for Machine Learning and Robotics arbeitet mittlerweile mit dem Modelfahrzeug AutoNOMOS Mini v3 (1:10). Der Hauptcomputer auf dem Auto ist ein \textit{Odroid}(XU4 64GB) mit Ubuntu Linux als Betriebssystem und ROS (Robot Operation Systems) als Steuerungssystem \citep{fubAuto}. [TODO Bild einfügen] \\
+Das Dahlem Center for Machine Learning and Robotics arbeitet mittlerweile mit dem Modelfahrzeug AutoNOMOS Mini v3 (1:10). Der Hauptcomputer auf dem Auto ist ein \textit{Odroid}(XU4 64GB) mit Ubuntu Linux als Betriebssystem und ROS (Robot Operation Systems) als Steuerungssystem \citep{fubAuto}.\\
+\begin{figure}
+\centering
+\includegraphics[scale=0.8]{Bilder/AutoNOMOS_mini_v3.png} 
+\caption{Überblick über die Module des AutoNOMOS Mini v3}
+\end{figure}
 Motorisiert ist das Auto mit einem bürstenlosen [TODO??] DC-Servomotor FAULHABER 2232. Die Lenkung wird von dem Servomotor HS-645-MG übernommen, beide Motoren werden mithilfe einer \textit{Arduino Nano} Platine gesteuert. \\
 Zur Wahrnehmung der Umgebung besitzt das AutoNOMOS Mini v3 mit dem RPLIDAR A2 360 einen rotierenden Laserscanner, der in der Lage ist, die Umgebung des Autos auf Hindernisse zu überprüfen. Als Rückgabewert liefert der RPLIDAR pro Gradwinkel den Wert, wie weit das nächste Hindernis in dieser Richtung entfernt ist, also insgesamt 360 Werte (einen pro Winkel). \\
 Auf dem oberen Teil des Autos befestigt ist das \textit{Kinect-type stereoscopic system} (Intel RealSense SR300), welches eine Wolke aus 3D Punkten liefert, die dazu benutzt werden kann, Hindernisse zu erkennen. Außerdem kann die Kamera des \textit{Kinect-type} Sensors dazu benutzt werden, Fahrbahnmarkierungen und Objekte direkt vor dem Auto zu lokalisieren.\\

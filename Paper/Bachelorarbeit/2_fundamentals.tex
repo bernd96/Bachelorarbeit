@@ -38,7 +38,8 @@ Der Baum wird anfangs mit dem Startzustand \verb|x_init| initialisiert. Anschlie
 Die Funktion \verb|EXTEND(T, x)| ermittelt zunächst mithilfe der Metrik $M$ den nächsten Nachbar von $x$. Diese Metrik kann von einer einfachen euklidischen Distanz bis hin zur komplexen Einberechnung verschiedener kinetmatischer Bedingungen alles beinhalten. Die hier verwendete Metrik wird später noch in Kapitel \ref{Metrik} beleuchtet. \\
 Ist der nächste Nachbar \verb|x_near| gefunden, wird von diesem aus mit \verb|project(x, x_near, u)|  ein Schritt der Länge  $\epsilon$ in Richtung x durchgeführt und an dieser Stelle der neue Knoten \verb|x_new| erzeugt. 
 \begin{figure}
-\includegraphics[scale=1]{Bilder/Extend.png} 
+\centering
+\includegraphics[scale=0.5]{Bilder/Extend.png} 
 \caption{Die EXTEND Funktion \citep{Lav00} }
 \label{fig3}
 \end{figure} \\
@@ -57,8 +58,10 @@ Die Rapidly-Exploring Random Trees haben einige Eigenschaften, die für Bewegung
 \end{enumerate}
 Leider existieren neben den oben genannten Vorteilen auch etliche Nachteile. Eines der größten ist, dass ein \textit{RRT} nicht den optimalen Pfad zurückliefert, da einmal gesetzte Knoten ihren Vaterknoten nicht mehr ändern können. Dadurch kann, auch wenn eine bessere Knotenfolge vom Start zum Ziel bestehen würde, diese nicht ausgewählt werden. \\
 \begin{figure}
-\includegraphics[scale=1]{Bilder/rrt_path.png} 
-\caption{Ausschnitt eines RRT Graphs mit 20.000 Knoten \citep{KaFra10} }
+\centering
+\includegraphics[scale=0.2]{Bilder/rrt_path.png} 
+\caption{Vergleich RRT (links) mit RRT* (rechts) \citep{KaFra10} }
+[TODO RRT* einfügen Bidl]
 \end{figure}
 Deshalb wurde von Sertac Karaman und Emilio Frazzoli aufbauend auf \textit{RRTs} der Algorithmus\textit{ RRT*} eingeführt, welcher diesen Nachteil ausgleicht.
 \subsection{RRT*}
