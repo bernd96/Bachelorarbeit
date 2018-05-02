@@ -1,1 +1,0 @@
-/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_visual_gps/share/fub_visual_gps/cmake/fub_visual_gpsConfig-version.cmake

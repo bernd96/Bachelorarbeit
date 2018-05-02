@@ -1,1 +1,0 @@
-/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_trajectory_msgs_rviz_plugin/share/fub_trajectory_msgs_rviz_plugin/cmake/fub_trajectory_msgs_rviz_pluginConfig-version.cmake

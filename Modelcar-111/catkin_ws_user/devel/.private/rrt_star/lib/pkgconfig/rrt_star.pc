@@ -1,8 +1,0 @@
-prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/rrt_star
-
-Name: rrt_star
-Description: Description of rrt_star
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/rrt_star/lib 
-Requires: 

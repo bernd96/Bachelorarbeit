@@ -1,5 +1,0 @@
-[31m[1mCMake Error[0m at /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/test_pgk/CMakeLists.txt:202 (dd_executable):
-  Unknown CMake command "dd_executable".
-
-
-make: *** [cmake_check_build_system] Error 1

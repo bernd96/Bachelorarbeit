@@ -1,0 +1,13 @@
+image: blang/latex
+
+compile:
+  stage: build
+  script:
+    # add or change commands here, e.g. if your thesis has an index
+    - pdflatex thesis
+    - bibtex thesis
+    - pdflatex thesis
+    - pdflatex thesis
+  artifacts:
+    paths:
+      - "*.pdf"

@@ -1,1 +1,0 @@
-/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fisheye_camera_matrix_msgs/lib/python2.7/dist-packages/fisheye_camera_matrix_msgs/__init__.py

@@ -1,8 +1,0 @@
-prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/test_model_car
-
-Name: test_model_car
-Description: Description of test_model_car
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/test_model_car/lib 
-Requires: 

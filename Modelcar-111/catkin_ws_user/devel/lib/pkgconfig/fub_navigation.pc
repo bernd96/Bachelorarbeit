@@ -1,1 +1,0 @@
-/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_navigation/lib/pkgconfig/fub_navigation.pc

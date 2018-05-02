@@ -1,1 +1,0 @@
-/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_trajectory_msgs/lib/python2.7/dist-packages/fub_trajectory_msgs/msg/_Trajectory.py

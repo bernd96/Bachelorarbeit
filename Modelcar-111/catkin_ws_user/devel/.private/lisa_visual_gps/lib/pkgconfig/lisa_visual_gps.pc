@@ -1,8 +1,0 @@
-prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/lisa_visual_gps
-
-Name: lisa_visual_gps
-Description: Description of lisa_visual_gps
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/lisa_visual_gps/lib 
-Requires: 

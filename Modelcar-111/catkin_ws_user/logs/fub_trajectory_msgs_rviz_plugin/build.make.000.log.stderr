@@ -1,2 +1,0 @@
-make[2]: Warning: File '/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_trajectory_msgs_rviz_plugin/src/trajectory_msg_display.cpp' has modification time 6866 s in the future
-make[2]: warning:  Clock skew detected.  Your build may be incomplete.

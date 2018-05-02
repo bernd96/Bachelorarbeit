@@ -1,5 +1,0 @@
-fub_visual_gps
-/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_visual_gps/share/fub_visual_gps/cmake/fub_visual_gpsConfig.cmake /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/share/fub_visual_gps/cmake/fub_visual_gpsConfig.cmake
-/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_visual_gps/share/fub_visual_gps/cmake/fub_visual_gpsConfig-version.cmake /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/share/fub_visual_gps/cmake/fub_visual_gpsConfig-version.cmake
-/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_visual_gps/lib/fub_visual_gps/fub_visual_gps_minarea /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/lib/fub_visual_gps/fub_visual_gps_minarea
-/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_visual_gps/lib/pkgconfig/fub_visual_gps.pc /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/lib/pkgconfig/fub_visual_gps.pc
