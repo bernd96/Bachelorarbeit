@@ -1,0 +1,9 @@
+[ 50%] [32mBuilding CXX object CMakeFiles/rrt_star_node.dir/src/Main.cpp.o[0m
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:12:18:[m[K [01;31m[Kfatal error: [m[KMain.h: No such file or directory
+compilation terminated.
+CMakeFiles/rrt_star_node.dir/build.make:62: recipe for target 'CMakeFiles/rrt_star_node.dir/src/Main.cpp.o' failed
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/Main.cpp.o] Error 1
+CMakeFiles/Makefile2:1955: recipe for target 'CMakeFiles/rrt_star_node.dir/all' failed
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+Makefile:138: recipe for target 'all' failed
+make: *** [all] Error 2

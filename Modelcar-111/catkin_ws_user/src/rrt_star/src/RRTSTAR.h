@@ -7,8 +7,8 @@
 #include <fub_trajectory_msgs/Trajectory.h>
 #include <nav_msgs/Odometry.h>
 #include <eigen3/Eigen/Dense>
-#include <Node.h>
-#include <ListOfNodes.h>
+#include "Node.h"
+#include "ListOfNodes.h"
 #ifndef SRC_RRTSTAR_H_
 #define SRC_RRTSTAR_H_
 

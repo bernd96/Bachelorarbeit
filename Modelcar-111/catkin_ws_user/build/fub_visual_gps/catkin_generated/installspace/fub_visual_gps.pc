@@ -1,0 +1,8 @@
+prefix=/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
+
+Name: fub_visual_gps
+Description: Description of fub_visual_gps
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
+Requires: 

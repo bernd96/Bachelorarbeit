@@ -8,7 +8,7 @@
 #include "Node.h"
 #include <iostream>
 #include <eigen3/Eigen/Dense>
-#include <Main.h>
+#include "const.h"
 #include <math.h>
 #include <iomanip>
 
@@ -33,6 +33,7 @@ auto Node::reached_goal()->bool {
 	return false;
 }
 auto Node::is_reachable(Node& parent, const Vector2d& dir_vector)->bool {
+	//Tests if parent can reach *this (Node ist reachable from parent)
 	double par_yaw=parent.get_yaw();
 	if (std::abs((double) (dir_vector.norm() - 1)) > ACCURACY) {
 		std::cout << "Warning! Direction Vector is not normalised! \n"
@@ -160,6 +161,7 @@ auto Node::project_to_parent(std::list<Node>& list_of_nodes)->bool {
 }
 
 auto Node::calculate_dir_vector(Node& node)->Vector2d {
+	//Direction Vector from Node to *this
 	Vector2d dir_vector(0, 0);
 	dir_vector = coordinates - node.get_coordinates();
 	//TODO Fehlerausgabe spezifizieren
@@ -211,7 +213,7 @@ auto Node::get_yaw()->double {
 	}
 	return yaw;
 }
-auto Node::get_coordinates() -> Vector2d {
+const auto Node::get_coordinates() -> Vector2d {
 	return coordinates;
 }
 auto Node::get_parent_pointer() const ->Node* {

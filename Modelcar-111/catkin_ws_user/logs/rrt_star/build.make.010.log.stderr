@@ -1,0 +1,6 @@
+In file included from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:12:0[m[K:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.h:10:18:[m[K [01;31m[Kfatal error: [m[KNode.h: No such file or directory
+compilation terminated.
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/Main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

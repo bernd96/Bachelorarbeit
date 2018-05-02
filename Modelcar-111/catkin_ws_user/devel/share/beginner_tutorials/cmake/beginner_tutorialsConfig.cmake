@@ -1,0 +1,1 @@
+/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/beginner_tutorials/share/beginner_tutorials/cmake/beginner_tutorialsConfig.cmake

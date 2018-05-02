@@ -1,0 +1,1 @@
+/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_visual_gps/lib/pkgconfig/fub_visual_gps.pc

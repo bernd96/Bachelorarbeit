@@ -1,0 +1,11 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~execution_frequency" : \b [double] Execution frequency [Hz] min: 0.0, default: 100.0, max: 1000.0
+- \b "~min_speed" : \b [double] Min Speed output - 0.5 is needed for car- simulator 0  min: 0.0, default: 0.5, max: 0.5
+- \b "~max_speed" : \b [double] Max Speed output - 0.8 is needed for car- simulator 0  min: 0.0, default: 0.7, max: 0.8
+- \b "~steer_center" : \b [double] Center for the car  min: 0.0, default: 110.0, max: 180.0
+- \b "~steer_max" : \b [double] Maximum Steering change  min: 0.0, default: 90.0, max: 90.0
+- \b "~steer_direction" : \b [int] fub_controller 1:left, -1:right--Car 0:left,180:right(direction : -1)--Simulator 0:right, 180:left direction: +1  min: 0, default: 0, max: 2
+

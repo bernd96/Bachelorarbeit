@@ -1,0 +1,15 @@
+\subsubsection usage Usage
+\verbatim
+<node name="fub_controller" pkg="fub_controller" type="fub_controller">
+  <param name="limit_steer_integral" type="double" value="0.0" />
+  <param name="low_speed_value" type="double" value="0.6" />
+  <param name="high_speed_value" type="double" value="1.0" />
+  <param name="kp_steer_low_speed_value" type="double" value="3.2" />
+  <param name="kp_steer_high_speed_value" type="double" value="3.2" />
+  <param name="ki_steer_low_speed_value" type="double" value="0.0" />
+  <param name="ki_steer_high_speed_value" type="double" value="0.0" />
+  <param name="kd_steer_low_speed_value" type="double" value="0.0" />
+  <param name="kd_steer_high_speed_value" type="double" value="0.0" />
+</node>
+\endverbatim
+

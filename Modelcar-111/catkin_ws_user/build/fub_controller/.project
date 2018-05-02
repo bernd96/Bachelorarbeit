@@ -1,0 +1,476 @@
+<projectDescription>
+	<name>fub_controller</name>
+	<comment />
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.make.core.makeBuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.cleanBuildTarget</key>
+					<value>clean</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableCleanBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.append_environment</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.stopOnError</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enabledIncrementalBuild</key>
+					<value>true</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.build.command</key>
+					<value>/bin/bash</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.contents</key>
+					<value>org.eclipse.cdt.make.core.activeConfigSettings</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.build.target.inc</key>
+					<value>-c "catkin build --force-color --status-rate 1 `basename ${project_loc}`"</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.build.arguments</key>
+					<value />
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildLocation</key>
+					<value>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/build/fub_controller</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.environment</key>
+					<value>VERBOSE=1|ROS_ROOT=/opt/ros/kinetic/share/ros|ROS_PACKAGE_PATH=/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/color_plugin:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/fub_cmake:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/fub_trajectory_msgs:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/fub_trajectory_msgs_rviz_plugin:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/road_description:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_control:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_controller:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_description:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_gazebo:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_simulator:/home/mi/besahre/seat/model_car_3/catkin_ws/src/fub_modelcar_tools:/home/mi/besahre/seat/model_car_3/catkin_ws/src/odometry:/opt/ros/kinetic/share|PYTHONPATH=/home/mi/besahre/seat/catkin_ws/devel/lib/python2.7/dist-packages:/opt/ros/kinetic/lib/python2.7/dist-packages|PATH=/opt/ros/kinetic/bin:/home/mi/besahre/bin:/home/mi/besahre/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin|LD_LIBRARY_PATH=/home/mi/besahre/seat/catkin_ws/devel/lib:/home/mi/besahre/seat/model_car_3/catkin_ws/devel/lib:/opt/ros/kinetic/lib|PKG_CONFIG_PATH=/home/mi/besahre/seat/catkin_ws/devel/lib/pkgconfig:/home/mi/besahre/seat/model_car_3/catkin_ws/devel/lib/pkgconfig:/opt/ros/kinetic/lib/pkgconfig|CMAKE_PREFIX_PATH=/home/mi/besahre/seat/catkin_ws/devel:/home/mi/besahre/seat/model_car_3/catkin_ws/devel:/opt/ros/kinetic|</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.build.target.auto</key>
+					<value>all</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.enableAutoBuild</key>
+					<value>false</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.build.target.clean</key>
+					<value>-c "catkin --force-color clean `basename ${project_loc}`;${workspace_loc:/}/bin/make-eclipse-projects.sh `basename ${project_loc}`"</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>
+					<value>all</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.buildArguments</key>
+					<value />
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.build.location</key>
+					<value>${workspace_loc:/}</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.make.core.autoBuildTarget</key>
+					<value>all</value>
+				</dictionary>
+				<dictionary>
+					<key>org.eclipse.cdt.core.errorOutputParser</key>
+					<value>org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.make.core.ScannerConfigBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.make.core.makeNature</nature>
+		<nature>org.eclipse.cdt.make.core.ScannerConfigNature</nature>
+		<nature>org.eclipse.cdt.core.ccnature</nature>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[Source directory]</name>
+			<type>2</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller</location>
+		</link>
+		<link>
+			<name>[Subprojects]</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Subprojects]/fub_controller</name>
+			<type>2</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller</location>
+		</link>
+		<link>
+			<name>[Subprojects]/gmock</name>
+			<type>2</type>
+			<location>/usr/src/gmock</location>
+		</link>
+		<link>
+			<name>[Subprojects]/gtest</name>
+			<type>2</type>
+			<location>/usr/src/gtest</location>
+		</link>
+		<link>
+			<name>[Targets]</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Source Files/ControllerMig.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/ControllerMig.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Source Files/PathFollower.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/PathFollower.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Source Files/SteerController.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/SteerController.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Source Files/VehicleState.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/VehicleState.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Source Files/Math.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/util/Math.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Source Files/Spline.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/util/Spline.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] fub_controller_mig_nodelet/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/Source Files/TestSteeringAndWheelRatio.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/tests/TestSteeringAndWheelRatio.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/Source Files/testMath.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/tests/testMath.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/Source Files/Math.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/util/Math.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/Source Files/VehicleState.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/VehicleState.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller-test/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller_mig</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller_mig/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller_mig/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller_mig/Source Files/main.cpp</name>
+			<type>1</type>
+			<location>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/fub_controller/src/controller_mig/main.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller_mig/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller_mig/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller_mig/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] fub_controller_mig/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock/Source Files/gtest-all.cc</name>
+			<type>1</type>
+			<location>/usr/src/gtest/src/gtest-all.cc</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock/Source Files/gmock-all.cc</name>
+			<type>1</type>
+			<location>/usr/src/gmock/src/gmock-all.cc</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main/Source Files/gtest-all.cc</name>
+			<type>1</type>
+			<location>/usr/src/gtest/src/gtest-all.cc</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main/Source Files/gmock-all.cc</name>
+			<type>1</type>
+			<location>/usr/src/gmock/src/gmock-all.cc</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main/Source Files/gmock_main.cc</name>
+			<type>1</type>
+			<location>/usr/src/gmock/src/gmock_main.cc</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gmock_main/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest/Source Files/gtest-all.cc</name>
+			<type>1</type>
+			<location>/usr/src/gtest/src/gtest-all.cc</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest_main</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest_main/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest_main/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest_main/Source Files/gtest_main.cc</name>
+			<type>1</type>
+			<location>/usr/src/gtest/src/gtest_main.cc</location>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest_main/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest_main/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest_main/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[lib] gtest_main/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

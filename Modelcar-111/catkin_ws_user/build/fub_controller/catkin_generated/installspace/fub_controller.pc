@@ -1,0 +1,8 @@
+prefix=/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
+
+Name: fub_controller
+Description: Description of fub_controller
+Version: 1.2.0
+Cflags: -I/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/include
+Libs: -L/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
+Requires: dynamic_reconfigure fub_trajectory_msgs geometry_msgs nav_msgs std_msgs

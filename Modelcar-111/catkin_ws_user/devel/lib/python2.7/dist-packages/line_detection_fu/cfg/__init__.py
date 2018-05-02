@@ -1,0 +1,1 @@
+/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/line_detection_fu/lib/python2.7/dist-packages/line_detection_fu/cfg/__init__.py

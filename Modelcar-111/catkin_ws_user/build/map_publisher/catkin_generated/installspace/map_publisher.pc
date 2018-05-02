@@ -1,0 +1,8 @@
+prefix=/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
+
+Name: map_publisher
+Description: Description of map_publisher
+Version: 0.0.1
+Cflags: 
+Libs: -L/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
+Requires: map_server

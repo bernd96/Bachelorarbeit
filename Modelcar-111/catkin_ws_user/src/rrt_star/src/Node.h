@@ -7,7 +7,6 @@
 
 #include <eigen3/Eigen/Dense>
 #include <list>
-#include <ListOfNodes.h>
 #ifndef NODE_H_
 #define NODE_H_
 
@@ -16,8 +15,7 @@ using namespace Eigen;
 enum class Val{invalid, valid, unknown};
 class Node {
 	private:
-	//absolut euklid coordinates
-		Vector2d coordinates;
+
 	//yaw angle of car when passing the node
 		double yaw;
 		Node* parent;
@@ -29,6 +27,8 @@ class Node {
 
 
 	public:
+	//absolut euklid coordinates in m
+	Vector2d coordinates;
 
 		//Überlegung: Delegieren von Konstruktoren. Dazu müsste man allerdings überall Standartwerte angeben...
 		Node(const Vector2d& coor);
@@ -36,7 +36,7 @@ class Node {
 		Node(const Vector2d& coor,double yaw);
 		Node(const Vector2d& coor,double yaw, Node* parent, Val validation,float cost);
 
-		auto get_coordinates()->Vector2d;
+	const auto get_coordinates()->Vector2d;
 		auto get_yaw()->double;
 		auto get_parent_pointer() const -> Node*;
 		auto get_cost() const -> int;
@@ -45,7 +45,7 @@ class Node {
 		auto set_coordinates(Vector2d&)->void;
 		auto set_validation(Val)->void;
 
-		auto calculate_dir_vector(Node& node)->Vector2d;
+	auto calculate_dir_vector(Node& node)->Vector2d;
 		auto calculate_yaw()->bool;
 		auto project_to_parent(ListOfNodes& construct)->bool;
 		auto easy_set_parent(ListOfNodes& construct)->bool;

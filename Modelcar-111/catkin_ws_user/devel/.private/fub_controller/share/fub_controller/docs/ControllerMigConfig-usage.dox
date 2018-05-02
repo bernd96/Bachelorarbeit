@@ -1,0 +1,12 @@
+\subsubsection usage Usage
+\verbatim
+<node name="fub_controller" pkg="fub_controller" type="fub_controller">
+  <param name="execution_frequency" type="double" value="100.0" />
+  <param name="min_speed" type="double" value="0.5" />
+  <param name="max_speed" type="double" value="0.7" />
+  <param name="steer_center" type="double" value="110.0" />
+  <param name="steer_max" type="double" value="90.0" />
+  <param name="steer_direction" type="int" value="0" />
+</node>
+\endverbatim
+
