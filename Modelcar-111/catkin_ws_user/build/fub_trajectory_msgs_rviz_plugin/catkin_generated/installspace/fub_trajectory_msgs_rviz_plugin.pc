@@ -1,8 +1,0 @@
-prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
-
-Name: fub_trajectory_msgs_rviz_plugin
-Description: Description of fub_trajectory_msgs_rviz_plugin
-Version: 0.0.1
-Cflags: 
-Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
-Requires: fub_trajectory_msgs rviz

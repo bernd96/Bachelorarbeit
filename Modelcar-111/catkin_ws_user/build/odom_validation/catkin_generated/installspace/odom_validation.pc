@@ -1,8 +1,0 @@
-prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
-
-Name: odom_validation
-Description: Description of odom_validation
-Version: 0.2.3
-Cflags: -I/usr/include/eigen3
-Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
-Requires: image_transport roscpp sensor_msgs geometry_msgs tf cv_bridge message_runtime std_msgs nodelet

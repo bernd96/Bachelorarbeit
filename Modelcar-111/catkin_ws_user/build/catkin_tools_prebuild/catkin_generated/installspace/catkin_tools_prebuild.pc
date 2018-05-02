@@ -1,8 +1,8 @@
-prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
+prefix=/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
 
 Name: catkin_tools_prebuild
 Description: Description of catkin_tools_prebuild
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
+Libs: -L/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
 Requires: 

@@ -11,7 +11,6 @@
 #include "ros/ros.h"
 #include <std_msgs/Int16.h>
 #include <std_msgs/Float32.h>
-#include <std_msgs/UInt8.h>
 
 namespace fub {
 namespace controller {
@@ -25,7 +24,7 @@ void ControllerMig::onInit()
     // advertise publishers (before subscribing to the vehicle state / setting up timer)
     mWantedNormSteerAnglePublisher = getNodeHandle().advertise<std_msgs::Float32>("command/normalized_steering_angle", 10);
     mWantedSpeedPublisher          = getNodeHandle().advertise<std_msgs::Int16>("manual_control/speed", 10);
-    mWantedSteeringAnglePublisher  = getNodeHandle().advertise<std_msgs::UInt8>("/steering", 10);
+    mWantedSteeringAnglePublisher  = getNodeHandle().advertise<std_msgs::Int16>("manual_control/steering", 10);
 
 
     // set up dynamic reconfigure service (before any configuration is used) - this will start the timer
@@ -76,7 +75,7 @@ void ControllerMig::update(VehicleState const & currentVehicleState)
         //publish last/default messages
         //TODO unset activation? brake?
         publish(currentVehicleState);
-
+	publishWantedSpeedAndFrontWheelAngle(0, 0);
         return;
     }
 
@@ -86,7 +85,7 @@ void ControllerMig::update(VehicleState const & currentVehicleState)
 
     //update spline for path following
     mPathFollower.updateSplineAndClosestPoints(currentVehicleState);
-    
+
     // get bearing angle
     double const angleBearing = mPathFollower.getBearingAngle(currentVehicleState);
 
@@ -104,7 +103,7 @@ void ControllerMig::update(VehicleState const & currentVehicleState)
         ROS_ERROR("angleBearing: %f angleHead: %f current speed: %f", angleBearing, angleHead, currentVehicleState.mCurrentSpeedFrontAxleCenter);
         mSteeringAngleNormalized = 0;
     }
-        ROS_INFO("steerOutput%f",mSteeringAngleNormalized);
+        //ROS_INFO("steerOutput%f",mSteeringAngleNormalized);
 
     // TODO: this makes no sense: shouldn't this be mGear or better yet, the
     //       current gear?
@@ -116,7 +115,8 @@ void ControllerMig::update(VehicleState const & currentVehicleState)
         steerAngle = steerAngle * 3.0;
     }
 */
-
+    ROS_INFO("old_odom =  %f , x,y = %.3f, %.3f v_cur %.3f, yaw cur %.3f ",currentVehicleState.mLastOdomTimeStampReceived.toSec(),currentVehicleState.mVehiclePosition[0],currentVehicleState.mVehiclePosition[1],\
+    currentVehicleState.mCurrentSpeedFrontAxleCenter,currentVehicleState.getVehicleYaw());
     publish(currentVehicleState);
 
     publishWantedSpeedAndFrontWheelAngle(wantedSpeed, mSteeringAngleNormalized);
@@ -133,14 +133,53 @@ void ControllerMig::publish(VehicleState const & vehicleState)
 
 void ControllerMig::publishWantedSpeedAndFrontWheelAngle(double speed, double wheelAngle)
 {
-    // publish wanted speed 1489.36
+    // publish wanted speed
         std_msgs::Int16 wantedSpeedMsg;
-        wantedSpeedMsg.data        = (speed *(1000));
+        //TODO korivi . updating max speed to 308 from 1489.36
+        // This conversion is made on basis that speed is calculated in mps and the output to the motor is in rpm of wheel.
+        /* TODO - verify these conversions - this is basis for chosing 308
+        1000rpm for motor - then
+        wheel speed max =  1000/(5.5*60) = 3.03rot per sec => 3.03*2*3.14*0.031 = 0.5899 mps
+        if 1000rpm is wheel speed then
+        wheel speed max  =  1000/60 ==> 3.244 mps. From simulation - this is correct
+        if 3.24 mps is max velocity, whats the time I want to attain it?
+        lets say in 5s then -> 3.24/5 = 0.65 mpss
+        min max accc =  [-0.65, 0.65] lets limit it to [-0.5:0.5]
+        1m - 5.1366 rotations of wheel.
+        */
+        //Condition - This should be 0.5 on car and 0 on simulator
+        //speed = speed<mConfig.min_speed?mConfig.min_speed:speed;
+	if (speed <0){ 
+          speed = fabs(speed)<mConfig.min_speed?-mConfig.min_speed:speed;
+	  speed = fabs(speed)>mConfig.max_speed?-mConfig.max_speed:speed;
+	}
+        else if(speed >0){
+          speed = speed<mConfig.min_speed?mConfig.min_speed:speed;
+          speed = speed>mConfig.max_speed?mConfig.max_speed:speed;
+	}	
+	else{//empty path - stop the robot
+	   speed =0;
+	}
+
+        wantedSpeedMsg.data        = static_cast<int16_t>(speed *(-308.26));
         mWantedSpeedPublisher.publish(wantedSpeedMsg);
 
-    // publish wanted steering angle
-        std_msgs::UInt8 wantedAngleMsg;
-        wantedAngleMsg.data = (90.0 * wheelAngle) + 90;
+        // publish wanted steering angle
+        std_msgs::Int16 wantedAngleMsg;
+        //TODO : Korivi - the eqn (90.0 * wheelAngle) + 90 changed to below for making them suitable for the model car
+        //TODO - looks like the original 0 is left and 180 is right, simulator is reservse. change this
+        //TODO Remove after debug
+        int16_t speed_pub =  static_cast<int16_t>(speed *(-308.26));
+        int16_t steer_pub =  static_cast<int16_t>(mConfig.steer_center + (mConfig.steer_direction-1)*(mConfig.steer_max * wheelAngle)) ;
+        ROS_INFO("Commanded Values: steer_pb %d  norm_str %.3f   speed_pb %d   raw_spd %.3f ",steer_pub,wheelAngle,speed_pub, speed);
+        //ROS_INFO("cur_state:  x,y %.3f,%.3f   vel: %.3f  yaw:%.3f odom_time %.3f",currentVehicleState.mVehiclePosition[0],\
+                  currentVehicleState.mVehiclePosition[1], currentVehicleState.mCurrentSpeedFrontAxleCenter,currentVehicleState.getVehicleYaw(),\
+                   currentVehicleState.mLastOdomTimeStampReceived.toSec());
+        //TODO remove till here
+
+        int angle_val = (mConfig.steer_center + (mConfig.steer_direction-1)*(mConfig.steer_max * wheelAngle)) ;
+	angle_val = std::min(angle_val, 180);
+	wantedAngleMsg.data = static_cast<int16_t>(std::max(angle_val, 0));
         mWantedSteeringAnglePublisher.publish(wantedAngleMsg);
 }
 

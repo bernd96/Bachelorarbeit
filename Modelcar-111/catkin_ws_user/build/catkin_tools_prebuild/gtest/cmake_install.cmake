@@ -1,8 +1,8 @@
-# Install script for directory: /usr/src/gtest
+# Install script for directory: /usr/src/gmock
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install")
+  set(CMAKE_INSTALL_PREFIX "/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "")
+    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -30,5 +30,11 @@ endif()
 # Install shared libraries without execute permission?
 if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  include("/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/build/catkin_tools_prebuild/gtest/gtest/cmake_install.cmake")
+
 endif()
 

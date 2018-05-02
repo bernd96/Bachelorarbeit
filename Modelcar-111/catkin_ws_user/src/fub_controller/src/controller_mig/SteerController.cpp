@@ -22,22 +22,25 @@ double SteerController::control(const VehicleState &vehicleState, double deltaT,
     // a long time ago, and had been kept to get the same controller results.
 
     double newSteerError = (wantedSteerAngle - currentSteerAngle);
-        ROS_INFO("newSteerError%f",newSteerError);
+        //ROS_INFO("newSteerError%f",newSteerError);
 
     Math::normalizeAngle(newSteerError);
-        ROS_INFO("normalizeAngle%f",newSteerError);
+        //ROS_INFO("normalizeAngle%f",newSteerError);
 
     mSteerIntegral += newSteerError * deltaT / (0.04);
     mSteerIntegral = boost::algorithm::clamp(mSteerIntegral, -mConfig.limit_steer_integral, mConfig.limit_steer_integral);
 
     double currentSpeed = vehicleState.mCurrentSpeedFrontAxleCenter;
+    //TODO Remove
+    //std::cout << "kp "<<mConfig.kp_steer_low_speed_value<<" , "<< mConfig.kp_steer_high_speed_value << '\n';
     double steerOutput =
           newSteerError * Math::boundedLinearInterpolation(currentSpeed, mConfig.low_speed_value, mConfig.high_speed_value, mConfig.kp_steer_low_speed_value, mConfig.kp_steer_high_speed_value)
         + mSteerIntegral * Math::boundedLinearInterpolation(currentSpeed, mConfig.low_speed_value, mConfig.high_speed_value, mConfig.ki_steer_low_speed_value, mConfig.ki_steer_high_speed_value)
         + (newSteerError - mOldSteerError) * (0.04) / deltaT * Math::boundedLinearInterpolation(currentSpeed, mConfig.low_speed_value, mConfig.high_speed_value, mConfig.kd_steer_low_speed_value, mConfig.kd_steer_high_speed_value);
 
     mOldSteerError = newSteerError;
-    ROS_INFO("steerOutput%f",steerOutput);
+	std::cout<<"bearing "<<wantedSteerAngle<<" yaw "<<currentSteerAngle<<" str_err "<<newSteerError<<" str_OP "<<steerOutput<<std::endl;
+    //ROS_INFO("steerOutput%f",steerOutput);
     return boost::algorithm::clamp(steerOutput, -1.0, 1.0);
 }
 

@@ -1,6 +1,6 @@
-devel_space: /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel
+devel_space: /home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel
 install: false
-install_space: /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
+install_space: /home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
 profile: default
-source_space: /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/src
-workspace: /home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user
+source_space: /home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src
+workspace: /home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user

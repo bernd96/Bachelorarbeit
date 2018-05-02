@@ -1,8 +1,0 @@
-prefix=/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install
-
-Name: beginner_tutorials
-Description: Description of beginner_tutorials
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/name-not-found/Dokumente/Bachelorarbeit/Modelcar-111/catkin_ws_user/install/lib 
-Requires: 
