@@ -1,0 +1,11 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:[m[K In function ‘[01m[Kvoid build_trajectory(fub_trajectory_msgs::Trajectory&, Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:43:52:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before ‘[01m[Klist_of_nodes[m[K’
+   trajectory.trajectory.push_back( std::list<Node> list_of_nodes;traj_point
+[01;32m[K                                                    ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:44:4:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ before ‘[01m[K)[m[K’ token
+    );
+[01;32m[K    ^[m[K
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/RRTSTAR.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

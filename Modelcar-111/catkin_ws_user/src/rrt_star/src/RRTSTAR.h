@@ -11,16 +11,10 @@
 #include "ListOfNodes.h"
 #ifndef SRC_RRTSTAR_H_
 #define SRC_RRTSTAR_H_
-
-class RRTSTAR {
-	double yaw;
-	Eigen::Vector2d position;
-public:
-	auto rrt_star(const Node& start)->fub_trajectory_msgs::Trajectory;
-	auto get_odom()->void;
-
-	RRTSTAR();
-	virtual ~RRTSTAR();
-};
+auto rrt_star(Node& start)->fub_trajectory_msgs::Trajectory;
+auto build_trajectory(fub_trajectory_msgs::Trajectory& traj,
+		Node&node)->void;
+//um zwischendurch die Odometrie zu bekommen
+auto get_odom()->void;
 
 #endif /* SRC_RRTSTAR_H_ */

@@ -1,0 +1,26 @@
+[35m[1mScanning dependencies of target rrt_star_node[0m
+[ 20%] [32mBuilding CXX object CMakeFiles/rrt_star_node.dir/src/RRTSTAR.cpp.o[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/rrt_star_node.dir/src/Main.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/rrt_star_node.dir/src/Node.cpp.o[0m
+[ 80%] [32mBuilding CXX object CMakeFiles/rrt_star_node.dir/src/ListOfNodes.cpp.o[0m
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:[m[K In member function ‘[01m[Kbool ListOfNodes::find_nearest_neighbour(Node&, Node*)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:81:15:[m[K [01;31m[Kerror: [m[Kcannot convert ‘[01m[KNode[m[K’ to ‘[01m[KNode*[m[K’ in assignment
+        parent = iter;
+[01;32m[K               ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:[m[K In member function ‘[01m[Kvoid ListOfNodes::rewire(Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:156:27:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KNode::set_parent(Node&)[m[K’
+   new_node.set_parent(iter);
+[01;32m[K                           ^[m[K
+In file included from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.h:7:0[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:8[m[K:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:50:7:[m[K [01;36m[Knote: [m[Kcandidate: void Node::set_parent(Node*)
+  auto set_parent(Node* node)->void;
+[01;32m[K       ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:50:7:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[KNode[m[K’ to ‘[01m[KNode*[m[K’
+CMakeFiles/rrt_star_node.dir/build.make:134: recipe for target 'CMakeFiles/rrt_star_node.dir/src/ListOfNodes.cpp.o' failed
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/ListOfNodes.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+CMakeFiles/Makefile2:1955: recipe for target 'CMakeFiles/rrt_star_node.dir/all' failed
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2
+Makefile:138: recipe for target 'all' failed

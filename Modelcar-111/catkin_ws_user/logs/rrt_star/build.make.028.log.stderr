@@ -1,0 +1,13 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:[m[K In member function ‘[01m[Kvoid ListOfNodes::rewire(Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:144:48:[m[K [01;31m[Kerror: [m[Kinvalid initialization of non-const reference of type ‘[01m[KEigen::Vector2d& {aka Eigen::Matrix<double, 2, 1>&}[m[K’ from an rvalue of type ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’
+   new_node.set_coordinates(iter.get_coordinates());
+[01;32m[K                                                ^[m[K
+In file included from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.h:7:0[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:8[m[K:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:48:7:[m[K [01;36m[Knote: [m[K  initializing argument 1 of ‘[01m[Kvoid Node::set_coordinates(Eigen::Vector2d&)[m[K’
+  auto set_coordinates(Vector2d&)->void;
+[01;32m[K       ^[m[K
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/ListOfNodes.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

@@ -1,0 +1,45 @@
+In file included from [01m[K/usr/include/c++/5/list:63:0[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:9[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.h:7[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:8[m[K:
+/usr/include/c++/5/bits/stl_list.h: In instantiation of ‘[01m[Kstd::_List_node<_Tp>::_List_node(_Args&& ...) [with _Args = {const Node&}; _Tp = Node][m[K’:
+[01m[K/usr/include/c++/5/ext/new_allocator.h:120:4:[m[K   required from ‘[01m[Kvoid __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = std::_List_node<Node>; _Args = {const Node&}; _Tp = std::_List_node<Node>][m[K’
+[01m[K/usr/include/c++/5/bits/stl_list.h:574:8:[m[K   required from ‘[01m[Kstd::__cxx11::list<_Tp, _Alloc>::_Node* std::__cxx11::list<_Tp, _Alloc>::_M_create_node(_Args&& ...) [with _Args = {const Node&}; _Tp = Node; _Alloc = std::allocator<Node>; std::__cxx11::list<_Tp, _Alloc>::_Node = std::_List_node<Node>][m[K’
+[01m[K/usr/include/c++/5/bits/stl_list.h:1763:32:[m[K   required from ‘[01m[Kvoid std::__cxx11::list<_Tp, _Alloc>::_M_insert(std::__cxx11::list<_Tp, _Alloc>::iterator, _Args&& ...) [with _Args = {const Node&}; _Tp = Node; _Alloc = std::allocator<Node>; std::__cxx11::list<_Tp, _Alloc>::iterator = std::_List_iterator<Node>][m[K’
+[01m[K/usr/include/c++/5/bits/stl_list.h:1089:9:[m[K   required from ‘[01m[Kvoid std::__cxx11::list<_Tp, _Alloc>::push_back(const value_type&) [with _Tp = Node; _Alloc = std::allocator<Node>; std::__cxx11::list<_Tp, _Alloc>::value_type = Node][m[K’
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:25:35:[m[K   required from here
+[01m[K/usr/include/c++/5/bits/stl_list.h:114:71:[m[K [01;31m[Kerror: [m[Kbinding ‘[01m[Kconst Node[m[K’ to reference of type ‘[01m[KNode&[m[K’ discards qualifiers
+  : __detail::_List_node_base(), _M_data(std::forward<_Args>(__args)...) 
+[01;32m[K                                                                       ^[m[K
+In file included from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.h:7:0[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:8[m[K:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:39:2:[m[K [01;36m[Knote: [m[K  initializing argument 1 of ‘[01m[KNode::Node(Node&)[m[K’
+  Node(Node&node);
+[01;32m[K  ^[m[K
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/ListOfNodes.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:[m[K In function ‘[01m[Kfub_trajectory_msgs::Trajectory rrt_star(const Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:54:30:[m[K [01;31m[Kerror: [m[Kbinding ‘[01m[Kconst Node[m[K’ to reference of type ‘[01m[KNode&[m[K’ discards qualifiers
+  list_of_nodes.add_node(start);
+[01;32m[K                              ^[m[K
+In file included from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.h:11:0[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:8[m[K:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.h:18:7:[m[K [01;36m[Knote: [m[K  initializing argument 1 of ‘[01m[Kvoid ListOfNodes::add_node(Node&)[m[K’
+  auto add_node(Node &node)->void;
+[01;32m[K       ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:85:31:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kget_cost[m[K’ in ‘[01m[Kgoal[m[K’, which is of non-class type ‘[01m[KNode()[m[K’
+    if (node.get_cost() < goal.get_cost()) {
+[01;32m[K                               ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:86:10:[m[K [01;31m[Kerror: [m[Kassignment of function ‘[01m[KNode goal()[m[K’
+     goal = node;
+[01;32m[K          ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:86:10:[m[K [01;31m[Kerror: [m[Kcannot convert ‘[01m[KNode[m[K’ to ‘[01m[KNode()[m[K’ in assignment
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:96:35:[m[K [01;31m[Kerror: [m[Kinvalid initialization of non-const reference of type ‘[01m[KNode&[m[K’ from an rvalue of type ‘[01m[KNode (*)()[m[K’
+  build_trajectory(trajectory, goal);
+[01;32m[K                                   ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:13:6:[m[K [01;36m[Knote: [m[Kin passing argument 2 of ‘[01m[Kvoid build_trajectory(fub_trajectory_msgs::Trajectory&, Node&)[m[K’
+ auto build_trajectory(fub_trajectory_msgs::Trajectory& trajectory,
+[01;32m[K      ^[m[K
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/RRTSTAR.cpp.o] Error 1
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

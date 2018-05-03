@@ -1,0 +1,12 @@
+CMakeFiles/rrt_star_node.dir/src/Main.cpp.o: In function `main':
+/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:47: undefined reference to `Node::Node(Eigen::Matrix<double, 2, 1, 0, 2, 1> const&, double, Node*, Val, double)'
+/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:49: undefined reference to `Node::print_node()'
+/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:56: undefined reference to `rrt_star(Node const&)'
+/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:47: undefined reference to `Node::~Node()'
+/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:47: undefined reference to `Node::~Node()'
+CMakeFiles/rrt_star_node.dir/src/Main.cpp.o: In function `std::_List_node<Node>::~_List_node()':
+/usr/include/c++/5/bits/stl_list.h:106: undefined reference to `Node::~Node()'
+collect2: error: ld returned 1 exit status
+make[2]: *** [/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/rrt_star/lib/rrt_star/rrt_star_node] Error 1
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

@@ -1,5 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/rrt_star_node.dir/src/Main.cpp.o"
+  "CMakeFiles/rrt_star_node.dir/src/Node.cpp.o"
+  "CMakeFiles/rrt_star_node.dir/src/RRTSTAR.cpp.o"
+  "CMakeFiles/rrt_star_node.dir/src/ListOfNodes.cpp.o"
   "/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/rrt_star/lib/rrt_star/rrt_star_node.pdb"
   "/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/rrt_star/lib/rrt_star/rrt_star_node"
 )
