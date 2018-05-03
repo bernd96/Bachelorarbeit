@@ -31,9 +31,8 @@ auto ListOfNodes::add_node(Node& node)->void {
 	
 }
 
-auto ListOfNodes::find_nearest_neighbour(Node& node,
-		Node* parent)->bool {
-	std::cout << "Entering find_nearest_neighbour..." << std::endl;
+auto ListOfNodes::find_nearest_neighbour(Node& node)->bool {
+//	std::cout << "Entering find_nearest_neighbour..." << std::endl;
 
 	//slow if only few nodes are inserted! (O(k³) worst case)
 	//if many nodes are there: O(9* (n/k²)), k length of axis of grid
@@ -56,7 +55,7 @@ auto ListOfNodes::find_nearest_neighbour(Node& node,
 				j++;
 			}
 			//top side out of bound
-			while ((y_val - round + j >= grid[0].size())) {
+			if ((y_val - round + j >= grid[0].size())) {
 				break;
 			}
 			for (int i = 0; i < 1 + 2 * round; ++i) {
@@ -67,9 +66,17 @@ auto ListOfNodes::find_nearest_neighbour(Node& node,
 					i++;
 				}
 				//right side out of bound, avoid infinite loops
-				while ((x_val - round + i >= grid.size())) {
+				if ((x_val - round + i >= grid.size())) {
 					break;
 				}
+				/*
+				std::cout << "x_val: " << x_val << std::endl;
+				std::cout << "y_val: " << y_val << std::endl;
+				std::cout << "i: " << i << std::endl;
+				std::cout << "j: " << j << std::endl;
+				std::cout << "round: " << round << std::endl;
+				std::cout << "__________________" << std::endl;
+				 */
 				//searches grid en try for matches
 				for (auto &iter : grid[x_val + i - round][y_val + j - round]) {
 					dir_vector = node.calculate_dir_vector(iter);
@@ -79,8 +86,9 @@ auto ListOfNodes::find_nearest_neighbour(Node& node,
 						if (node.is_reachable(iter, dir_vector)
 							&& node.not_to_near(iter)) {
 						distance = dir_vector.norm();
-							std::cout << "parent found!" << std::endl;
-							parent = &iter;
+							node.set_parent(&iter);
+
+
 						found = true;
 						}
 					}
@@ -99,16 +107,17 @@ auto ListOfNodes::radius_find_nearest_neighbours(Node& node,
 	 * which has better costs through node
 	 */
 	//if radius bigger then cellsize, we have to search at least 3 times (5x5)
-	std::cout << "Entering radius_find_nearest_neighbour..." << std::endl;
+//	std::cout << "Entering radius_find_nearest_neighbour..." << std::endl;
 
 	int number_of_rounds = (RADIUS / cell_size + 0.9999);
-	int x_val = node.coordinates[0] / cell_size;
-	int y_val = node.coordinates[1] / cell_size;
+	int x_val = (node.get_coordinates())[0] / cell_size;
+	int y_val = (node.get_coordinates())[1] / cell_size;
 	bool found = false;
 	Eigen::Vector2d dir_vector;
 	for (int round = 0; round < number_of_rounds && round < grid.size();
 			round++) {
 		for (int j = 0; j < 1 + 2 * round; ++j) {
+
 			//check if entry could be out of bounds:
 			//bottom side out of bound
 			while ((y_val - round + j < 0)) {

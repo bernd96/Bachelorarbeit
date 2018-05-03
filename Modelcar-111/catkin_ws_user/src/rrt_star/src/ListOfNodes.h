@@ -16,8 +16,7 @@ private:
 	std::vector<std::vector<std::list<Node>>> grid;
 public:
 	auto add_node(Node &node)->void;
-	auto find_nearest_neighbour(Node&node,
-			Node* parent)->bool;
+	auto find_nearest_neighbour(Node&node)->bool;
 	auto radius_find_nearest_neighbours(Node&node,
 			std::list<Node>& neighbours)->bool;
 

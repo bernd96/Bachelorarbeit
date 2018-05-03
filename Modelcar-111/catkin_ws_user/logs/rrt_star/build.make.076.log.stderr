@@ -1,0 +1,14 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:[m[K In function ‘[01m[Kfub_trajectory_msgs::Trajectory rrt_star(Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:77:53:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KListOfNodes::find_nearest_neighbour(Node&, Node*&)[m[K’
+   list_of_nodes.find_nearest_neighbour(node, nearest);
+[01;32m[K                                                     ^[m[K
+In file included from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.h:11:0[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.cpp:8[m[K:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.h:19:7:[m[K [01;36m[Knote: [m[Kcandidate: Node* ListOfNodes::find_nearest_neighbour(Node&)
+  auto find_nearest_neighbour(Node&node)->Node*;
+[01;32m[K       ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.h:19:7:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 2 provided
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/RRTSTAR.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

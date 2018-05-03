@@ -62,21 +62,26 @@ auto rrt_star(Node& start)->fub_trajectory_msgs::Trajectory {
 		double b = randoms(engine);
 		coor << a, b;
 		Node node { coor };
-		Node* nearest;
-		if (!list_of_nodes.find_nearest_neighbour(node, nearest)) {
+		Node* nearest = nullptr;
+		//function find nearest implicit set parent
+		if (!list_of_nodes.find_nearest_neighbour(node)) {
 			std::cout << "No node found..." << std::endl;
 			continue;
 		}
+		std::cout << "Nearest coor: "
+				<< node.get_parent_pointer()->get_coordinates()
+				<< std::endl;
 		//TODO what if no parent found?
-		node.project_to_parent(*nearest);
+		node.project_to_parent(*node.get_parent_pointer());
 		//TODO  real validation check
 		node.set_validation(Val::valid);
 		if (node.get_validation() != Val::valid) {
 			continue;
 		}
-		list_of_nodes.find_nearest_neighbour(node, nearest);
+		if (!list_of_nodes.find_nearest_neighbour(node)) {
+			std::cout << "After projection Node to near" << std::endl;
+		}
 
-		node.set_parent(nearest);
 		node.calculate_yaw();
 		node.calculate_cost();
 		if (!node.check()) {

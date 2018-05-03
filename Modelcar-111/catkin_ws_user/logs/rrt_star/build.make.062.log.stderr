@@ -1,0 +1,10 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:[m[K In member function ‘[01m[Kbool ListOfNodes::radius_find_nearest_neighbours(Node&, std::__cxx11::list<Node>&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:126:34:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K)[m[K’ before ‘[01m[Kfind_[m[K’
+     || ((j != 0 && j < 2 * round)find_
+[01;32m[K                                  ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:131:5:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K)[m[K’ before ‘[01m[Kwhile[m[K’
+     while ((x_val - round + i >= grid.size())) {
+[01;32m[K     ^[m[K
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/ListOfNodes.cpp.o] Error 1
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

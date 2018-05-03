@@ -20,7 +20,7 @@ auto Node::calculate_yaw()->bool {
 	Vector2d dir = calculate_dir_vector(*parent);
 	dir.normalize();
 	double dir_yaw = calculate_yaw_from_vec(dir);
-	yaw = dir_yaw + fmod((dir_yaw - par_yaw), (2 * M_PI));
+	yaw = dir_yaw + fmod((abs(dir_yaw - par_yaw)), (2 * M_PI));
 	return true;
 }
 auto Node::calculate_yaw_from_vec(Vector2d vec)->double {
@@ -228,7 +228,7 @@ auto Node::set_parent(Node* node)->void {
 		std::cout << "Node::set_parent: Warning! parent is set to null"
 				<< std::endl;
 	}
-	parent = node;
+	this->parent = node;
 }
 auto Node::set_coordinates(Vector2d& coor)->void {
 	if (coor.isZero()) {

@@ -1,0 +1,12 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:[m[K In member function ‘[01m[Kbool ListOfNodes::find_nearest_neighbour(Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:89:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass Node[m[K’ has no member named ‘[01m[Kset_parent[m[K’
+        node.set_parent(&iter);
+[01;32m[K             ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:[m[K In member function ‘[01m[Kvoid ListOfNodes::rewire(Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/ListOfNodes.cpp:172:12:[m[K [01;31m[Kerror: [m[K‘[01m[Kclass Node[m[K’ has no member named ‘[01m[Kset_parent[m[K’
+   new_node.set_parent(&iter);
+[01;32m[K            ^[m[K
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/ListOfNodes.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

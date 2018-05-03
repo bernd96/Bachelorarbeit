@@ -19,7 +19,8 @@ const int NUMBER_OF_NODES = 5;
 
 //Konstanten fürs Auto - Lenkwinkel in Grad? oder Vektor/radius des Lenkkreises?
 	const double STEERING_ANGLE_RADIUS= 0.3;
-	const double MAX_ANGLE = M_PI;
+//max angle for valid nodes, STEERING_ANGLE_RADIUS / STEPSIZE <= 1!!!
+const double MAX_ANGLE = asin(STEERING_ANGLE_RADIUS / STEPSIZE);
 //~Speed in m/s, max 1.5 times faster
 const double SPEED = 0.5;
 	/*

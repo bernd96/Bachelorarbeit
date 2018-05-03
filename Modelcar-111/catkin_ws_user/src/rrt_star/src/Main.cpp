@@ -37,7 +37,9 @@ int main(int argc, char **argv) {
 	//Zeitmessung Start
 	struct timespec mytime;
 	clock_gettime(CLOCK_MONOTONIC, &mytime);
-	float starttime = mytime.tv_nsec;
+	long double starttime = mytime.tv_nsec;
+	double startsecs = mytime.tv_sec;
+
 	
 	ros::init(argc, argv, "rrt_star");
 	ros::NodeHandle n;
@@ -46,11 +48,12 @@ int main(int argc, char **argv) {
 	//Auto - get Position and Orientation and write to start_position
 	ros::Subscriber sub =n.subscribe("/odom",100, callback);
 	yaw = M_PI;
+	pos << 1, 2;
 	Node start { pos, yaw, nullptr, Val::valid, 0 };
 
 	start.print_node();
 
-		while (ros::ok()){
+	//while (ros::ok()){
 		fub_trajectory_msgs::Trajectory trajectory;
 		trajectory = rrt_star(start);
 		ros::Rate loop_rate(4);
@@ -62,14 +65,14 @@ int main(int argc, char **argv) {
 			ros::spinOnce();
 			loop_rate.sleep();
 
-	}
+	//}
 
 
 
 	//Zeitmessung Auswertung
 	clock_gettime(CLOCK_MONOTONIC, &mytime);
-	double msecs = ((float) (mytime.tv_nsec) - (float) (starttime)) / 1000000;
-	double secs = msecs / 1000;
+	double msecs = ((mytime.tv_nsec) - (starttime)) / (double) 1000000;
+	double secs = ((double) (mytime.tv_sec) - (double) (startsecs));
 	std::cout << "Time for algorithm: " << msecs << " MiliSeconds or " << secs
 			<< " seconds." << std::endl;
 
