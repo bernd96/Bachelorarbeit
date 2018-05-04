@@ -1,0 +1,51 @@
+Berechnung der korrekten Orientierung und Feststellen der Gültigkeit von Knoten.
+
+Das Auto hat einen Drehwinkel Alpha von [0,2*PI), wie es in der Umgebung ausgerichtet sein kann.
+Alpha=0 bedeutet, dass das Auto in Richtung x-Achse ausgerichtet ist, bei Alpha=PI/2 (90°) in Richtung y-Achse.
+
+Um festzustellen, ob das Auto im Ausgangszustand(x,y,Alpha) einen Punkt erreichen kann,
+wid erstmal der Richtungsvektor zwischen Ausgangszustand und Zielpunkt(a,b) bestimmt: vec(a,b) - vec(x,y) ("Spitze minus Anfang").
+
+Nun wird der resultierende Richtungsvektor in einen Winkel umgerechnet.
+Es gilt für zwei Vectoren (e,f) und (c,d) und den Winkel Beta zwischen diesen beiden:
+cos Beta = (e,f).dot(c,d)/(length(e,f)*(length(c,d)) (TODO:Beweis/Quelle)
+Nun setzen wir als vec(e,f) den (normalisierten) Richtungsvektor und für (c,d) den Vector(1,0) ein.
+Dadurch erhalten wir den Winkel zur x-Achse: cos Beta = (e,f).dot(1,0)   (Länge eines normalisierten vektors=1, Bruch fällt weg)
+
+Nachdem der Winkel Beta des Richtungsvektors zur x-Achse ausgerechnet wurde, können wir nun die Differenz zwischen Beta und Alpha, 
+der Ausrichtung des Autos, ausrechnen.
+
+abs(Alpha-Beta) = Steuerungswinkel Gamma
+
+Je nach Schrittweite und max. Lenkausschlag des Autos darf Gamma einen bestimmten Wert nicht überschreiten,
+sonst kann der Punkt, sobald er zur Schrittweite heranprojiziert wurde, nicht mehr in einem Schritt erreicht werden.
+
+Dieser Wert kann mithilfe des Kosinussatzes ausgerechnet werden [TODO siehe Zeichnung]:
+Gamma = arccos((a²-b²-c²)/-2bc) [TODO Quelle zum Beweis] a=Lenkradius, b=Lenkradius, c=Schrittweite
+-> Gamma = arccos(c/2*b)
+Gamma ist jetzt aber nicht der Winkel zwischen der Ausrichtung und Richtung zum Punkt, sondern PI/2-Gamma führt uns zum Ziel
+weil das sonst der falsche Winkel ist (siehe Zeichnung)
+
+Für dir_vector.norm() > Schrittweite gilt:
+Solange also die Differenz abs(alpha-beta) kleiner ist als der Winkel Gamma, kann das Auto den Punkt erreichen.
+
+Für dir_vector.norm()< Schrittweite:
+Einzige Ausnahme ist jedoch, wenn der Punkt zu nahe am Auto dran ist (siehe Zeichnung)
+Hierbei kann sich das Auto maximal soweit zur Seite bewegen wie es der Lenkradius zulässt.
+Wie in der Zeichnung zu sehen werden zwei Kreise links und rechts von den Koordinaten des Autos aus gezogen.
+Bei maximalem Lenkeinschlag würde das Auto genau auf der Außenbahn der Kreise entlangfahren, daher kann es innerhalb einer
+Iteration nie innerhalb dieser Kreise gelangen.
+Die Mittelpunkte der Kreise wird aus der Ausrichtung des Autos und dem minimalen Lenkradius berechnet.
+Dazu wird zuerst der Winkel der Ausrichtung in einen Vektor der Länge 1 überführt:
+Oben berechneten wir diesen Winkel mit cos beta = (x,y).dot(1,0) wenn (x,y) normalisiert ist.
+Das ist äquivalent zu cos beta=x.
+Da der Vector normalisiert ist gilt: x² + y² =1, 
+also y=sqrt(1-x²) oder y=sqrt(1-cos²beta)
+
+
+Unerwartete Probleme:
+In der Praxis muss stets darauf geachtet werden, die Winkel richtig zu berechnen. Da können leicht Flüchtigkeitsfehler entstehen, 
+insbesondere in der Behandlung von cos und sinus. Dadurch, dass man einen 360° Kreis hat für die Ausrichtung des Autos,
+müssen jedesmal Fallunterscheidungen getroffen werden ob z.B. die Ausrichtung des Autos von 0-PI oder von PI-2*PI geht.
+Ein weiteres Problem war der Übergang von 0 zu 2*PI an der x-Achse, der öfters für Fehler in den Berechnungen gesorgt hatte.
+Aber auch ganz simple Flüchtigkeitsfehler wie z.B. das vergessen einer Klammer kann für längere Verwirrung und Fehlersuche sorgen.

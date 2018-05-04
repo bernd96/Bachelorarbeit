@@ -47,11 +47,13 @@ int main(int argc, char **argv) {
 
 	//Auto - get Position and Orientation and write to start_position
 	ros::Subscriber sub =n.subscribe("/odom",100, callback);
-	yaw = M_PI;
+	yaw = M_PI / 4;
 	pos << 1, 2;
-	Node start { pos, yaw, nullptr, Val::valid, 0 };
+	Vector2d dir;
+	dir << 0, 0;
+	Node start { pos, yaw, nullptr, dir, Val::valid, 0 };
 
-	start.print_node();
+	//start.print_node();
 
 	//while (ros::ok()){
 		fub_trajectory_msgs::Trajectory trajectory;

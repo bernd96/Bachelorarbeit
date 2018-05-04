@@ -17,25 +17,27 @@ auto build_trajectory(fub_trajectory_msgs::Trajectory& trajectory,
 	 * füge Pointer auf neue Knoten vorne an
 	 */
 	std::list<Node*> traject_to_goal;
+	//TODO if goal found..
 	Node* tmp = goal.get_parent_pointer();
 	for (int j = 0; tmp != nullptr; ++j) {
 		traject_to_goal.push_front(tmp);
 		tmp = (*tmp).get_parent_pointer();
+		tmp->print_node_short();
 	}
 	//first try for duration: eukl. distance
 	double duration = 2;
 	double path_length = 0;
 	for (auto &iter : traject_to_goal) {
 		fub_trajectory_msgs::TrajectoryPoint traj_point;
-		traj_point.pose.position.x = (*iter).get_coordinates()[0];
-		traj_point.pose.position.y = (*iter).get_coordinates()[1];
+		traj_point.pose.position.x = (*iter).get_coordinates_fast()[0];
+		traj_point.pose.position.y = (*iter).get_coordinates_fast()[1];
 		//a quaternion created from yaw
 		geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(
 				(*iter).get_yaw());
 		traj_point.pose.orientation = odom_quat;
 		//TODO calcute duration from distance of nodes
-		path_length = (iter->get_coordinates()
-				- iter->get_parent_pointer()->get_coordinates()).norm();
+		path_length = (iter->get_coordinates_fast()
+				- iter->get_parent_pointer()->get_coordinates_fast()).norm();
 		duration *= path_length / SPEED;
 		ros::Duration dur((5 * duration) + 1);
 		traj_point.time_from_start = dur;
@@ -51,8 +53,8 @@ auto rrt_star(Node& start)->fub_trajectory_msgs::Trajectory {
 	std::random_device rn;
 	std::mt19937 engine(rn());
 	std::uniform_real_distribution<double> randoms(1.0, RANGE);
-
-	list_of_nodes.add_node(start);
+//TODO easy
+	list_of_nodes.add_node_easy(start);
 
 	Vector2d coor;
 	Node goal;
@@ -61,33 +63,36 @@ auto rrt_star(Node& start)->fub_trajectory_msgs::Trajectory {
 		double a = randoms(engine);
 		double b = randoms(engine);
 		coor << a, b;
+		std::cout << "________________________" << std::endl;
+
 		Node node { coor };
-		Node* nearest = nullptr;
 		//function find nearest implicit set parent
-		if (!list_of_nodes.find_nearest_neighbour(node)) {
-			std::cout << "No node found..." << std::endl;
+		//TODO easy
+		if (!list_of_nodes.find_nearest_neighbour_easy(node)) {
+			std::cout << "No nearest neighbour node found..." << std::endl;
 			continue;
 		}
-		std::cout << "Nearest coor: "
-				<< node.get_parent_pointer()->get_coordinates()
-				<< std::endl;
-		//TODO what if no parent found?
 		node.project_to_parent(*node.get_parent_pointer());
 		//TODO  real validation check
 		node.set_validation(Val::valid);
 		if (node.get_validation() != Val::valid) {
 			continue;
 		}
-		if (!list_of_nodes.find_nearest_neighbour(node)) {
-			std::cout << "After projection Node to near" << std::endl;
+		//TODO easy
+		if (!list_of_nodes.find_nearest_neighbour_easy(node)) {
+			std::cout << "Cant find nearest_parent::Node to near now"
+					<< std::endl;
+			continue;
 		}
-
 		node.calculate_yaw();
 		node.calculate_cost();
+		//TODO just for debug
 		if (!node.check()) {
 			continue;
 		}
-		list_of_nodes.add_node(node);
+		//node.print_node();
+		//TODO easy
+		list_of_nodes.add_node_easy(node);
 
 		//TODO Verhalten wenn Ziel erreicht
 		if (node.reached_goal()) {
@@ -96,7 +101,8 @@ auto rrt_star(Node& start)->fub_trajectory_msgs::Trajectory {
 				goal = node;
 			}
 		}
-		list_of_nodes.rewire(node);
+		//TODO easy
+		list_of_nodes.rewire_easy(node);
 
 	}		//for loop
 

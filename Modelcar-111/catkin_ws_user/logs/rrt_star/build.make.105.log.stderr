@@ -1,0 +1,8 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:[m[K In member function ‘[01m[Kbool Node::calculate_dir_vector(Node&, Eigen::Vector2d&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:37:9:[m[K [01;31m[Kerror: [m[Kcannot convert ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’ to ‘[01m[Kbool[m[K’ in return
+  return dir;
+[01;32m[K         ^[m[K
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/Node.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

@@ -10,7 +10,7 @@
 #include <nav_msgs/Odometry.h>
 #include <eigen3/Eigen/Dense>
 #include <tf/tf.h>
-#include "Node.h"
+
 #include <list>
 #include <fub_trajectory_msgs/Trajectory.h>
 

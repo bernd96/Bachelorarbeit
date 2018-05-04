@@ -1,0 +1,4 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:[m[K In member function ‘[01m[KEigen::Vector2d& Node::calculate_dir_vectorrr(Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:32:11:[m[K [01;35m[Kwarning: [m[Kreference to local variable ‘[01m[Kdir[m[K’ returned [-Wreturn-local-addr]
+  Vector2d dir(0, 0);
+[01;32m[K           ^[m[K

@@ -1,0 +1,7 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:[m[K In member function ‘[01m[Kbool Node::not_to_near(Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:126:39:[m[K [01;31m[Kerror: [m[Kinvalid use of non-static member function
+    << (left_circle_center - par_coor).norm << std::endl;
+[01;32m[K                                       ^[m[K
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/Node.cpp.o] Error 1
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

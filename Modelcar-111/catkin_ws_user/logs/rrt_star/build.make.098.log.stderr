@@ -1,0 +1,26 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:52:48:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KNode::Node(<brace-enclosed initializer list>)[m[K’
+  Node start { pos, yaw, nullptr, Val::valid, 0 };
+[01;32m[K                                                ^[m[K
+In file included from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/RRTSTAR.h:10:0[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Main.cpp:16[m[K:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:37:2:[m[K [01;36m[Knote: [m[Kcandidate: Node::Node(Eigen::Vector2d&, double, Node*, Eigen::Vector2d&, Val, double)
+  Node(Vector2d& coor, double yaw, Node* parent, Vector2d& dir,
+[01;32m[K  ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:37:2:[m[K [01;36m[Knote: [m[K  candidate expects 6 arguments, 5 provided
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:36:2:[m[K [01;36m[Knote: [m[Kcandidate: Node::Node()
+  Node();
+[01;32m[K  ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:36:2:[m[K [01;36m[Knote: [m[K  candidate expects 0 arguments, 5 provided
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:34:2:[m[K [01;36m[Knote: [m[Kcandidate: Node::Node(Eigen::Vector2d&)
+  Node(Vector2d& coor);
+[01;32m[K  ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:34:2:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 5 provided
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:16:7:[m[K [01;36m[Knote: [m[Kcandidate: Node::Node(const Node&)
+ class Node {
+[01;32m[K       ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:16:7:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 5 provided
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/Main.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2

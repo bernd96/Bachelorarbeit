@@ -1,0 +1,379 @@
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:[m[K In member function ‘[01m[KEigen::Vector2d& Node::calculate_dir_vectorrr(Node&)[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:33:8:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator*[m[K’ (operand type is ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’)
+  dir = *this->coordinates - node.get_coordinates();
+[01;32m[K        ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:126:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Core:345[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:56:1:[m[K [01;36m[Knote: [m[Kcandidate: const ScalarMultipleReturnType Eigen::MatrixBase<Derived>::operator*(const Scalar&) const [with Derived = Eigen::Matrix<double, 2, 1>; Eigen::MatrixBase<Derived>::ScalarMultipleReturnType = Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, 2, 1> >; typename Eigen::internal::traits<T>::Scalar = double; Eigen::MatrixBase<Derived>::Scalar = double]
+ operator*(const Scalar& scalar) const
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:56:1:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:76:1:[m[K [01;36m[Knote: [m[Kcandidate: const ScalarComplexMultipleReturnType Eigen::MatrixBase<Derived>::operator*(const std::complex<typename Eigen::internal::traits<T>::Scalar>&) const [with Derived = Eigen::Matrix<double, 2, 1>; Eigen::MatrixBase<Derived>::ScalarComplexMultipleReturnType = Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple2_op<double, std::complex<double> >, const Eigen::Matrix<double, 2, 1> >; typename Eigen::internal::traits<T>::Scalar = double]
+ operator*(const std::complex<Scalar>& scalar) const
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:76:1:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:345:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:173:5:[m[K [01;36m[Knote: [m[Kcandidate: template<class OtherDerived> const Eigen::Product<Derived, OtherDerived> Eigen::MatrixBase<Derived>::operator*(const Eigen::MatrixBase<OtherDerived>&) const [with OtherDerived = OtherDerived; Derived = Eigen::Matrix<double, 2, 1>]
+     operator*(const MatrixBase<OtherDerived> &other) const;
+[01;32m[K     ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:173:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:33:15:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+  dir = *this->coordinates - node.get_coordinates();
+[01;32m[K               ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:345:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:194:5:[m[K [01;36m[Knote: [m[Kcandidate: template<class DiagonalDerived> const Eigen::Product<Derived, OtherDerived, 1> Eigen::MatrixBase<Derived>::operator*(const Eigen::DiagonalBase<DiagonalDerived>&) const [with DiagonalDerived = DiagonalDerived; Derived = Eigen::Matrix<double, 2, 1>]
+     operator*(const DiagonalBase<DiagonalDerived> &diagonal) const;
+[01;32m[K     ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:194:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:33:15:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+  dir = *this->coordinates - node.get_coordinates();
+[01;32m[K               ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Geometry:46:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:6[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Scaling.h:111:1:[m[K [01;36m[Knote: [m[Kcandidate: Eigen::MatrixBase<Derived>::ScalarMultipleReturnType Eigen::MatrixBase<Derived>::operator*(const Eigen::UniformScaling<typename Eigen::internal::traits<T>::Scalar>&) const [with Derived = Eigen::Matrix<double, 2, 1>; Eigen::MatrixBase<Derived>::ScalarMultipleReturnType = Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, 2, 1> >; typename Eigen::internal::traits<T>::Scalar = double]
+ MatrixBase<Derived>::operator*(const UniformScaling<Scalar>& s) const
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Scaling.h:111:1:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:298:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:462:8:[m[K [01;36m[Knote: [m[Kcandidate: void Eigen::internal::special_scalar_op_base<Derived, Scalar, OtherScalar, BaseType, EnableIt>::operator*(Eigen::internal::special_scalar_op_base<Derived, Scalar, OtherScalar, BaseType, EnableIt>::dummy) const [with Derived = Eigen::Matrix<double, 2, 1>; Scalar = double; OtherScalar = double; BaseType = Eigen::DenseCoeffsBase<Eigen::Matrix<double, 2, 1>, 3>; bool EnableIt = false]
+   void operator*(dummy) const;
+[01;32m[K        ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:462:8:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Householder:24:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/QR:17[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:4[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Householder/HouseholderSequence.h:439:99:[m[K [01;36m[Knote: [m[Kcandidate: template<class OtherDerived, class VectorsType, class CoeffsType, int Side> typename Eigen::internal::matrix_type_times_scalar_type<typename VectorsType::Scalar, OtherDerived>::Type Eigen::operator*(const Eigen::MatrixBase<Derived>&, const Eigen::HouseholderSequence<VectorsType, CoeffsType, Side>&)
+ typename internal::matrix_type_times_scalar_type<typename VectorsType::Scalar,OtherDerived>::Type operator*(const MatrixBase<OtherDerived>& other, const HouseholderSequence<VectorsType,CoeffsType,Side>& h)
+[01;32m[K                                                                                                   ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Householder/HouseholderSequence.h:439:99:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:33:15:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+  dir = *this->coordinates - node.get_coordinates();
+[01;32m[K               ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:397:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:350:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class TranspositionsDerived, class MatrixDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::TranspositionsBase<TranspositionsDerived>&, const Eigen::MatrixBase<U>&)
+ operator*(const TranspositionsBase<TranspositionsDerived> &transpositions,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:350:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:33:15:[m[K [01;36m[Knote: [m[K  ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’ is not derived from ‘[01m[Kconst Eigen::TranspositionsBase<TranspositionsDerived>[m[K’
+  dir = *this->coordinates - node.get_coordinates();
+[01;32m[K               ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:397:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:338:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class MatrixDerived, class TranspositionsDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::MatrixBase<Derived>&, const Eigen::TranspositionsBase<TranspositionsDerived>&)
+ operator*(const MatrixBase<MatrixDerived> &matrix,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:338:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:33:15:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+  dir = *this->coordinates - node.get_coordinates();
+[01;32m[K               ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:396:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:558:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class PermutationDerived, class MatrixDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::PermutationBase<PermutationDerived>&, const Eigen::MatrixBase<U>&)
+ operator*(const PermutationBase<PermutationDerived> &permutation,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:558:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:33:15:[m[K [01;36m[Knote: [m[K  ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’ is not derived from ‘[01m[Kconst Eigen::PermutationBase<PermutationDerived>[m[K’
+  dir = *this->coordinates - node.get_coordinates();
+[01;32m[K               ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:396:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:546:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class MatrixDerived, class PermutationDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::MatrixBase<Derived>&, const Eigen::PermutationBase<PermutationDerived>&)
+ operator*(const MatrixBase<MatrixDerived> &matrix,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:546:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:33:15:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+  dir = *this->coordinates - node.get_coordinates();
+[01;32m[K               ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:126:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Core:345[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:88:1:[m[K [01;36m[Knote: [m[Kcandidate: const Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple2_op<double, std::complex<double> >, const Eigen::Matrix<double, 2, 1> > Eigen::operator*(const std::complex<double>&, const StorageBaseType&)
+ operator*(const std::complex<Scalar>& scalar, const StorageBaseType& matrix)
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:88:1:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:83:1:[m[K [01;36m[Knote: [m[Kcandidate: const ScalarMultipleReturnType Eigen::operator*(const Scalar&, const StorageBaseType&)
+ operator*(const Scalar& scalar, const StorageBaseType& matrix)
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:83:1:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:32:11:[m[K [01;35m[Kwarning: [m[Kreference to local variable ‘[01m[Kdir[m[K’ returned [-Wreturn-local-addr]
+  Vector2d dir(0, 0);
+[01;32m[K           ^[m[K
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:[m[K In member function ‘[01m[KEigen::Vector2d& Node::get_coordinates()[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:219:9:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator*[m[K’ (operand type is ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’)
+  return *this->coordinates;
+[01;32m[K         ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:126:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Core:345[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:56:1:[m[K [01;36m[Knote: [m[Kcandidate: const ScalarMultipleReturnType Eigen::MatrixBase<Derived>::operator*(const Scalar&) const [with Derived = Eigen::Matrix<double, 2, 1>; Eigen::MatrixBase<Derived>::ScalarMultipleReturnType = Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, 2, 1> >; typename Eigen::internal::traits<T>::Scalar = double; Eigen::MatrixBase<Derived>::Scalar = double]
+ operator*(const Scalar& scalar) const
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:56:1:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:76:1:[m[K [01;36m[Knote: [m[Kcandidate: const ScalarComplexMultipleReturnType Eigen::MatrixBase<Derived>::operator*(const std::complex<typename Eigen::internal::traits<T>::Scalar>&) const [with Derived = Eigen::Matrix<double, 2, 1>; Eigen::MatrixBase<Derived>::ScalarComplexMultipleReturnType = Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple2_op<double, std::complex<double> >, const Eigen::Matrix<double, 2, 1> >; typename Eigen::internal::traits<T>::Scalar = double]
+ operator*(const std::complex<Scalar>& scalar) const
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:76:1:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:345:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:173:5:[m[K [01;36m[Knote: [m[Kcandidate: template<class OtherDerived> const Eigen::Product<Derived, OtherDerived> Eigen::MatrixBase<Derived>::operator*(const Eigen::MatrixBase<OtherDerived>&) const [with OtherDerived = OtherDerived; Derived = Eigen::Matrix<double, 2, 1>]
+     operator*(const MatrixBase<OtherDerived> &other) const;
+[01;32m[K     ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:173:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:219:16:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+  return *this->coordinates;
+[01;32m[K                ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:345:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:194:5:[m[K [01;36m[Knote: [m[Kcandidate: template<class DiagonalDerived> const Eigen::Product<Derived, OtherDerived, 1> Eigen::MatrixBase<Derived>::operator*(const Eigen::DiagonalBase<DiagonalDerived>&) const [with DiagonalDerived = DiagonalDerived; Derived = Eigen::Matrix<double, 2, 1>]
+     operator*(const DiagonalBase<DiagonalDerived> &diagonal) const;
+[01;32m[K     ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:194:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:219:16:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+  return *this->coordinates;
+[01;32m[K                ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Geometry:46:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:6[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Scaling.h:111:1:[m[K [01;36m[Knote: [m[Kcandidate: Eigen::MatrixBase<Derived>::ScalarMultipleReturnType Eigen::MatrixBase<Derived>::operator*(const Eigen::UniformScaling<typename Eigen::internal::traits<T>::Scalar>&) const [with Derived = Eigen::Matrix<double, 2, 1>; Eigen::MatrixBase<Derived>::ScalarMultipleReturnType = Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, 2, 1> >; typename Eigen::internal::traits<T>::Scalar = double]
+ MatrixBase<Derived>::operator*(const UniformScaling<Scalar>& s) const
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Scaling.h:111:1:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:298:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:462:8:[m[K [01;36m[Knote: [m[Kcandidate: void Eigen::internal::special_scalar_op_base<Derived, Scalar, OtherScalar, BaseType, EnableIt>::operator*(Eigen::internal::special_scalar_op_base<Derived, Scalar, OtherScalar, BaseType, EnableIt>::dummy) const [with Derived = Eigen::Matrix<double, 2, 1>; Scalar = double; OtherScalar = double; BaseType = Eigen::DenseCoeffsBase<Eigen::Matrix<double, 2, 1>, 3>; bool EnableIt = false]
+   void operator*(dummy) const;
+[01;32m[K        ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:462:8:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Householder:24:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/QR:17[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:4[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Householder/HouseholderSequence.h:439:99:[m[K [01;36m[Knote: [m[Kcandidate: template<class OtherDerived, class VectorsType, class CoeffsType, int Side> typename Eigen::internal::matrix_type_times_scalar_type<typename VectorsType::Scalar, OtherDerived>::Type Eigen::operator*(const Eigen::MatrixBase<Derived>&, const Eigen::HouseholderSequence<VectorsType, CoeffsType, Side>&)
+ typename internal::matrix_type_times_scalar_type<typename VectorsType::Scalar,OtherDerived>::Type operator*(const MatrixBase<OtherDerived>& other, const HouseholderSequence<VectorsType,CoeffsType,Side>& h)
+[01;32m[K                                                                                                   ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Householder/HouseholderSequence.h:439:99:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:219:16:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+  return *this->coordinates;
+[01;32m[K                ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:397:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:350:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class TranspositionsDerived, class MatrixDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::TranspositionsBase<TranspositionsDerived>&, const Eigen::MatrixBase<U>&)
+ operator*(const TranspositionsBase<TranspositionsDerived> &transpositions,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:350:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:219:16:[m[K [01;36m[Knote: [m[K  ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’ is not derived from ‘[01m[Kconst Eigen::TranspositionsBase<TranspositionsDerived>[m[K’
+  return *this->coordinates;
+[01;32m[K                ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:397:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:338:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class MatrixDerived, class TranspositionsDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::MatrixBase<Derived>&, const Eigen::TranspositionsBase<TranspositionsDerived>&)
+ operator*(const MatrixBase<MatrixDerived> &matrix,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:338:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:219:16:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+  return *this->coordinates;
+[01;32m[K                ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:396:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:558:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class PermutationDerived, class MatrixDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::PermutationBase<PermutationDerived>&, const Eigen::MatrixBase<U>&)
+ operator*(const PermutationBase<PermutationDerived> &permutation,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:558:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:219:16:[m[K [01;36m[Knote: [m[K  ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’ is not derived from ‘[01m[Kconst Eigen::PermutationBase<PermutationDerived>[m[K’
+  return *this->coordinates;
+[01;32m[K                ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:396:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:546:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class MatrixDerived, class PermutationDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::MatrixBase<Derived>&, const Eigen::PermutationBase<PermutationDerived>&)
+ operator*(const MatrixBase<MatrixDerived> &matrix,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:546:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:219:16:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+  return *this->coordinates;
+[01;32m[K                ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:126:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Core:345[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:88:1:[m[K [01;36m[Knote: [m[Kcandidate: const Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple2_op<double, std::complex<double> >, const Eigen::Matrix<double, 2, 1> > Eigen::operator*(const std::complex<double>&, const StorageBaseType&)
+ operator*(const std::complex<Scalar>& scalar, const StorageBaseType& matrix)
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:88:1:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:83:1:[m[K [01;36m[Knote: [m[Kcandidate: const ScalarMultipleReturnType Eigen::operator*(const Scalar&, const StorageBaseType&)
+ operator*(const Scalar& scalar, const StorageBaseType& matrix)
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:83:1:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:[m[K In member function ‘[01m[Kbool Node::set_dir_vector()[m[K’:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:245:15:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator*[m[K’ (operand type is ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’)
+  dir_vector = *this->coordinates - parent->get_coordinates();
+[01;32m[K               ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:126:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Core:345[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:56:1:[m[K [01;36m[Knote: [m[Kcandidate: const ScalarMultipleReturnType Eigen::MatrixBase<Derived>::operator*(const Scalar&) const [with Derived = Eigen::Matrix<double, 2, 1>; Eigen::MatrixBase<Derived>::ScalarMultipleReturnType = Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, 2, 1> >; typename Eigen::internal::traits<T>::Scalar = double; Eigen::MatrixBase<Derived>::Scalar = double]
+ operator*(const Scalar& scalar) const
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:56:1:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:76:1:[m[K [01;36m[Knote: [m[Kcandidate: const ScalarComplexMultipleReturnType Eigen::MatrixBase<Derived>::operator*(const std::complex<typename Eigen::internal::traits<T>::Scalar>&) const [with Derived = Eigen::Matrix<double, 2, 1>; Eigen::MatrixBase<Derived>::ScalarComplexMultipleReturnType = Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple2_op<double, std::complex<double> >, const Eigen::Matrix<double, 2, 1> >; typename Eigen::internal::traits<T>::Scalar = double]
+ operator*(const std::complex<Scalar>& scalar) const
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:76:1:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:345:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:173:5:[m[K [01;36m[Knote: [m[Kcandidate: template<class OtherDerived> const Eigen::Product<Derived, OtherDerived> Eigen::MatrixBase<Derived>::operator*(const Eigen::MatrixBase<OtherDerived>&) const [with OtherDerived = OtherDerived; Derived = Eigen::Matrix<double, 2, 1>]
+     operator*(const MatrixBase<OtherDerived> &other) const;
+[01;32m[K     ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:173:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:245:22:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+  dir_vector = *this->coordinates - parent->get_coordinates();
+[01;32m[K                      ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:345:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:194:5:[m[K [01;36m[Knote: [m[Kcandidate: template<class DiagonalDerived> const Eigen::Product<Derived, OtherDerived, 1> Eigen::MatrixBase<Derived>::operator*(const Eigen::DiagonalBase<DiagonalDerived>&) const [with DiagonalDerived = DiagonalDerived; Derived = Eigen::Matrix<double, 2, 1>]
+     operator*(const DiagonalBase<DiagonalDerived> &diagonal) const;
+[01;32m[K     ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:194:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:245:22:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+  dir_vector = *this->coordinates - parent->get_coordinates();
+[01;32m[K                      ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Geometry:46:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:6[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Scaling.h:111:1:[m[K [01;36m[Knote: [m[Kcandidate: Eigen::MatrixBase<Derived>::ScalarMultipleReturnType Eigen::MatrixBase<Derived>::operator*(const Eigen::UniformScaling<typename Eigen::internal::traits<T>::Scalar>&) const [with Derived = Eigen::Matrix<double, 2, 1>; Eigen::MatrixBase<Derived>::ScalarMultipleReturnType = Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple_op<double>, const Eigen::Matrix<double, 2, 1> >; typename Eigen::internal::traits<T>::Scalar = double]
+ MatrixBase<Derived>::operator*(const UniformScaling<Scalar>& s) const
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Scaling.h:111:1:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:298:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:462:8:[m[K [01;36m[Knote: [m[Kcandidate: void Eigen::internal::special_scalar_op_base<Derived, Scalar, OtherScalar, BaseType, EnableIt>::operator*(Eigen::internal::special_scalar_op_base<Derived, Scalar, OtherScalar, BaseType, EnableIt>::dummy) const [with Derived = Eigen::Matrix<double, 2, 1>; Scalar = double; OtherScalar = double; BaseType = Eigen::DenseCoeffsBase<Eigen::Matrix<double, 2, 1>, 3>; bool EnableIt = false]
+   void operator*(dummy) const;
+[01;32m[K        ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/util/XprHelper.h:462:8:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Householder:24:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/QR:17[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:4[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Householder/HouseholderSequence.h:439:99:[m[K [01;36m[Knote: [m[Kcandidate: template<class OtherDerived, class VectorsType, class CoeffsType, int Side> typename Eigen::internal::matrix_type_times_scalar_type<typename VectorsType::Scalar, OtherDerived>::Type Eigen::operator*(const Eigen::MatrixBase<Derived>&, const Eigen::HouseholderSequence<VectorsType, CoeffsType, Side>&)
+ typename internal::matrix_type_times_scalar_type<typename VectorsType::Scalar,OtherDerived>::Type operator*(const MatrixBase<OtherDerived>& other, const HouseholderSequence<VectorsType,CoeffsType,Side>& h)
+[01;32m[K                                                                                                   ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Householder/HouseholderSequence.h:439:99:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:245:22:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+  dir_vector = *this->coordinates - parent->get_coordinates();
+[01;32m[K                      ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:397:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:350:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class TranspositionsDerived, class MatrixDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::TranspositionsBase<TranspositionsDerived>&, const Eigen::MatrixBase<U>&)
+ operator*(const TranspositionsBase<TranspositionsDerived> &transpositions,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:350:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:245:22:[m[K [01;36m[Knote: [m[K  ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’ is not derived from ‘[01m[Kconst Eigen::TranspositionsBase<TranspositionsDerived>[m[K’
+  dir_vector = *this->coordinates - parent->get_coordinates();
+[01;32m[K                      ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:397:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:338:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class MatrixDerived, class TranspositionsDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::MatrixBase<Derived>&, const Eigen::TranspositionsBase<TranspositionsDerived>&)
+ operator*(const MatrixBase<MatrixDerived> &matrix,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Transpositions.h:338:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:245:22:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+  dir_vector = *this->coordinates - parent->get_coordinates();
+[01;32m[K                      ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:396:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:558:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class PermutationDerived, class MatrixDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::PermutationBase<PermutationDerived>&, const Eigen::MatrixBase<U>&)
+ operator*(const PermutationBase<PermutationDerived> &permutation,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:558:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:245:22:[m[K [01;36m[Knote: [m[K  ‘[01m[KEigen::Vector2d {aka Eigen::Matrix<double, 2, 1>}[m[K’ is not derived from ‘[01m[Kconst Eigen::PermutationBase<PermutationDerived>[m[K’
+  dir_vector = *this->coordinates - parent->get_coordinates();
+[01;32m[K                      ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:396:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:546:1:[m[K [01;36m[Knote: [m[Kcandidate: template<class MatrixDerived, class PermutationDerived> const Eigen::Product<MatrixDerived, PermutationDerived, 2> Eigen::operator*(const Eigen::MatrixBase<Derived>&, const Eigen::PermutationBase<PermutationDerived>&)
+ operator*(const MatrixBase<MatrixDerived> &matrix,
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/PermutationMatrix.h:546:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:245:22:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+  dir_vector = *this->coordinates - parent->get_coordinates();
+[01;32m[K                      ^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:126:0[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Core:345[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.h:8[m[K,
+                 from [01m[K/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/src/rrt_star/src/Node.cpp:8[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:88:1:[m[K [01;36m[Knote: [m[Kcandidate: const Eigen::CwiseUnaryOp<Eigen::internal::scalar_multiple2_op<double, std::complex<double> >, const Eigen::Matrix<double, 2, 1> > Eigen::operator*(const std::complex<double>&, const StorageBaseType&)
+ operator*(const std::complex<Scalar>& scalar, const StorageBaseType& matrix)
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:88:1:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:83:1:[m[K [01;36m[Knote: [m[Kcandidate: const ScalarMultipleReturnType Eigen::operator*(const Scalar&, const StorageBaseType&)
+ operator*(const Scalar& scalar, const StorageBaseType& matrix)
+[01;32m[K ^[m[K
+[01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseUnaryOps.h:83:1:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 1 provided
+make[2]: *** [CMakeFiles/rrt_star_node.dir/src/Node.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/rrt_star_node.dir/all] Error 2
+make: *** [all] Error 2
