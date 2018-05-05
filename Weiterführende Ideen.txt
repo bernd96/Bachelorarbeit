@@ -1,0 +1,3 @@
+Mit Entfernungsnorm rumspielen, z.B. Manhattan Norm anstatt Euklidische Norm: 
+Bessere Laufzeit
+Belohnt geradeausfahren (wenn 90° Turns nicht gestattet, ansonsten werden diese ebenso bevorzugt, also nur sinnvoll falls max winkel < 45° oder PI/4 ist)
