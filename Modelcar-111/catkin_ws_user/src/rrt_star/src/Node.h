@@ -35,8 +35,7 @@ class Node {
 	Node(Vector2d& coor);
 
 	Node();
-	Node(Vector2d& coor, double yaw, Node* parent,
-			Vector2d& dir,
+	Node(Vector2d coor, double yaw, Node* parent, Vector2d dir,
 			Val validation,
 			double cost);
 	Node(const Node&node);
@@ -59,14 +58,19 @@ class Node {
 
 	//Helper Functions
 	auto calculate_dir_vector(Node& node, Vector2d&dir) ->bool;
-	auto calculate_yaw()->bool;
+	auto calculate_cost(const Node&parent) const->double;
+	auto calculate_yaw_and_cost()->void;
+
 	auto calculate_yaw_from_vec(Vector2d& vec) const->double;
 	auto calculate_cost()->bool;
+	auto calculate_direction(Vector2d&direct) const ->void;
+
 	auto project_to_parent(Node&parent)->bool;
 
 	//Check validity
 	auto not_to_near(Node& parent) const->bool;
-	auto is_reachable(Node& parent, Vector2d& dir_vector) const->bool;
+	auto is_reachable(const Node& parent,
+			const Vector2d& dir_vector) const->bool;
 	auto check()->bool;
 
 	auto reached_goal()->bool;
@@ -76,6 +80,6 @@ class Node {
 	auto equals(Node& b) ->bool;
 
 	auto print_node_short()->void;
-	auto print_node()->void;
+	auto print_node() const->void;
 };
 #endif /* NODE_H_ */

@@ -34,6 +34,8 @@ auto ListOfNodes::add_node(Node& node)->void {
 }
 
 auto ListOfNodes::find_nearest_neighbour(Node& node)->bool {
+	//deprecated
+
 	std::cout << "Entering find_nearest_neighbour..." << std::endl;
 
 	//slow if only few nodes are inserted! (O(k³) worst case)
@@ -110,6 +112,7 @@ auto ListOfNodes::find_nearest_neighbour(Node& node)->bool {
 
 auto ListOfNodes::radius_find_nearest_neighbours(Node& node,
 		std::list<Node>& neighbours) ->bool {
+//deprecated
 	std::cout << "Entering radius find_nearest_neighbour..." << std::endl;
 	/*
 	 * Find nearest reachable Neighbours
@@ -171,6 +174,8 @@ auto ListOfNodes::radius_find_nearest_neighbours(Node& node,
 }
 
 auto ListOfNodes::find_nearest_parent(Node& node)->bool {
+	//deprecated
+
 	std::cout << "Entering find_nearest_parent..." << std::endl;
 	int loop = 0;
 	//slow if only few nodes are inserted! (O(k³) worst case)
@@ -189,7 +194,7 @@ auto ListOfNodes::find_nearest_parent(Node& node)->bool {
 			!found && (round < grid.size()) && round < number_of_rounds;
 			round++) {
 		/*
-		 * searches a square with size 1+2*round (3*3,5*5,7*7,9*9...)
+		 * searches a square with size 1+2*round (1*1,3*3,5*5,7*7,9*9...)
 		 * and with node in center for possible neighbours
 		 * checks for reachability and nearest distance
 		 */
@@ -236,19 +241,6 @@ auto ListOfNodes::find_nearest_parent(Node& node)->bool {
 									node.set_dir_vector();
 
 									found = true;
-									tmp_dist = dir.norm();
-									if (tmp_dist < min_distance) {
-										if (node.is_reachable(iter, dir)) {
-											if (node.not_to_near(iter)) {
-												min_distance = tmp_dist;
-												node.set_parent(iter);
-												node.set_dir_vector();
-
-												found = true;
-											}
-
-										}
-									}
 								}
 
 							}
@@ -263,6 +255,8 @@ auto ListOfNodes::find_nearest_parent(Node& node)->bool {
 	return found;
 }
 auto ListOfNodes::rewire(Node& node)->void {
+	//deprecated
+
 	std::cout << "Entering rewiring..." << std::endl;
 
 	std::list<Node> possible_childs;
@@ -274,8 +268,7 @@ auto ListOfNodes::rewire(Node& node)->void {
 			new_node.set_validation(iter.get_validation());
 			new_node.set_parent(node);
 			new_node.set_dir_vector();
-			new_node.calculate_yaw();
-			new_node.calculate_cost();
+			new_node.calculate_yaw_and_cost();
 			if (new_node.check()) {
 				this->add_node(new_node);
 				this->rewire(new_node);
@@ -303,67 +296,70 @@ bool ListOfNodes::find_nearest_neighbour_easy(Node& node) {
 	double tmp_dist = 0;
 	double min_distance = 2 * RANGE;
 	Vector2d dir;
+	bool projected = false;
 	bool found = false;
 	for (auto &iter : easy_list) {
 		if (!(iter.equals(node))) {
 			node.calculate_dir_vector(iter, dir);
 			tmp_dist = dir.norm();
 			if (tmp_dist < min_distance) {
-				if (node.is_reachable(iter, dir)) {
-					if (node.not_to_near(iter)) {
-						min_distance = tmp_dist;
-						node.set_parent(iter);
-						node.set_dir_vector();
-
-						found = true;
-					}
-
-				}
-			}
-		}
-	}
-	return found;
-}
-
-bool ListOfNodes::radius_find_nearest_neighbours_easy(Node& node,
-		std::list<Node>& neighbours) {
-	Vector2d dir;
-	bool found = false;
-	double cost_new;
-	double cost_old;
-	for (auto &iter : easy_list) {
-		if (!(iter.equals(node))) {
-			iter.calculate_dir_vector(node, dir);
-			cost_new = node.get_cost() + dir.norm();
-			cost_old = iter.get_cost();
-			if (cost_new < cost_old && iter.is_reachable(node, dir)
-					&& iter.not_to_near(node)) {
-				neighbours.push_back(iter);
+				min_distance = tmp_dist;
+				node.set_parent(iter);
 				found = true;
 			}
 		}
 	}
+	if (found) {
+		node.set_dir_vector(dir);
+	}
 	return found;
 }
-
-void ListOfNodes::rewire_easy(Node& node) {
-	std::list<Node> possible_childs;
-	this->radius_find_nearest_neighbours_easy(node, possible_childs);
-	for (auto &iter : possible_childs) {
+bool ListOfNodes::find_nearest_parent_easy(Node& node) {
+	double tmp_cost = 0;
+	double min_cost = RANGE * RANGE;
+	Vector2d dir;
+	bool projected = false;
+	bool found = false;
+	for (auto &iter : easy_list) {
 		if (!(iter.equals(node))) {
-
-			Node new_node;
-			new_node.set_coordinates(iter.get_coordinates_fast());
-			new_node.set_validation(iter.get_validation());
-			new_node.set_parent(node);
-			new_node.set_dir_vector();
-			new_node.calculate_yaw();
-			new_node.calculate_cost();
-			if (new_node.check()) {
-				this->add_node(new_node);
-				this->rewire_easy(new_node);
+			tmp_cost = node.calculate_cost(iter);
+			if (tmp_cost < min_cost) {
+				min_cost = tmp_cost;
+				node.set_parent(iter);
+				node.calculate_dir_vector(iter, dir);
+				found = true;
 			}
 		}
 	}
-	std::cout << "End rewiring..." << std::endl;
+	if (found) {
+		node.set_dir_vector(dir);
+	}
+	return found;
+}
+
+bool ListOfNodes::rewire_easy(Node& node) {
+	Vector2d dir;
+	bool found = false;
+	double cost_new;
+	double cost_old;
+	double dist;
+	for (auto &iter : easy_list) {
+		if (!(iter.equals(node))) {
+			//Bessere Datenstruktur für schnellere Suche wäre cool
+			iter.calculate_dir_vector(node, dir);
+			dist = dir.norm();
+			if (dist < RADIUS) {
+				cost_new = iter.calculate_cost(node);
+				cost_old = iter.get_cost();
+				if (cost_new < cost_old && iter.not_to_near(node)) {
+					iter.set_parent(node);
+					iter.set_dir_vector();
+					iter.calculate_yaw_and_cost();
+					found = true;
+			}
+				}
+
+		}
+	}
+	return found;
 }

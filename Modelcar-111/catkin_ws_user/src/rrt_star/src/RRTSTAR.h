@@ -11,10 +11,11 @@
 #include "ListOfNodes.h"
 #ifndef SRC_RRTSTAR_H_
 #define SRC_RRTSTAR_H_
-auto rrt_star(Node& start)->fub_trajectory_msgs::Trajectory;
+auto rrt_star(Node& start,
+		std::list<Node>& raw_nodes,
+		fub_trajectory_msgs::Trajectory&traj)->bool;
 auto build_trajectory(fub_trajectory_msgs::Trajectory& traj,
-		Node&node)->void;
+		Node* node)->void;
 //um zwischendurch die Odometrie zu bekommen
-auto get_odom()->void;
 
 #endif /* SRC_RRTSTAR_H_ */

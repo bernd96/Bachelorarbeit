@@ -1,0 +1,9 @@
+also, rewiring scheint zu funzen.
+car erkennt odometrie bzw eigene position nur relativ.
+Also mein Goal ist nicht fest, sondern "wandert" mit der orientierung des Autos. das ist blöd (trajectorie wandert halt entsprechend)
+
+wichtig: Auto position im simulator (pradeep? can u help me?)
+richtige anzeige der Koordinaten
+richtige Umrechnungen
+wie nimmt der simulator welche daten entgegen?
+möglichst schnell valide testfälle anlegen...
