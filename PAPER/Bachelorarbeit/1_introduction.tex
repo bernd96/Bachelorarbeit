@@ -13,7 +13,7 @@ Ein Forschungsgebiet ist die Entwicklung und Analyse autonomer Autos. Zur oben b
 Diese Bachelorarbeit untersucht einen dieser anderen Algorithmen zur Pfadplanung, \textit{RRT*}, auf seine Tauglichkeit, über eine vorgegebene Fahrbahn mit Hindernissen eine abfahrbare, sichere und möglichst optimale \textit{Trajektorie} zu finden. 
 
 \subsection{Aufbau und Struktur}
-Nach einer kurzen Hinführung zum Thema werden zuallererst die Grundlagen (\ref{sec:Grundlagen}) besprochen, um das Verständnis der nachfolgenden Kapitel zu erleichtern. Danach wird die Umsetzung des Algorithmus auf das Auto sowie die technischen Details und Hintergründe beschrieben (\ref{sec:Umsetzung}). Im vierten Kapitel (\ref{sec:Ergebnisse} werden die Ergebnisse der Testfahrten vorgestellt und bewertet. Zum Schluss (\ref{sec:Zusammenfassung}) werden in einem Fazit alle Schlussfolgerungen nochmals zusammengefasst und ein Ausblick auf weitere mögliche Forschungsmöglichkeiten gegeben. \\ 
+Nach einer kurzen Hinführung zum Thema werden zuallererst die Grundlagen (\ref{sec:Grundlagen}) besprochen, um das Verständnis der nachfolgenden Kapitel zu erleichtern. Danach wird die Umsetzung des Algorithmus auf das Auto sowie die technischen Details und Hintergründe beschrieben (\ref{sec:Umsetzung}). Im vierten Kapitel (\ref{sec:Ergebnisse}) werden die Ergebnisse der Testfahrten vorgestellt und bewertet. Zum Schluss (\ref{sec:Zusammenfassung}) werden in einem Fazit alle Schlussfolgerungen nochmals zusammengefasst und ein Ausblick auf weitere mögliche Forschungsmöglichkeiten gegeben. \\ 
 \subsubsection{Problemanalyse}
 Diese Arbeit untersucht die Effizienz des\textit{ RRT*}-Algorithmus unter Anwendung bei autonomen Autos. Dazu fährt das Auto eine vorgegebene Strecke ab.
 \begin{figure}
@@ -43,24 +43,25 @@ Low-Level-Planer & Steuert direkt die Motoren des Autos, Lenkung und Antrieb, um
 RRT & Rapidly-Exploring Random Tree \citep{Lav98}, ein Algorithmus zur Findung eines Pfades zum Ziel durch unbekanntes Gelände, wird in Kapitel \ref{RRT} noch weiter erläutert\\
 RRT* & Eine verbesserte Variante des RRT, bei dem die Pfade optimiert werden \citep{KaFra10}. Asymptoptisch optimal, erläutert in Kapitel \ref{RRT*} \\
 ROS & Robot Operating Systems, eine Open-Source Sammlung an Software-Bibliotheken und Werkzeugen zur Kreation von Anwendungen zur Robotik \citep{ROS}. \\
-Lidar & Light detection and ranging; Radarscanner am Auto, für Abstandsmessung zu Hindernissen.\\
 Nonholonomic Robots & Roboter, die gewissen kinematischen Einschränkungen unterworfen sind. Ein Auto zum Beispiel kann sich nicht in jede beliebige Richtung bewegen, sondern ist z.B. durch den maximalen Lenkwinkel und den Wenderadius eingeschränkt und kann nicht jeden beliebigen Punkt sofort, mit nur einem Schritt, erreichen. Im Gegensatz dazu stehen holonome Roboter, die sich in jede beliebige Richtung ohne direkte Einschränkungen bewegen können.  \\
 Kinodynamic planning & Beschreibt eine Klasse von Problemen, bei der physikalische Einschränkungen wie Geschwindigkeit, Beschleunigung und Kräfte zusammen mit kinematischen Einschränkungen (z.B. Hindernisvermeidung) berücksichtigt werden müssen. \\
 hochdimensionale Probleme & Probleme, bei deren Lösung nicht nur ein oder zwei, sondern sehr viele verschiedene Parameter berücksichtig werden müssen. Kinodynamic Planning befasst sich mit hochdimensionalen Problemen.\\
 randomisierte Algorithmen & Algorithmen, deren Durchführung nicht determiniert ist, die also jedesmal ein etwas anderes Ergebnis zurückliefern. Der Vorteil ist, dass dies Algorithmen zwar nicht immer das bestmöglichste Ergebnis liefern, dafür aber schneller in der Ausführungszeit sind und oft einfacher zu verstehen und zu implementieren.\\
-Odroid & Einplatinencomputer mit Mehrkernprozessor. \\
-Arduino Nano & Mikrocontroller zur Steuerung der Motoren und Sensoren.\\
-Gyroskop & Auch Kreiselinstrument, zur Messung der Lageänderung (z.B. Ausrichtung des Autos).\\
-Odometrie & Methode zur Schätzung von Position und Orientierung anhand der Daten des Vortriebsystems (Motoren).\\
-[TODO] ab hier wird die Tabelle abgeschnitten...]
-Rewiring & Neuverknüpfung eines RRT*-Baumes \citep{KaFra10}. Die Begriffe Rewiring und Neuverknüpfung werden synomym gebraucht. Nach Hinzufügung eines Knotens K zum Baum werden Nachbarknoten überprüft, ob diese durch K besser erreichbar sind als vorher. Falls ja, wird K als Vaterknoten ausgewählt. \\
-k-nearest neighbour algorithm& Algorithmus, der zu einem Punkt P die nächsten K Nachbarn bestimmt.\\
-radius k-nearest neighbour & Algorithmus, der in einem Radius alle nächsten Nachbarn des Punktes P bestimmt.\\
-Quaternion & 4-dimensionaler Vektor, in dem die Ausrichtung eines Objekts im Raum definiert ist.\\
-
-
 \end{tabularx} 
 
+\begin{tabularx}{\textwidth}{l|X}
+ \textbf{Begriff}  & \textbf{Erklärung}  \\
+\hline 
+Odroid & Einplatinencomputer am Auto mit Mehrkernprozessor. \\
+Arduino Nano & Mikrocontroller am Auto zur Steuerung der Motoren und Sensoren.\\
+Gyroskop & Auch Kreiselinstrument, Sensor am Auto zur Messung der Lageänderung (z.B. Ausrichtung des Autos).\\
+Lidar & Light detection and ranging; Radarscanner am Auto, für Abstandsmessung zu Hindernissen.\\
+Odometrie & Methode zur Schätzung von Position und Orientierung anhand der Daten des Vortriebsystems (Motoren).\\
+Rewiring & Neuverknüpfung eines RRT*-Baumes \citep{KaFra10}. Die Begriffe Rewiring und Neuverknüpfung werden synomym gebraucht. Nach Hinzufügung eines Knotens K zum Baum werden Nachbarknoten überprüft, ob diese durch K besser erreichbar sind als vorher. Falls ja, wird K als Vaterknoten ausgewählt. \\
+k-nearest neighbour algorithm & Algorithmus, der zu einem Punkt P die nächsten K Nachbarn bestimmt.\\
+radius k-nearest neighbour & Algorithmus, der in einem Radius alle nächsten Nachbarn des Punktes P bestimmt.\\
+Quaternion & 4-dimensionaler Vektor, in dem die Ausrichtung eines Objekts im Raum definiert ist.\\
+\end{tabularx}
 \subsubsection{Wichtige Quellen und deren Beitrag zum Thema}
 Es existieren[TODO RRT-Quellen \citep[vgl][]{Lav98}, RRT*-Quellen, Übersichtsliteratur]
 \\

@@ -26,10 +26,19 @@ Für jedes \textit{Topic} ist dabei auch die Nachrichtenart definiert, die für 
 \subsection{APIs und Einbettung zu bereits vorhandene Knoten}
 Das Dahlem Center for Machine Learning and Robotics entwickelte ROS-Pakete für die Steuerung ihrer autonomer Fahrzeuge. Diese Pakete und daraus resultierenden ROS-Nodes können dazu genutzt werden, den von mir entwickelten RRT*-Pfadplaner möglichst gut einzubetten. So kann durch das visuelle indoor GPS die Position des Autos bestimmt werden, die der Pfadplaner für seine Berechnungen braucht. Die resultierende \textit{Trajektorie}, die der Pfadplaner entwickelt, wird einem Steuerungsknoten übergeben, der diese \textit{Trajektorie} in Motorbefehle, also Beschleunigungen und Lenkungen, umsetzt. 
 \subsubsection{Bestimmung der Odometry und visual GPS}
-[TODO was benutzte ich jetzt?]
+Zur Ausführung des Algorithmus gehört, dass das Auto sich selbst lokalisieren kann und seine eigene Startposition feststellen kann. Diese wird, mit der aktuellen Ausrichtung des Autos, dazu benutzt um den Startpunkt für den Algorithmus zu setzen. \\
+Das Dahlem Center for Machine Learning and Robotics hat dafür zwei verschiedene Varianten entwickelt, die kombiniert einander ergänzen können. \\
+\begin{enumerate}
+\item Odometrie \\
+Anhand des Lenkwinkels und der Motordrehgeschwindigkeit kann die erwartete Position, Geschwindigkeit und Beschleunigung berechnet werden. Mit dem im Auto verbauten Gyroskop werden Lageänderungen entlang jeder Achse gemessen. Aufgrund mechanischer Beschränkungen und Ungenauigkeiten sind Messungen mithilfe der Odometrie nie ganz exakt und somit kann eine so bestimmte Position mit der Zeit von der tatsächlichen Postition abweichen.
+\item Visual GPS\\
+Da es innerhalb von Gebäuden Schwierigkeiten mit der genauen Positionsbestimmung via GPS gibt, wurde mithilfe von vier Lampen, die an der Decke angebracht wurden, ein visuelles GPS simuliert. Diese vier Lampen leuchten in unterschiedlichen, gut erkennbaren Farben und werden mit der Fischaugenkamera, die zur Decke ausgerichtet ist, erfasst. Anhand der Lage der Lampen zueinander und wie die Fischaugenkamera diese sieht kann die Position des Autos bestimmt werden.\\
+Dazu muss jedoch gesagt werden, dass das eindeutige Erkennen der Lampen nur unter guten Bedingungen (Lichtverhältnisse, alle 4 Lampen im Bild) möglich ist. 
+\end{enumerate}
 
-\subsubsection{Steuerungsknoten fubController}
-Dieser Knoten lauscht auf das \textit{Topic} \verb|"planned_path"|. Auf \verb|"planned_path"| kann eine \textit{Trajektorie} publiziert werden, die dann mithilfe des Steuerungsknotens vom Auto abgefahren wird. Dabei kümmert sich dieser Steuerungsknoten allerdings nicht um etwagige Hindernisse, die mit dem Auto kollidieren könnten. Somit muss der Pfadplaner selbst alle Kollisionen mit Hindernissen ausschließen. \\
+\subsubsection{Low-Level-Planer}
+Das Dahlem Center for Machine Learning and Robotics entwickelte einen Steuerungsknoten fub controller, der für die Steuerung der Motoren zuständig ist.
+Dieser Knoten lauscht auf das \textit{Topic} \verb|"planned_path"|. Auf \verb|"planned_path"| kann eine \textit{Trajektorie} publiziert werden, die dann mithilfe des Steuerungsknotens vom Auto abgefahren wird. Dabei kümmert sich dieser Steuerungsknoten allerdings nicht um etwagige Hindernisse, die mit dem Auto kollidieren könnten, sondern fährt nur die Trajektorie ab. Somit muss der Pfadplaner selbst alle Kollisionen mit Hindernissen ausschließen. \\
 Das Format der \textit{Trajektorie} wurde von der Arbeitsgruppe der FU Berlin definiert und besteht aus
 \begin{itemize}
 \item \verb|std_msgs/Header|: Hier wird die aktuelle Zeit gespeichert.
@@ -42,7 +51,7 @@ Ein Trajektorien-Punkt symbolisiert einen abzufahrenden Knotenpunkt und wiederum
 \item \verb|geometry_msgs/Twist velocity|:Hier wird die Geschwindigkeit des Autos an diesem Punkt gespeichert.
 \item \verb|geometry_msgs/Twist acceleration| Hier wird die Beschleunigung des Autos an diesem Punkt gespeichert.
 \end{itemize}
-Die Position wird in x-Position und y-Position angegeben, ausgehend von einer Ecke des Raumes. Die Orientierung wird durch ein \textit{Quaternion} dargestellt, bei dem durch vier Werte die Drehung in jeder Richtung des Raumes genau bestimmt ist. Allerdings genügt uns die Drehung um die z-Achse, also die Drehrichtung über die Vertikalachse, weshalb dieses Quaternion in einen Winkel, der sogenannten Gierung, umgerechnet wird.
+Die Position wird in x-Position und y-Position angegeben, ausgehend von einer Ecke des Raumes. Die Orientierung wird durch ein \textit{Quaternion} dargestellt, bei dem durch vier Werte die Drehung in jeder Richtung des Raumes genau bestimmt ist. Allerdings genügt uns die Drehung um die z-Achse, also die Drehrichtung über die Vertikalachse, weshalb dieses Quaternion in einen Winkel, der sogenannten Gierung( engl. \textit{yaw}), umgerechnet wird.
 \\
 Nachdem die notwendige Infrastruktur erläutert wurde, folgt eine kurze Betrachtung der kinematischen und physikalischen Einschränkungen, denen das AutoNOMOS Mini v3 unterworfen ist. Anschließend können wir uns endlich dem Kernstück der Arbeit, dem eigentlichen RRT*-Pfadplaner, widmen.
 
@@ -73,11 +82,13 @@ Dazu hatte ich am Anfang unterschiedliche Ansätze:
 \end{enumerate}
 Das Problem des ersten Ansatzes war, das unter Umständen je nach Umgebung ein Pfad nicht nur wegen bestimmter Ecken und Kanten nicht abfahrbar ist, sondern auch wegen Kurven, die Aufgrund des Lenkradius des Autos nicht zu bewältigen wären. Es wäre zwar möglich, für kurze Zeit die geplante Trajektorie zu verlassen und nach Ende der Kurve wieder zu ihr zu stoßen, allerdings ist es unter diesen Umständen schwierig eine Hindernisfreiheit zu garantieren. \\
 Die zweite Variante war Thema der Bachelorarbeit meines oben bereits erwähnten Kommolitonen David Gödicke \citep{Goedicke18}. Dieser benutze für den Pfad zwischen zwei Kurven Dubins Curves \citep{Dubin61}, bei denen drei Einstellungen aus linkem maximalem Lenkeinschlag, rechtem maximalen Lenkeinschlag und geradeaus fahren dreimal hintereinander verkettet werden . Damit kann zwar jeder Punkt des Arbeitsbereiches erreicht werden, allerdings war die Berechnung zu aufwändig und langsam, was für Echtzeit Szenarien im Straßenverkehr ein hartes Ausschlusskriterium ist \citep[vergleiche][Kapitel 7]{Goedicke18}. \\
-Deshalb entschloss ich mich für die dritte Variante, bei der Knoten nur zum RRT*-Graph unter der Bedingung hinzugefügt werden, dass sie erreichbar sind.
+Deshalb entschloss ich mich zuerst für die dritte Variante, bei der Knoten nur zum RRT*-Graph unter der Bedingung hinzugefügt werden, dass sie erreichbar sind.
 
 \subsection{RRT*-Pfadplaner für autonome Fahrzeuge}
 \subsubsection{Vorauswahl}
 \label{sec:Vorauswahl}
+[TODO ist eig alles veraltet, muss neu geschrieben werden. Ich kann mit dem Auto jetzt jeden Punkt außerhalb der Wendekreise erreichen...damit fällt alles mit Erreichbarkeit über den Winkel weg, Projektion, Berechnung der Orientierung und Sicherstellen-das-der-Knoten-nicht-zu-nah-ist bleibt aber bestehen...\\
+Vor allem müssen neue Grafiken erstellt werden (Mi?)!]
 Diese beinhaltete, bei der Erstellung des RRT* vom Auto nicht erreichbare Knoten gar nicht erst zuzulassen. Das Auto sollte also von einem Knoten zum nächsten mit nur einer Lenkeinstellung direkt fahren können. Dies sollte die Berechnungszeit stark verringern. \\
 Zum Ausschluss der Knoten verwendete ich zuerst eine Heuristik: Ein nächster Nachbar N für einen neu hinzugefügten Knoten K kam nur dann in Frage, falls dieser den neu hinzugefügten Knoten K auch erreichen konnte. Dazu wurde die Ausrichtung des Autos im potenziellen Elternknoten N mit dem Richtungsvektor zwischen den beiden Knoten verglichen. Somit war K gültig, falls der Winkel zwischen der Ausrichtung von N und dem direktem Weg zum Knoten K (Richtungsvektor) einen bestimmten Wert $\gamma$ nicht überschritt.
 \begin{figure}
@@ -118,6 +129,7 @@ Nachdem erfolgreich ein Vaterknoten bestimmt und dem neu hinzugefügtem Knoten K
 Da das Auto im Vaterknoten N eine bestimmte Ausrichtung hat und mit nur einer Lenkeinstellung zum nächsten Knoten K gelangt, ist dort die Ausrichtung dadurch festgelegt und berechnet sich aus der Ausrichtung des Vaterknotens, Winkel $\theta$, und dem Richtungsvektor von N nach K. Der Richtungsvektor kann in einen Winkel relativ zu x-Achse mit Hilfe des Skalarprodukts ausgerechnet werden. Wie in der Zeichnung ~\ref{fig:fig8} zu sehen ist, wird der Winkel des Richtungsvektors zweimal auf die Ausrichtung im Vaterknoten addiert, um die Ausrichtung im neuen Knoten zu erhalten. \\
 
 \subsection{Metrik und Kostenfunktion}
+\label{sec:Metrik}
 Eine besondere Bedeutung zur Erzeugung einer "guten" Trajektorie kommt der Kostenfunktion zu. Diese sorgt nicht nur dafür, welcher Knoten als Vaterknoten ausgewählt wird, sondern spielt auch beim Neuverknüpfen des Baumes eine Rolle.Somit kann mithilfe der Kostenfunktion für besonders gut abfahrbare oder besonders kurze Pfade gesorgt werden. \\
 Da durch die Orientierung des Vaterknotens die Orientierung des Kindknotens bereits festgelegt ist (siehe Abbildung ~\ref{fig:fig8}, können aus eigentlich geraden Strecken sehr ungünstige Pfade entstehen.\\
  In Abbildung ~\ref{fig:fig5} wird als Kostenfunktion der euklidische Abstand benutzt. Knoten C wählt aus B1 und B2 den nächsten Nachbarn aus, das ist B2. Leider entsteht dadurch eine sehr kurvige Route, bei der vom fast maximalem Lenkeinschlag nach rechts auf den maximalen Lenkeinschlag der anderen Seite gewechselt werden muss. Neben Nachteilen des Komforts, der Sicherheit und längerem Weg wird auch die Ungenauigkeit höher. Anfangs wurde angenommen, dass der Lenkwinkel sich sofort ändern kann. Während bei kleinen Änderungen diese Annahme nur für kleine Fehler sorgt, sind die Auswirkungen bei solch starken Änderungen deutlicher spürbar.
@@ -146,9 +158,10 @@ Als Lösung wurde hierbei eine Kombination aus dem euklidischem Abstand und der 
 \begin{center}
 $cost(K) = cost(N) +eukl. Abstand(K,N) * (1+Winkeldifferenz)$
 \end{center} 
-Bei einer geraden Strecke wird lediglich der euklidische Abstand als Kosten hinzuaddiert, bei einer Kehre von 180$^{\circ}$ das vierfache der euklidischen Kosten.  
+Bei einer geraden Strecke wird lediglich der euklidische Abstand als Kosten aufsummiert, bei einer Kehre von 180$^{\circ}$ bis zum vierfachen der euklidischen Kosten (Winkeldifferenz $\pi$ +1).\\
+Nachteil dieser Kostenfunktion ist, dass nicht berücksichtigt wird das starke Kurven weniger "schlimm" sind auf größerer Strecke. Mit anderen Worten, das Fahren genau auf den minimalen Wendekreisen ist meist weniger angenehm als das Fahren auf weiten Kreisen, auch wenn beide Pfade die gleiche Winkeldifferenz haben. Das Problem hierbei ist, dass ein kleinerer Kreis geringere euklidische Kosten hat und demzufolge gegenüber dem größeren Kreis bevorzugt wird.
 \subsubsection{Rewiring}
-[TODO Pseudo code] Der Knoten K wurde neu in den Baum hinzugefügt. Nun wird überprüft, ob bereits vorhandene Knoten besser erreichbar sind, wenn der Weg über K gewählt wird.
+[TODO Rewiring neu schreiben, siehe oben. Hat sich geändert, Rewiring muss nicht Rekursiv durchgeführt werden.] Der Knoten K wurde neu in den Baum hinzugefügt. Nun wird überprüft, ob bereits vorhandene Knoten besser erreichbar sind, wenn der Weg über K gewählt wird.
 Dazu werden zunächst im Radius R alle in Frage kommenden Nachbarn ausgewählt. Aussortiert werden alle, die entweder vom Knoten K aus nicht erreichbar sind (gleiche Überprüfung wie oben) oder aber bei denen K keine Verbesserung bewirkt also die Kosten über den Knoten K gleich oder kleiner sind. \\
 Wenn man von den jetzt noch ausgewählten Knoten M einfach K als Vater hinzufügen würde, müsste jeweils die Orientierung der Knoten, der Winkel $\theta$, geändert werden. Das Auto gelangt auf anderem Wege zu diesen Knoten und hat somit eine andere Ausrichtung als vorher. Allerdings kann es dadurch vorkommen, das wenn der Knoten $m \in M$ eine neue Orientierung hat, Kinder von m nicht mehr durch m erreichbar sind [TODO Zeichnung]. Deshalb wird, anstatt die Orientierung zu ändern, einfach ein neuer Knoten hinzugefügt, der zwar die gleicher Koordinaten hat wie m, aber eine andere Orientierung. Dies wird mit allen von K erreichbaren Knoten durchgeführt. Alle somit zum Baum neu hinzugefügten Knoten sind durch K besser erreichbar und können nun selbst zur Neuverknüpfung des Baumes beitragen. Somit wird der Algorithmus des Neuverknüpfens rekursiv auf alle im vorherigen Schritt durch das Rewiring neu hinzugefügten Knotens angewendet. \\
 Der Vorteil dieses Mechanismus ist, dass mögliche Optimierungen schnell durch den Baum wandern und keine Knoten ungültig werden. Außerdem müssen nicht so viele randomisierte Punkte erzeut werden, was der Laufzeit zu Gute kommt. Nachteile sind allerdings eine geringere Anzahl von räumlich verteilten Punkten (es liegen Punkte "übereinander"). Zudem kann dieses Verfahren viel Zeit beanspruchen, ohne viel Effekt zu haben, wenn besonders viele Punkte im Baum existieren und Bereiche weit abseits der Zielregion neu verknüpft werden.
@@ -156,9 +169,9 @@ Der Vorteil dieses Mechanismus ist, dass mögliche Optimierungen schnell durch d
 
 \subsection{Datenstruktur}
 RRT* hat eine amortisierte Laufzeit von O(n log(n)). Um diese Laufzeit auch in der Praxis zu erreichen, muss auf spezielle Datenstrukturen zurückgegriffen werden. Insbesondere müssen mehrfach sowohl der nächste Knoten als auch die nächsten innerhalb eines Radius ermittelt werden. Für die sogenannte \textit{k-nearest neighbour} Suche und \textit{radius k-nearest neighbour} existieren bereits viele wissenschaftliche Untersuchungen und auch empfohlene Datenstrukturen, wie zum Beispiel k-d-Bäume \citep{Bentley75}. Leider benötigt der RRT* Algorithmus eine dynamische Datenstruktur, da Punkte erst nach und nach hinzugefügt werden. Eine weitere Einschränkung waren fehlende Implementierungen, die auf die Anwendungsfälle von RRT* zugeschnitten waren. \\
+TODO Gitter wird nicht verwendet, sondern einfache Liste. Vllt Kombination aus beidem?
 Aufgrund dieser Einschränkungen wurde keine komplizierte, unter Umständen bessere Datenstruktur gewählt. Stattdessen wurde ein einfaches Gitter implementiert, deren Achsen die x- und y-Werte des einzufügenden Punktes repräsentierte. Dadurch fallen Punkte, die nah beeinander sind, in die gleiche oder benachbarte Zellen. Je nach Wahl der Größe der Zellen müssen nur die Knoten der Zelle selbst und der Nachbarzellen überprüft werden. Ein weiterer Vorteil des Gitters ist das schnelle Einfügen eines Knotens: Dadurch dass das Gitter statisch bleibt können Arrays als Rahmen gewählt werden und die Laufzeit zum Einfügen von Knoten liegt bei O(1).\\
 Solange allerdings noch sehr wenige Knoten sich im Gitter befinden, muss unter Umständen das gesamte Gitter nach Nachbarn abgesucht werden, was die Laufzeit stark verschlechtert. Innerhalb einer Zelle sind die Knoten in einer Liste gespeichert. Sollten sehr viele Knoten in eine Zelle fallen, dauert das Durchsuchen dieser Zelle sehr lange.
-
 
 
 \subsection{Dokumentation der Durchführung und entstandener Artefakte}
@@ -166,22 +179,22 @@ Solange allerdings noch sehr wenige Knoten sich im Gitter befinden, muss unter U
 Anfangs wurde Python code programmiert. Dieser war weder objektorientiert noch besonders schnell, obwohl mit numpy eine für Vektorberechnungen optimierte Bibliothek benutzt wurde. Dann wurde - aufgrund von Performancegründen - zur Programmiersprache C++ gewechselt. Dabei wurde auch Objektorientierung eingeführt, um die einzelnen Knoten in ihrer Komplexität besser handhaben zu können. Dies verschlang sehr viel Zeit.\\
 Als Datenstruktur wurde, sowohl eine Liste als auch ein Gitter verwendet. Zur Geschwindigkeitsoptimierungen wurde die Header-Bibliothek Eigen 3 benutzt. [TODO mehr schreiben wenn was funktioniert]
 \subsection{Beschreibung besonderer Schwierigkeiten und wie diese umgangen wurden}
-[TODO] evtl in nächstes/übernächstes kapitel. Lernfortschritte deutlich machen/ was habe ich aus den jeweiligen Problemen gelernt?
+[TODO] evtl in nächstes/übernächstes kapitel. Lernfortschritte deutlich machen/ was habe ich aus den jeweiligen Problemen gelernt? Alles noch ergänzen...
 
 \subsubsection{Schwierigkeiten beim Einbinden bereits bestehender Architekturen}
- - Einbindung Eigen
- - Eclipse
- Erkenntnis, das eine mächtige Entwicklungsumgebung auch ein Stein am Fuß sein, mehr eine Behinderung als Hilfe wenn nicht richtig eingebunden, aber auch verweis auf zahlreiche vorteile (debuggen, schnell zwischen fkt hin und her springen)
- - visual Gps
- - fub controller
+ - Einbindung Eigen Bibliothek (ging von der Schwierigkeit her) \\
+ - Eclipse (hat viele Nerven gekostet, 4-6 Tage insgesamt zum Funktionieren mit c++11 und allen ROS-Abhängigkeiten\\
+ Erkenntnis, das eine mächtige Entwicklungsumgebung auch ein Stein am Fuß sein, mehr eine Behinderung als Hilfe wenn nicht richtig eingebunden, aber auch verweis auf zahlreiche vorteile (debuggen, schnell zwischen fkt hin und her springen)\\
+ - visual Gps: Lampen wurden nicht richtig erkannt, viele Hardgecodete Konstanten, funktioniert nicht -> 3 Tage verschwendet\\
+ - fub controller: Hart, herauszufinden was in welchem Format dieser controller braucht (z.B. Timestamp), kaum Doku. Und z.T. falsche Konstanten? (Umrechnung der Geschwindigkeit von m/s zur Motorgecshwindigkeit)
  
 \subsubsection{Schwierigkeiten beim Programmieren und Kreieren eigener Strukturen}
-- winkel und flüchtigkeitsfehler
-- Programmieren in einer unbekannten programmiersprache, Zeiteinschätzungen
+- winkel und flüchtigkeitsfehler \\
+- Programmieren in einer unbekannten programmiersprache (c++), Zeiteinschätzungen \\
 \subsubsection{Schwierigkeiten bei Tests und Übertragung auf das Auto}
 	Hehe das kommt noch
 \subsubsection{Tests und Testdatensätze/Szenarien für die Software)}
 Test auf ....[TODO] wenns läuft...
 \subsubsection{Korrektheitsbeweise}
 \subsection{(Evaluation - nur wenn ich dafür Zeit habe)}
-vllt rechtfertigung dass ich zu faul war/ nix geschafft habe??
+vllt rechtfertigung warum ich zu faul war/ nix geschafft habe??
