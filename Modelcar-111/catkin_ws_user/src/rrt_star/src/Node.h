@@ -25,8 +25,6 @@ class Node {
 		Val validation;
 		//costs to get to that node from parent, advanced function
 		double cost;
-		//eukl. cost from start to node
-		double cost_to_node;
 		//absolut euklid coordinates in m
 		Vector2d coordinates;
 
@@ -60,14 +58,17 @@ class Node {
 
 		//Helper Functions
 		auto calculate_dir_vector(Node& node, Vector2d&dir) ->bool;
-		auto calculate_yaw_cost(Node&parent,Vector2d&dir_new, double &tmp_yaw, double & new_cost, double&eukl_cost) ->void;
+	auto calculate_yaw_cost(Node&parent, Vector2d&dir_new, double &tmp_yaw,
+			double & new_cost) ->void;
 		auto calculate_yaw_and_cost()->void;
 
 		auto calculate_yaw_from_vec(Vector2d& vec) const->double;
 		auto calculate_cost()->bool;
 		auto calculate_direction(Vector2d&direct) const ->void;
 
-		auto project_to_parent(Node&parent)->bool;
+	auto project_to_parent(Node&parent)->bool;
+	auto Node::simple_project()->double;
+
 
 		//Check validity
 		auto not_to_near(Node& parent) const->bool;

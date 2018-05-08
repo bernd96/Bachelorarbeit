@@ -24,7 +24,7 @@ const double RANGE = 12.0;
 const double UPPER_BOUND = 10;
 const double LOWER_BOUND=-2;
 // Zielbereich,(x,y,Ausdehnung Richtung X, Ausdehnung Richtung Y)
-const Eigen::Vector4d GOAL_AREA(-6, -6, 1, 1);
+const Eigen::Vector4d GOAL_AREA(6, 6, 1, 1);
 
 //Konstanten für die Datenstruktur:
 const double CELL_SIZE = 1;

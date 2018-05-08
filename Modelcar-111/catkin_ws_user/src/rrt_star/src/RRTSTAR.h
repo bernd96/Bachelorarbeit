@@ -14,6 +14,8 @@
 auto rrt_star(Node& start,
 		std::list<Node>& raw_nodes,
 		fub_trajectory_msgs::Trajectory&traj)->bool;
+auto rrt_star_euklid(Node& start, std::list<Node>& raw_nodes,
+		fub_trajectory_msgs::Trajectory&traj)->bool;
 auto build_trajectory(fub_trajectory_msgs::Trajectory& traj,
 		Node* node)->void;
 //um zwischendurch die Odometrie zu bekommen

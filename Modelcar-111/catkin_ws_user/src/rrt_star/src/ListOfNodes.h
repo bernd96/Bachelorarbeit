@@ -20,7 +20,8 @@ public:
 	auto find_nearest_neighbour(Node&node)->bool;
 	auto find_nearest_parent(Node&node)->bool;
 	auto radius_find_nearest_neighbours(Node&node,
-			std::list<Node>& neighbours)->bool;
+			std::list<Node>& neighbours,
+			std::vector<Node>&rewire_nodes)->bool;
 
 	auto rewire(Node&node)->void;
 	ListOfNodes(int size, double cellsize);
@@ -32,6 +33,7 @@ public:
 	bool find_nearest_neighbour_easy(Node&node);
 	bool rewire_easy(Node&node);
 	bool find_nearest_parent_easy(Node&node);
+	bool rewire_euklid(Node&node);
 };
 
 

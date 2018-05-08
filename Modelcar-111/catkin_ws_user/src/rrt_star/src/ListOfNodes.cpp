@@ -110,10 +110,10 @@ ListOfNodes::ListOfNodes(int size, double c) {
 //}
 
 
-//auto ListOfNodes::radius_find_nearest_neighbours(Node& node,
-//		std::list<Node>& neighbours) ->bool {
-////deprecated
+//auto ListOfNodes:: (Node& node,
+//		std::list<Node>& neighbours, std::vector<Node>&rewire_nodes) ->bool {
 //	std::cout << "Entering radius find_nearest_neighbour..." << std::endl;
+//	//highly deprecated
 //	/*
 //	 * Find nearest reachable Neighbours
 //	 * which has better costs through node
@@ -121,55 +121,29 @@ ListOfNodes::ListOfNodes(int size, double c) {
 //	//if radius bigger then cellsize, we have to search at least 3 times (5x5)
 ////	std::cout << "Entering radius_find_nearest_neighbour..." << std::endl;
 //
-//	int number_of_rounds = (RADIUS / cell_size + 0.9999);
-//	int x_val = (node.get_coordinates())[0] / cell_size;
-//	int y_val = (node.get_coordinates())[1] / cell_size;
 //	bool found = false;
 //	double cost_new;
 //	double cost_old;
 //	Eigen::Vector2d dir;
-//	for (int round = 0; round < number_of_rounds && round < grid.size();
-//			round++) {
-//		for (int j = 0; j < 1 + 2 * round; ++j) {
-//
-//			//check if entry could be out of bounds:
-//			//bottom side out of bound
-//			while ((y_val - round + j < 0)) {
-//				j++;
+//	for (auto &iter : easy_list) {
+//		if (!(iter.equals(node))) {
+//			//Bessere Datenstruktur für schnellere Suche wäre cool
+//			iter.calculate_dir_vector(node, dir);
+//			dist = dir.norm();
+//			if (dist < RADIUS) {
+//				iter.calculate_yaw_cost(node,dir, new_yaw, new_cost);
+//				cost_old = iter.get_cost();
+//				if (new_cost < cost_old && iter.not_to_near(node)) {
+//					iter.set_parent(node);
+//					iter.set_dir_vector();
+//					iter.set_yaw(new_yaw);
+//					iter.set_cost(new_cost);
+//					found = true;
+//				}
 //			}
-//			//top side out of bound
-//			while ((y_val - round + j >= grid[x_val].size())) {
-//				break;
-//			}
-//			for (int i = 0; i < 1 + 2 * round; ++i) {
-//				//left side out of bound&& node.not_to_near(iter)
-//				//jump over already searched cells
-//				while ((x_val - round + i < 0)
-//						|| ((j != 0 && j < 2 * round)
-//								&& (i != 0 && i < 2 * round))) {
-//					i++;
-//				}
-//				//right side out of bound, avoid infinite loops
-//				while ((x_val - round + i >= grid.size())) {
-//					break;
-//				}
 //
-//				//searches grid entry for matches
-//				for (auto &iter : grid[x_val + i - round][y_val + j - round]) {
-//					if (!(iter.equals(node))) {
-//						iter.calculate_dir_vector(node, dir);
-//						cost_new = node.get_cost() + dir.norm();
-//						cost_old = iter.get_cost();
-//						if (cost_new < cost_old && iter.is_reachable(node, dir)
-//								&& iter.not_to_near(node)) {
-//							neighbours.push_back(iter);
-//							found = true;
-//						}
-//					}
-//				}
 //			}
 //		}
-//	}
 //	return found;
 //}
 
@@ -301,11 +275,13 @@ bool ListOfNodes::find_nearest_neighbour_easy(Node& node) {
 	for (auto &iter : easy_list) {
 		if (!(iter.equals(node))) {
 			node.calculate_dir_vector(iter, dir);
-			tmp_dist = dir.norm();
-			if (tmp_dist < min_distance) {
-				min_distance = tmp_dist;
-				node.set_parent(iter);
-				found = true;
+			if (dir[1] < min_distance && dir[0] < min_distance) {
+				tmp_dist = dir.norm();
+				if (tmp_dist < min_distance) {
+					min_distance = tmp_dist;
+					node.set_parent(iter);
+					found = true;
+				}
 			}
 		}
 	}
@@ -324,13 +300,15 @@ bool ListOfNodes::find_nearest_parent_easy(Node& node) {
 	for (auto &iter : easy_list) {
 		if (!(iter.equals(node))) {
 			node.calculate_dir_vector(iter, dir);
-			node.calculate_yaw_cost(iter, dir,new_yaw,new_cost);
-			if (new_cost < min_cost) {
-				min_cost = new_cost;
-				node.set_parent(iter);
-				node.set_yaw(new_yaw);
-				node.set_cost(new_cost);
-				found = true;
+			if (dir.norm < min_cost && node.not_to_near(iter)) {
+				node.calculate_yaw_cost(iter, dir, new_yaw, new_cost);
+				if (new_cost < min_cost) {
+					min_cost = new_cost;
+					node.set_parent(iter);
+					node.set_yaw(new_yaw);
+					node.set_cost(new_cost + iter.get_cost());
+					found = true;
+				}
 			}
 		}
 	}
@@ -343,27 +321,72 @@ bool ListOfNodes::find_nearest_parent_easy(Node& node) {
 bool ListOfNodes::rewire_easy(Node& node) {
 	Vector2d dir;
 	bool found = false;
-	double cost_new;
-	double cost_old;
-	double dist;
+	double old_cost;
 	double new_yaw;
 	double new_cost;
+	Node* best_node_ptr = nullptr;
+	Node* actual_node_ptr = &node;
+	double cost_reduction = 0;
+	//laufzeit n*logn
+	do {
+		found = false;
+		for (auto &iter : easy_list) {
+			if (!(iter.equals(*actual_node_ptr))) {
+				iter.calculate_dir_vector(*actual_node_ptr, dir);
+				//Rewire in Quadrat um Laufzeit zu sparen
+				if (dir[1] < RADIUS && dir[0] < RADIUS) {
+					iter.calculate_yaw_cost(*actual_node_ptr, dir, new_yaw,
+								new_cost);
+					double cost_sum = new_cost + actual_node_ptr->get_cost();
+					old_cost = iter.get_cost();
+					if (cost_sum < old_cost
+								&& iter.not_to_near(*actual_node_ptr)) {
+							easy_list.emplace_back(iter.get_coordinates(),
+									new_yaw,
+								*actual_node_ptr, dir, Val::valid, cost_sum);
+							found = true;
+							if (cost_reduction < old_cost - new_cost) {
+								cost_reduction = old_cost - new_cost;
+								best_node_ptr = &easy_list.back();
+							}
+						}
+					}
+
+			}
+		}
+		if (best_node_ptr != nullptr) {
+			cost_reduction = 0;
+			actual_node_ptr = best_node_ptr;
+			best_node_ptr = nullptr;
+
+		}
+	} while (found);
+
+	return found;
+}
+bool ListOfNodes::rewire_euklid(Node& node) {
+	Vector2d dir;
+	bool found = false;
+	double cost;
+	double cost_new;
+	double norm;
 	for (auto &iter : easy_list) {
 		if (!(iter.equals(node))) {
 			//Bessere Datenstruktur für schnellere Suche wäre cool
 			iter.calculate_dir_vector(node, dir);
-			dist = dir.norm();
-			if (dist < RADIUS) {
-				iter.calculate_yaw_cost(node,dir, new_yaw, new_cost);
-				cost_old = iter.get_cost();
-				if (new_cost < cost_old && iter.not_to_near(node)) {
-					iter.set_parent(node);
-					iter.set_dir_vector();
-					iter.set_yaw(new_yaw);
-					iter.set_cost(new_cost);
-					found = true;
-			}
+			if (dir[1] < RADIUS && dir[0] < RADIUS) {
+				norm = dir.norm();
+				if (norm < RADIUS) {
+					cost = iter.get_cost();
+					cost_new = norm + node.get_cost();
+					if (cost_new < cost) {
+						iter.set_parent(node);
+						iter.set_dir_vector();
+						iter.set_cost(cost_new);
+						found = true;
+					}
 				}
+			}
 
 		}
 	}

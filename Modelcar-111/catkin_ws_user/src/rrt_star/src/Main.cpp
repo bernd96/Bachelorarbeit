@@ -39,7 +39,6 @@ int main(int argc, char **argv) {
 	struct timespec mytime;
 	clock_gettime(CLOCK_MONOTONIC, &mytime);
 	std::list<Node> raw_nodes;
-
 	//create list of raw nodes for later use
 	for (int i = 0; i < NUMBER_OF_NODES; ++i) {
 		Vector2d position(0, 0);

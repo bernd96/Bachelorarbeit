@@ -24,12 +24,8 @@ auto build_trajectory(fub_trajectory_msgs::Trajectory& trajectory,
 	traject_to_goal.push_back(goal);
 	Node* tmp = goal->get_parent_pointer();
 	for (int j = 0; tmp != nullptr; ++j) {
-
 		traject_to_goal.push_front(tmp);
 		tmp = (*tmp).get_parent_pointer();
-
-
-
 	}
 		//first try for duration: eukl. distance
 	double duration = 0;
@@ -70,7 +66,67 @@ auto rrt_star(Node& start,
 	std::random_device rn;
 	std::mt19937 engine(rn());
 	std::uniform_real_distribution<double> randoms(LOWER_BOUND, UPPER_BOUND);
-//TODO easy
+	list_of_nodes.add_node_easy(start);
+	int rewire_counter = 0;
+
+	Vector2d coor;
+	Node* goal = nullptr;
+
+	for (auto &node : raw_nodes) {
+		//randoms efficient?
+		double a = randoms(engine);
+		double b = randoms(engine);
+		coor << a, b;
+		//	std::cout << "________________________" << std::endl;
+		node.set_coordinates(coor);
+
+		//function find nearest implicit set parent
+		if (!list_of_nodes.find_nearest_neighbour_easy(node)) {
+			//std::cout << "No nearest neighbour node found..." << std::endl;
+			continue;
+		}
+		node.project_to_parent(*node.get_parent_pointer());
+		//TODO  real validation check
+		node.set_validation(Val::valid);
+		if (node.get_validation() != Val::valid) {
+			continue;
+		}
+		if (!list_of_nodes.find_nearest_parent_easy(node)) {
+			std::cout << "Cant find nearest_parent::Node to near now"
+					<< std::endl;
+			continue;
+		}
+		int counter;
+
+		list_of_nodes.add_node_easy(node);
+
+		if (node.reached_goal()) {
+					if (goal != nullptr) {
+				if (node.get_cost() < goal->get_cost()) {
+						goal = &node;
+					std::cout << "Better goal node found" << std::endl;
+
+						}
+					} else {
+						goal = &node;
+					}
+		}
+		list_of_nodes.rewire_easy(node);
+
+	}		//for loop
+	build_trajectory(trajectory, goal);
+	if (goal == nullptr) {
+		return false;
+	}
+	return true;
+}
+auto rrt_star_euklid(Node& start, std::list<Node>&raw_nodes,
+		fub_trajectory_msgs::Trajectory& trajectory)->bool {
+	ListOfNodes list_of_nodes(SIZE, CELL_SIZE);
+
+	std::random_device rn;
+	std::mt19937 engine(rn());
+	std::uniform_real_distribution<double> randoms(LOWER_BOUND, UPPER_BOUND);
 	list_of_nodes.add_node_easy(start);
 
 	Vector2d coor;
@@ -85,40 +141,31 @@ auto rrt_star(Node& start,
 		node.set_coordinates(coor);
 
 		//function find nearest implicit set parent
-		//TODO easy
 		if (!list_of_nodes.find_nearest_neighbour_easy(node)) {
 			//std::cout << "No nearest neighbour node found..." << std::endl;
 			continue;
 		}
-		node.project_to_parent(*node.get_parent_pointer());
+		double costs = node.simple_project();
+		node.set_cost(costs);
 		//TODO  real validation check
 		node.set_validation(Val::valid);
 		if (node.get_validation() != Val::valid) {
 			continue;
 		}
-		//TODO easy
-		if (!list_of_nodes.find_nearest_parent_easy(node)) {
-			std::cout << "Cant find nearest_parent::Node to near now"
-					<< std::endl;
-			continue;
-		}
-		//TODO easy
 		list_of_nodes.add_node_easy(node);
 
-		//TODO Verhalten wenn Ziel erreicht
 		if (node.reached_goal()) {
-					if (goal != nullptr) {
+			if (goal != nullptr) {
 				if (node.get_cost() < goal->get_cost()) {
-						goal = &node;
+					goal = &node;
 					std::cout << "Better goal node found" << std::endl;
 
-						}
-					} else {
-						goal = &node;
-					}
+				}
+			} else {
+				goal = &node;
+			}
 		}
-		//TODO easy
-		list_of_nodes.rewire_easy(node);
+		list_of_nodes.rewire_euklid(node);
 
 	}		//for loop
 	build_trajectory(trajectory, goal);
