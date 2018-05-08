@@ -129,7 +129,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/odom_validation/lib;/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/lib;/home/mi/besahre/seat/catkin_ws/devel/lib;/home/mi/besahre/seat/model_car_3/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+    foreach(path /home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/odom_validation/lib;/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/lib;/opt/ros/kinetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

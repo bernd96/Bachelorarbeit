@@ -18,6 +18,7 @@ auto build_trajectory(fub_trajectory_msgs::Trajectory& trajectory,
 	 */
 	std::list<Node*> traject_to_goal;
 	if (goal == nullptr) {
+		std::cout<<"no goal found"<<std::endl;
 		return;
 	}
 	traject_to_goal.push_back(goal);
@@ -54,6 +55,7 @@ auto build_trajectory(fub_trajectory_msgs::Trajectory& trajectory,
 			ros::Duration dur(duration);
 			traj_point.time_from_start = dur;
 		std::cout << traj_point.time_from_start << std::endl;
+		iter->print_node();
 			trajectory.trajectory.push_back(traj_point);
 	
 	}
@@ -67,7 +69,7 @@ auto rrt_star(Node& start,
 
 	std::random_device rn;
 	std::mt19937 engine(rn());
-	std::uniform_real_distribution<double> randoms(0, -RANGE);
+	std::uniform_real_distribution<double> randoms(LOWER_BOUND, UPPER_BOUND);
 //TODO easy
 	list_of_nodes.add_node_easy(start);
 
@@ -100,8 +102,6 @@ auto rrt_star(Node& start,
 					<< std::endl;
 			continue;
 		}
-		node.calculate_yaw_and_cost();
-
 		//TODO easy
 		list_of_nodes.add_node_easy(node);
 

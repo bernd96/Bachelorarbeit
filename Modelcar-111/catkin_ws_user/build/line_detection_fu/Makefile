@@ -439,6 +439,19 @@ pcl_msgs_generate_messages_cpp/fast:
 .PHONY : pcl_msgs_generate_messages_cpp/fast
 
 #=============================================================================
+# Target rules for targets named nodelet_topic_tools_gencfg
+
+# Build rule for target.
+nodelet_topic_tools_gencfg: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 nodelet_topic_tools_gencfg
+.PHONY : nodelet_topic_tools_gencfg
+
+# fast build rule for target.
+nodelet_topic_tools_gencfg/fast:
+	$(MAKE) -f CMakeFiles/nodelet_topic_tools_gencfg.dir/build.make CMakeFiles/nodelet_topic_tools_gencfg.dir/build
+.PHONY : nodelet_topic_tools_gencfg/fast
+
+#=============================================================================
 # Target rules for targets named sensor_msgs_generate_messages_cpp
 
 # Build rule for target.
@@ -1461,6 +1474,7 @@ help:
 	@echo "... pcl_msgs_generate_messages_py"
 	@echo "... pcl_msgs_generate_messages_lisp"
 	@echo "... pcl_msgs_generate_messages_cpp"
+	@echo "... nodelet_topic_tools_gencfg"
 	@echo "... sensor_msgs_generate_messages_cpp"
 	@echo "... std_srvs_generate_messages_py"
 	@echo "... std_msgs_generate_messages_eus"

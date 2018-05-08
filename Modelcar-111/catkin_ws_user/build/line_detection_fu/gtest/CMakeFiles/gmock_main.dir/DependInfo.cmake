@@ -31,8 +31,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/vtk-6.2"
-  "/usr/include/freetype2"
-  "/usr/include/x86_64-linux-gnu/freetype2"
+  "/usr/include/python2.7"
   "/usr/include/x86_64-linux-gnu"
   "/usr/include/jsoncpp"
   "/usr/include/hdf5/openmpi"
@@ -41,8 +40,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/lib/openmpi/include"
   "/usr/lib/openmpi/include/openmpi"
   "/usr/include/libxml2"
+  "/usr/include/freetype2"
+  "/usr/include/x86_64-linux-gnu/freetype2"
   "/usr/include/tcl"
-  "/usr/include/python2.7"
   "/usr/src/gmock/include"
   "/usr/src/gmock"
   "/usr/src/gtest/include"

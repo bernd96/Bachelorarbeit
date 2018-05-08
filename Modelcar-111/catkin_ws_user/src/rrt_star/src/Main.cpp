@@ -80,7 +80,7 @@ int main(int argc, char **argv) {
 		ros::Rate loop_rate(4);
 		ros::Time now = ros::Time::now();
 		trajectory.header.stamp = now;
-		trajectory.header.frame_id = "odom";
+		trajectory.header.frame_id = "map";
 		trajectory.child_frame_id = "base_link";
 		traj.publish(trajectory);
 		ros::spinOnce();

@@ -1,0 +1,8 @@
+[ 25%] [34m[1mAutomatic moc for target fub_trajectory_msgs_rviz_plugin[0m
+[34m[1mGenerating moc_trajectory_msg_display.cpp[0m
+[ 25%] Built target fub_trajectory_msgs_rviz_plugin_automoc
+[35m[1mScanning dependencies of target fub_trajectory_msgs_rviz_plugin[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/fub_trajectory_msgs_rviz_plugin.dir/src/trajectory_msg_display.cpp.o[0m
+[ 75%] [32mBuilding CXX object CMakeFiles/fub_trajectory_msgs_rviz_plugin.dir/fub_trajectory_msgs_rviz_plugin_automoc.cpp.o[0m
+[100%] [32m[1mLinking CXX shared library /home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_trajectory_msgs_rviz_plugin/lib/libfub_trajectory_msgs_rviz_plugin.so[0m
+[100%] Built target fub_trajectory_msgs_rviz_plugin

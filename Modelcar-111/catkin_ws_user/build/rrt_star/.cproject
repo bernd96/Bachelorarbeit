@@ -13,12 +13,34 @@
 				<project-mappings/>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="scannerConfiguration">
+				<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
+				<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
+					<buildOutputProvider>
+						<openAction enabled="true" filePath=""/>
+						<parser enabled="true"/>
+					</buildOutputProvider>
+					<scannerInfoProvider id="specsFile">
+						<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="/usr/bin/cc" useDefault="true"/>
+						<parser enabled="true"/>
+					</scannerInfoProvider>
+				</profile>
+				<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile">
+					<buildOutputProvider>
+						<openAction enabled="true" filePath=""/>
+						<parser enabled="true"/>
+					</buildOutputProvider>
+					<scannerInfoProvider id="makefileGenerator">
+						<runAction arguments="-f ${project_name}_scd.mk" command="/usr/bin/make" useDefault="true"/>
+						<parser enabled="true"/>
+					</scannerInfoProvider>
+				</profile>
+			</storageModule>
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="rrt_star.null.1" name="rrt_star"/>
 	</storageModule>
-	<storageModule moduleId="refreshScope"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
 		<buildTargets>
 			<target name=": edit_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
@@ -674,30 +696,6 @@
 			</target>
 		</buildTargets>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
-		<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
-			<buildOutputProvider>
-				<openAction enabled="true" filePath=""/>
-				<parser enabled="true"/>
-			</buildOutputProvider>
-			<scannerInfoProvider id="specsFile">
-				<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file} -std=c++11" command="/usr/bin/cc" useDefault="true"/>
-				<parser enabled="true"/>
-			</scannerInfoProvider>
-		</profile>
-		<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile">
-			<buildOutputProvider>
-				<openAction enabled="true" filePath=""/>
-				<parser enabled="true"/>
-			</buildOutputProvider>
-			<scannerInfoProvider id="makefileGenerator">
-				<runAction arguments="-f ${project_name}_scd.mk" command="/usr/bin/make" useDefault="true"/>
-				<parser enabled="true"/>
-			</scannerInfoProvider>
-		</profile>
-	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.core.pathentry">
 		<pathentry kind="mac" name="ROS_PACKAGE_NAME" path="" value="&quot;rrt_star&quot;"/>
 		<pathentry kind="mac" name="ROSCONSOLE_BACKEND_LOG4CXX" path="" value=""/>
@@ -963,11 +961,12 @@
 		<pathentry kind="mac" name="__GLIBCXX_BITSIZE_INT_N_0" path="" value="128"/>
 		<pathentry kind="mac" name="__GNUC_GNU_INLINE__" path="" value="1"/>
 		<pathentry kind="mac" name="_GNU_SOURCE" path="" value="1"/>
-		<pathentry kind="mac" name="__GXX_EXPERIMENTAL_CXX0X__" path="" value=""/>
 		<pathentry include="/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/devel/.private/fub_trajectory_msgs/include" kind="inc" path="" system="true"/>
 		<pathentry include="/opt/ros/kinetic/include" kind="inc" path="" system="true"/>
 		<pathentry include="/opt/ros/kinetic/include/xmlrpcpp" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/src/gmock/include" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/src/gmock" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/src/gtest/include" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/src/gtest" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/lib/gcc/x86_64-linux-gnu/5/include" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/local/include" kind="inc" path="" system="true"/>
@@ -977,8 +976,9 @@
 		<pathentry include="/usr/include/c++/5" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/include/x86_64-linux-gnu/c++/5" kind="inc" path="" system="true"/>
 		<pathentry include="/usr/include/c++/5/backward" kind="inc" path="" system="true"/>
+		<pathentry include="/usr/include/eigen3" kind="inc" path="" system="true"/>
 		<pathentry kind="src" path="[Source directory]"/>
 		<pathentry excluding="[Source directory]/|**/CMakeFiles/" kind="out" path=""/>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 </cproject>

@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>fub_remap_joystick</name>
-	<comment />
+	<name>fub_remap_joystick-Debug@fub_remap_joystick</name>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -30,7 +31,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.command</key>
-					<value>/bin/bash</value>
+					<value>/usr/bin/make</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.contents</key>
@@ -38,11 +39,11 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.target.inc</key>
-					<value>-c "catkin build --force-color --status-rate 1 `basename ${project_loc}`"</value>
+					<value>all</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.arguments</key>
-					<value />
+					<value>-j8</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
@@ -54,11 +55,11 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.environment</key>
-					<value>VERBOSE=1|ROS_ROOT=/opt/ros/kinetic/share/ros|ROS_PACKAGE_PATH=/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/color_plugin:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/fub_cmake:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/fub_trajectory_msgs:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/fub_trajectory_msgs_rviz_plugin:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/road_description:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_control:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_controller:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_description:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_gazebo:/home/mi/besahre/seat/catkin_ws/src/seat_car_simulator/seat_car_simulator:/home/mi/besahre/seat/model_car_3/catkin_ws/src/fub_modelcar_tools:/home/mi/besahre/seat/model_car_3/catkin_ws/src/odometry:/opt/ros/kinetic/share|PYTHONPATH=/home/mi/besahre/seat/catkin_ws/devel/lib/python2.7/dist-packages:/opt/ros/kinetic/lib/python2.7/dist-packages|PATH=/opt/ros/kinetic/bin:/home/mi/besahre/bin:/home/mi/besahre/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin|LD_LIBRARY_PATH=/home/mi/besahre/seat/catkin_ws/devel/lib:/home/mi/besahre/seat/model_car_3/catkin_ws/devel/lib:/opt/ros/kinetic/lib|PKG_CONFIG_PATH=/home/mi/besahre/seat/catkin_ws/devel/lib/pkgconfig:/home/mi/besahre/seat/model_car_3/catkin_ws/devel/lib/pkgconfig:/opt/ros/kinetic/lib/pkgconfig|CMAKE_PREFIX_PATH=/home/mi/besahre/seat/catkin_ws/devel:/home/mi/besahre/seat/model_car_3/catkin_ws/devel:/opt/ros/kinetic|</value>
+					<value>VERBOSE=1|CMAKE_NO_VERBOSE=1|</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.enableFullBuild</key>
-					<value>false</value>
+					<value>true</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.target.auto</key>
@@ -70,7 +71,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.target.clean</key>
-					<value>-c "catkin --force-color clean `basename ${project_loc}`;${workspace_loc:/}/bin/make-eclipse-projects.sh `basename ${project_loc}`"</value>
+					<value>clean</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.fullBuildTarget</key>
@@ -78,11 +79,11 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value />
+					<value></value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.location</key>
-					<value>${workspace_loc:/}</value>
+					<value>/home/mi/besahre/Documents/Bachelorarbeit/Modelcar-111/catkin_ws_user/build/fub_remap_joystick</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.autoBuildTarget</key>

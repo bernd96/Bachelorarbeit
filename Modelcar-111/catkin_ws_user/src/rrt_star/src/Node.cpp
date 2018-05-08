@@ -15,58 +15,48 @@
 using namespace Eigen;
 
 
-auto Node::calculate_yaw_and_cost()->void {
-	//calculate AND SETS yaw and costs
-	//TODO check berechnung wenn ausgeschlafen
-	Vector2d dir_par;
-	Vector2d dir_new;
-	//TODO write test has to be null!!
-	double par_yaw = parent->get_yaw();
-	dir_new = get_dir_vector().normalized();
-	parent->calculate_direction(dir_par);
-	double alpha = acos(dir_par.dot(dir_new));
-	yaw = fmod((2 * alpha + par_yaw), (2 * M_PI));
-	double eukl_cost = dir_vector.norm();
-	//mehrkosten: Eukl bei gerader Strecke, 7* euklid bei 360°
-	double real_cost = parent->get_cost()
-			+ eukl_cost * (1 + (2 * M_PI - alpha));
-	cost = real_cost;
-}
-auto Node::calculate_cost(const Node&parent) const->double {
+auto Node::calculate_yaw_cost(Node&parent, Vector2d&dir_new,double& new_yaw, double & new_cost, double& eukl_cost) ->void {
 	//calculate the costs from parent to this without changing anything
+	//call when *this dont has a parentpointer
+	//dir_new is direction vector from parent to node
 	Vector2d dir_par;
-	Vector2d dir_new;
-	calculate_direction(dir_new);
+
+	double par_yaw = parent.get_yaw();
+	eukl_cost = dir_new.norm();
+	dir_new.normalize();
 	parent.calculate_direction(dir_par);
-	double alpha = acos(dir_par.dot(dir_new));
-	double eukl_cost = dir_vector.norm();
+
+	double alpha = M_PI-acos(dir_par.dot(dir_new));
+
+	//new_yaw: yaw of node if parent is the parent
+	new_yaw=fmod((2 * alpha + par_yaw), (2 * M_PI));
+
 	//mehrkosten: Eukl bei gerader Strecke, 7* euklid bei 360°
-	double real_cost = parent.get_cost()
-			+ eukl_cost * (1 + (2 * M_PI - alpha));
-	return real_cost;
+	//Durch Verschiebung der Bedeutung von Alpha und der Konstante 1 variationen möglich
+	new_cost = eukl_cost * (1 + (2*M_PI - 2*alpha));
 }
 
 auto Node::calculate_direction(Vector2d&direct) const->void {
-	//Einheitskreis: normalisiert
+	//Put normalised direction vector of own yaw into Vector direct
 	direct[0] = cos(yaw);
 	direct[1] = sin(yaw);
 }
-auto Node::calculate_yaw_from_vec(Vector2d& vec) const->double {
-	//deprecated
-
-	//precondition: vec has to be normalized
-	Vector2d dir = vec;
-	double ret_yaw;
-	//y is positive, yaw from [0-M_PI)
-	if (dir[1] > 0) {
-		ret_yaw = std::acos(dir[0]);
-	} else {
-		//y is negative, yaw from [M_PI-2*M_PI
-		ret_yaw = 2 * M_PI - std::acos(dir[0]);
-	}
-	
-	return ret_yaw;
-}
+//auto Node::calculate_yaw_from_vec(Vector2d& vec) const->double {
+//	//deprecated
+//
+//	//precondition: vec has to be normalized
+//	Vector2d dir = vec;
+//	double ret_yaw;
+//	//y is positive, yaw from [0-M_PI)
+//	if (dir[1] > 0) {
+//		ret_yaw = std::acos(dir[0]);
+//	} else {
+//		//y is negative, yaw from [M_PI-2*M_PI
+//		ret_yaw = 2 * M_PI - std::acos(dir[0]);
+//	}
+//
+//	return ret_yaw;
+//}
 auto Node::calculate_dir_vector(Node& node, Vector2d& dir) ->bool {
 	//Direction Vector from Node to *this
 	dir = this->get_coordinates_fast() - node.get_coordinates_fast();
@@ -77,22 +67,23 @@ auto Node::calculate_dir_vector(Node& node, Vector2d& dir) ->bool {
 	 }*/
 	return true;
 }
-auto Node::calculate_cost()->bool {
-	//deprecated
-	//Precondition: Node is complete, e.g. correct yaw, coor, parent etc.
-	double eukl_cost = dir_vector.norm();
-	double yaw_diff = std::abs(double(parent->get_yaw() - yaw));
-	//yaw flips from 2Pi to 0, diff from PI/4 to 7/4 *PI is PI/2
-	if (yaw_diff > M_PI) {
-		yaw_diff = 2 * M_PI - yaw_diff;
-	}
-	cost = parent->get_cost() + eukl_cost * (1 + yaw_diff);
-	if (cost != 0) {
-		return true;
-	} else {
-		return false;
-	}
-}
+//auto Node::calculate_cost()->bool {
+//	//deprecated
+//	//Precondition: Node is complete, e.g. correct yaw, coor, parent etc.
+//	double eukl_cost = dir_vector.norm();
+//	double yaw_diff = std::abs(double(parent->get_yaw() - yaw));
+//	//yaw flips from 2Pi to 0, diff from PI/4 to 7/4 *PI is PI/2
+//	if (yaw_diff > M_PI) {
+//		yaw_diff = 2 * M_PI - yaw_diff;
+//	}
+//	cost = parent->get_cost() + eukl_cost * (1 + yaw_diff);
+//	if (cost != 0) {
+//		return true;
+//
+//	} else {
+//		return false;
+//	}
+//}
 
 auto Node::reached_goal()->bool {
 	if (!(coordinates[0] < GOAL_AREA[0]) && !(coordinates[1] < GOAL_AREA[1])
@@ -102,28 +93,28 @@ auto Node::reached_goal()->bool {
 	}
 	return false;
 }
-auto Node::is_reachable(const Node& parent, const Vector2d& dir_v) const->bool {
-	//deprecated
-	//Tests if parent can reach *this (Node ist reachable from parent)
-	Vector2d dir = dir_v.normalized();
-	double par_yaw=parent.get_yaw();
-	/*	if (std::abs((double) (dir.norm() - 1)) > ACCURACY) {
-		std::cout << "Warning! Direction Vector is not normalised! \n"
-				<< dir
-				<< std::endl;
-	 }*/
-	double dir_yaw = calculate_yaw_from_vec(dir);
-	double diff = abs(dir_yaw - par_yaw);
-	if (diff > M_PI) {
-		diff = 2 * M_PI - diff;
-	}
-	if (diff > MAX_ANGLE){
-		return false;
-	} else {
-		return true;
-	}
-
-}
+//auto Node::is_reachable(const Node& parent, const Vector2d& dir_v) const->bool {
+//	//deprecated
+//	//Tests if parent can reach *this (Node ist reachable from parent)
+//	Vector2d dir = dir_v.normalized();
+//	double par_yaw=parent.get_yaw();
+//	/*	if (std::abs((double) (dir.norm() - 1)) > ACCURACY) {
+//		std::cout << "Warning! Direction Vector is not normalised! \n"
+//				<< dir
+//				<< std::endl;
+//	 }*/
+//	double dir_yaw = calculate_yaw_from_vec(dir);
+//	double diff = abs(dir_yaw - par_yaw);
+//	if (diff > M_PI) {
+//		diff = 2 * M_PI - diff;
+//	}
+//	if (diff > MAX_ANGLE){
+//		return false;
+//	} else {
+//		return true;
+//	}
+//
+//}
 auto Node::not_to_near(Node& parent) const->bool {
 	/*
 	 * DOC
@@ -172,8 +163,7 @@ auto Node::check()->bool {
 		std::cout << "Check: Costs are 0 or negative" << std::endl;
 		return false;
 	}
-	if (dir_vector.norm() < 0 || dir_vector.norm() > 2 * RANGE
-			|| dir_vector.norm() == 0) {
+	if (dir_vector.norm() < 0 || dir_vector.norm() > 2 * RANGE || (dir_vector.norm())== 0) {
 		std::cout << "Check: Dir_vector ist seltsam: " << dir_vector
 				<< std::endl;
 
@@ -186,7 +176,8 @@ auto Node::project_to_parent(Node&parent)->bool {
 //	std::cout << "Entering proeject to parent..." << std::endl;
 	/*
 	if (&parent == nullptr) {
-		std::cout << "project to parent: Parent is null!" << std::endl;
+		std::cout << "project to parent: Parent is null!" << std::endl;d GOAL_AREA(-6, -6, 1, 1);
+
 		return false;
 	}
 	if (dir_vector.norm() < STEPSIZE) {
@@ -262,6 +253,7 @@ auto Node::set_dir_vector()->bool {
 }
 auto Node::set_dir_vector(Vector2d& dir)->void {
 	if (dir.isZero()) {
+
 		std::cout << "Node::set_dir_vector(): Warning! dir_vector would be Zero"<<std::endl;
 		return;
 	}
@@ -273,6 +265,22 @@ auto Node::set_coordinates(Vector2d& coor)->void {
 auto Node::set_validation(Val enumVal)->void {
 	validation = enumVal;
 }
+auto Node::set_cost(double costs)->void{
+	if(costs <=0){
+		std::cout<<"Set cost: cost <=0, fail!"<<std::endl;
+		return;
+	}
+	cost=costs;
+}
+auto Node::set_yaw(double ya)->void{
+	if (ya<0 || ya > 2* M_PI){
+		return;
+	}
+	yaw=ya;
+}
+
+
+
 auto Node::print_node() const->void {
 	std::cout << "________________________" << std::endl;
 	std::cout << "Coordinates: " << coordinates << std::endl;
