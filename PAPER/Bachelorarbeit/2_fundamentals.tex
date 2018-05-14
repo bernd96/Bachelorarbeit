@@ -116,6 +116,7 @@ EXTEND(T,x)
 Während wie beim Erstellen eines \textit{RRT} auch bei \textit{RRT*} zuerst der nächste Nachbar als Vaterknoten festgelegt wird, folgt daraufhin eine Speicherung der nächsten Nachbarn von \verb|x_new| in einem gewissen Radius $r$ in der Liste \verb|X_NEAR|. 
 Es wird \verb|x_min| als der Abstand zum nächsten Knoten gesetzt. Die Funktion \verb|x_nearest.cost| liefert die Kosten, um vom Startknoten zu \verb|x_nearest| zu kommen, zurück, während die Funktion \verb|cost(x_nearest, x_new| die Kosten des Pfades von \verb|x_nearest| zu \verb|x_new| berechnet. Als vorläufiger Startwert beinhaltet \verb|c_min| demnach die Kosten, um vom Startknoten aus zu \verb|x_new| zu kommen. \\
 Die Liste \verb|X_NEAR| wird auf den besten Vaterknoten, also den mit den geringsten Kosten für \verb|x_new|, überprüft. Dieser beste gefundene Nachbar wird für \verb|x_new| als Vaterknoten gesetzt, also eine Kante zwischen \verb|x_new| und \verb|x_near| gezogen. \\
+\label{sec:rewiring}
 Nachdem so ein Pfad vom Vaterknoten zu \verb|x_new| gebildet wurde, wird der Baum Neuverknüpft. Bei jedem Knoten innerhalb des Radius von \verb|x_new| wird überprüft, ob die Kosten mit \verb|x_new| als Vaterknoten geringer werden. Wo immer dies der Fall ist, wird \verb|x_new| als Vaterknoten gesetzt.
 \subsubsection{Vor- und Nachteile RRT*}
 Der erste Unterschied zu einem \textit{RRT} ist, dass nicht der nächste Nachbar als Vaterknoten gesetzt wird, sondern der mit den besten Kosten. Je nach Wahl des Radius $r$ und Güte der Kostenfunktion kann hier einiges an "Umweg" gespart werden. \\

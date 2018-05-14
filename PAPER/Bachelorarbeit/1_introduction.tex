@@ -15,6 +15,7 @@ Diese Bachelorarbeit untersucht einen dieser anderen Algorithmen zur Pfadplanung
 \subsection{Aufbau und Struktur}
 Nach einer kurzen Hinführung zum Thema werden zuallererst die Grundlagen (\ref{sec:Grundlagen}) besprochen, um das Verständnis der nachfolgenden Kapitel zu erleichtern. Danach wird die Umsetzung des Algorithmus auf das Auto sowie die technischen Details und Hintergründe beschrieben (\ref{sec:Umsetzung}). Im vierten Kapitel (\ref{sec:Ergebnisse}) werden die Ergebnisse der Testfahrten vorgestellt und bewertet. Zum Schluss (\ref{sec:Zusammenfassung}) werden in einem Fazit alle Schlussfolgerungen nochmals zusammengefasst und ein Ausblick auf weitere mögliche Forschungsmöglichkeiten gegeben. \\ 
 \subsubsection{Problemanalyse}
+\label{sec:Problemanalyse}
 Diese Arbeit untersucht die Effizienz des\textit{ RRT*}-Algorithmus unter Anwendung bei autonomen Autos. Dazu fährt das Auto eine vorgegebene Strecke ab.
 \begin{figure}
 \centering
@@ -63,7 +64,6 @@ radius k-nearest neighbour & Algorithmus, der in einem Radius alle nächsten Nac
 Quaternion & 4-dimensionaler Vektor, in dem die Ausrichtung eines Objekts im Raum definiert ist.\\
 \end{tabularx}
 \subsubsection{Wichtige Quellen und deren Beitrag zum Thema}
-Es existieren[TODO RRT-Quellen \citep[vgl][]{Lav98}, RRT*-Quellen, Übersichtsliteratur]
-\\
+Als wichtigste Quellen sind "Rapidly Exploring Random Trees: A new Tool for Path Planning"\citep{Lav98} von Steven LaValle und "Incremental Sampling-based Algorithms for Optimal Motion Planning" \citep{KaFra10} von Sertac Karaman und Emilio Frazzoli zu nennen. Diese führen jeweils die Algorithmen RRT und RRT* ein. Eine besonders am Anfang sehr wichtige Quelle war "Optimal Path Planning using RRT* based Approaches: A Survey and Future Directions"\citep{NoKhaHa16}, welche eine Übersicht über verschiedene Variationen und RRT* in verschiedenen Szenarien gibt. Dies hat mir bei der Orientierung und Eingrenzung des Themas sehr geholfen. [TODO Kapitel erscheint irgendwie sinnlos...kann man da iwie sinn hinzufügen?]\\
 Nun werden wir uns den wissenschaftlichen Grundlagen der Arbeit widmen.
 

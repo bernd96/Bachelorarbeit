@@ -3,13 +3,13 @@
 \label{sec:Umsetzung}
 Bevor wir uns den notwendigen Anpassungen des \textit{RRT*}-Algorithmus widmen können, müssen wir die kinematischen und physikalischen Beschränkungen des Autos analysieren. Anschließend wird das verwendete Framework ROS - Robot Operating Systems - vorgestellt, wonach wir uns mit der Wahl einer geeigneten Metrik und Kostenfunktion beschäftigen.
 \subsection{Hardwareausstattung der Autos}
-Das Dahlem Center for Machine Learning and Robotics arbeitet mittlerweile mit dem Modelfahrzeug AutoNOMOS Mini v3 (1:10).[TODO Bild anfügen] Der Hauptcomputer auf dem Auto ist ein \textit{Odroid}(XU4 64GB) mit Ubuntu Linux als Betriebssystem und ROS (Robot Operation Systems) als Steuerungssystem \citep{fubAuto}.\\
+Das Dahlem Center for Machine Learning and Robotics arbeitet mittlerweile mit dem Modellfahrzeug AutoNOMOS Mini v3 (1:10).[TODO Bild anfügen] Der Hauptcomputer des Autos ist ein \textit{Odroid}(XU4 64GB) mit Ubuntu Linux als Betriebssystem und ROS (Robot Operation Systems) zur Steuerung \citep{fubAuto}.\\
 \begin{figure}
 \centering
 \includegraphics[scale=0.8]{Bilder/AutoNOMOS_mini_v3.png} 
 \caption{Überblick über die Module des AutoNOMOS Mini v3}
 \end{figure}
-Motorisiert ist das Auto mit einem bürstenlosen [TODO??] DC-Servomotor FAULHABER 2232. Die Lenkung wird von dem Servomotor HS-645-MG übernommen, beide Motoren werden mithilfe einer \textit{Arduino Nano} Platine gesteuert. \\
+Motorisiert ist das Auto mit einem bürstenlosen DC-Servomotor FAULHABER 2232. Die Lenkung wird von dem Servomotor HS-645-MG übernommen, beide Motoren werden mithilfe einer \textit{Arduino Nano} Platine gesteuert. \\
 Zur Wahrnehmung der Umgebung besitzt das AutoNOMOS Mini v3 mit dem RPLIDAR A2 360 einen rotierenden Laserscanner, der in der Lage ist, die Umgebung des Autos auf Hindernisse zu überprüfen. Als Rückgabewert liefert der RPLIDAR pro Gradwinkel den Wert, wie weit das nächste Hindernis in dieser Richtung entfernt ist, also insgesamt 360 Werte (einen pro Winkel). \\
 Auf dem oberen Teil des Autos befestigt ist das \textit{Kinect-type stereoscopic system} (Intel RealSense SR300), welches eine Wolke aus 3D Punkten liefert, die dazu benutzt werden kann, Hindernisse zu erkennen. Außerdem kann die Kamera des \textit{Kinect-type} Sensors dazu benutzt werden, Fahrbahnmarkierungen und Objekte direkt vor dem Auto zu lokalisieren.\\
 Der letzte äußere Sensor, auch am oberen Teil des Autos angebracht, ist die Fischaugen-Kamera. Diese zeigt nach oben, zur Decke, und kann dazu benutzt werden bestimmte markante, feststehende Objekte zu lokalisieren, damit das AutoNOMOS Mini v3 sich auch innerhalb von Räumen orientieren kann. Dazu kann eine GPS Navigationseinheit simuliert werden, indem die an der Decke angebrachten vier Lampen in unterschiedlichen Farben leuchten. \\
@@ -24,7 +24,7 @@ Mithilfe von ROS können so genannte \textit{Nodes}, ausführbare Programme, erz
 Für jedes \textit{Topic} ist dabei auch die Nachrichtenart definiert, die für dieses \textit{Topic} veröffentlicht und von diesem \textit{Topic} empfangen werden. Dies können neben simplen Datentypen auch komplexe, selbst definierte Datenstrukturen sein. Dabei wird nur dieser eine, vorher festgelegte Datentyp der Nachricht vom \textit{Topic} akzeptiert.
 \textit{Topics} stellen nur eine unidirektionale Verbindung zur Verfügung. Für die Abwicklung von zum Beispiel Remote Procedure Calls sind sogenannte Services zuständig. Diese ermöglichen, eine Antwort auf eine bestimmte Anfrage nach dem Client Server Prinzip zurückzusenden.
 \subsection{APIs und Einbettung zu bereits vorhandene Knoten}
-Das Dahlem Center for Machine Learning and Robotics entwickelte ROS-Pakete für die Steuerung ihrer autonomer Fahrzeuge. Diese Pakete und daraus resultierenden ROS-Nodes können dazu genutzt werden, den von mir entwickelten RRT*-Pfadplaner möglichst gut einzubetten. So kann durch das visuelle indoor GPS die Position des Autos bestimmt werden, die der Pfadplaner für seine Berechnungen braucht. Die resultierende \textit{Trajektorie}, die der Pfadplaner entwickelt, wird einem Steuerungsknoten übergeben, der diese \textit{Trajektorie} in Motorbefehle, also Beschleunigungen und Lenkungen, umsetzt. 
+Das Dahlem Center for Machine Learning and Robotics entwickelte ROS-Pakete für die Steuerung ihrer autonomer Fahrzeuge. Diese Pakete und daraus resultierenden ROS-Nodes können dazu genutzt werden, den von mir entwickelten RRT*-Pfadplaner möglichst gut einzubetten. So kann durch das visuelle indoor GPS die Position des Autos bestimmt werden, die der Pfadplaner für seine Berechnungen braucht. Die resultierende \textit{Trajektorie}, die der Pfadplaner entwickelt, wird dem Low-Level-Planer übergeben, der diese \textit{Trajektorie} in Motorbefehle, also Beschleunigungen und Lenkungen, umsetzt. 
 \subsubsection{Bestimmung der Odometry und visual GPS}
 Zur Ausführung des Algorithmus gehört, dass das Auto sich selbst lokalisieren kann und seine eigene Startposition feststellen kann. Diese wird, mit der aktuellen Ausrichtung des Autos, dazu benutzt um den Startpunkt für den Algorithmus zu setzen. \\
 Das Dahlem Center for Machine Learning and Robotics hat dafür zwei verschiedene Varianten entwickelt, die kombiniert einander ergänzen können. \\
@@ -37,8 +37,8 @@ Dazu muss jedoch gesagt werden, dass das eindeutige Erkennen der Lampen nur unte
 \end{enumerate}
 
 \subsubsection{Low-Level-Planer}
-Das Dahlem Center for Machine Learning and Robotics entwickelte einen Steuerungsknoten fub controller, der für die Steuerung der Motoren zuständig ist.
-Dieser Knoten lauscht auf das \textit{Topic} \verb|"planned_path"|. Auf \verb|"planned_path"| kann eine \textit{Trajektorie} publiziert werden, die dann mithilfe des Steuerungsknotens vom Auto abgefahren wird. Dabei kümmert sich dieser Steuerungsknoten allerdings nicht um etwagige Hindernisse, die mit dem Auto kollidieren könnten, sondern fährt nur die Trajektorie ab. Somit muss der Pfadplaner selbst alle Kollisionen mit Hindernissen ausschließen. \\
+Das Dahlem Center for Machine Learning and Robotics entwickelte den Low-Level-Planer "fub controller", der für die Steuerung der Motoren zuständig ist.
+Dieser Planer lauscht auf das \textit{Topic} \verb|"planned_path"|. Auf \verb|"planned_path"| kann eine \textit{Trajektorie} publiziert werden, die dann mithilfe des Low-Level-Planers vom Auto abgefahren wird. Dabei kümmert sich dieser Planer allerdings nicht um etwagige Hindernisse, die mit dem Auto kollidieren könnten, sondern fährt nur die Trajektorie ab. Somit muss der Pfadplaner selbst alle Kollisionen mit Hindernissen ausschließen. \\
 Das Format der \textit{Trajektorie} wurde von der Arbeitsgruppe der FU Berlin definiert und besteht aus
 \begin{itemize}
 \item \verb|std_msgs/Header|: Hier wird die aktuelle Zeit gespeichert.
@@ -56,7 +56,8 @@ Die Position wird in x-Position und y-Position angegeben, ausgehend von einer Ec
 Nachdem die notwendige Infrastruktur erläutert wurde, folgt eine kurze Betrachtung der kinematischen und physikalischen Einschränkungen, denen das AutoNOMOS Mini v3 unterworfen ist. Anschließend können wir uns endlich dem Kernstück der Arbeit, dem eigentlichen RRT*-Pfadplaner, widmen.
 
 \subsection{Kinematische und physikalische Einschränkungen}
-Im Gegensatz zu holonomischen Fahrzeugen sind die möglichen Pfade eines Autos nicht so einfach zu berechnen. Deshalb stellen wir zuerst zur Orientierung ein mathematisches Modell des Autos auf und definieren die Randbedingungen, unter denen es agiert.
+Im Gegensatz zu holonomischen Fahrzeugen, die sich ohne EInschränkungen in alle Richtungen des Raumes bewegen können, sind die möglichen Pfade eines nicht holonomischen Fahrzeug wie ein Auto nicht so einfach zu berechnen. Deshalb stellen wir zue
+rst ein mathematisches Modell des Autos auf und definieren die Randbedingungen, unter denen es agiert.
 Die mathematischen Definitionen der Randbedingungen und des Autos sind in der Bachelorarbeit von Lukas Gödicke \citep{Goedicke18} gut beschrieben und werden hier (übersetzt) übernommen. \\
 \subsubsection{Randbedingungen}
 Die Position des Autos bezieht sich auf den Mittelpunkt zwischen den Hinterrädern mit den Koordinaten x und y. Der Winkel $\theta \in S,  S=[0,2\pi]$ steht für die Ausrichtung des Autos, der Winkel $\phi \in S$ für die Ausrichtung der Räder (=Lenkwinkel). Wir nehmen an, dass das Auto sich auf einer flachen Ebene bewegt. Somit ist der Arbeitsraum definiert durch $C =  \mathbb{R \times S}$. Ein Zustand des Autos wird beschrieben durch $q \in C = (x,y,\theta)$.\\
@@ -73,21 +74,25 @@ $ \dot{{\theta}} = \frac{i_g}{L} tan (i_{\phi}) $
 L ist hierbei der Radstand, also der Abstand zwischen Vorder- und Hinterachse.
 
 \subsubsection{Konsequenzen}
-Ein normaler \textit{RRT*} besitzt \textit{Trajektorien} zum Ziel, die für ein Auto aufgrund der oben benannten Beschränkungen nicht abfahrbar sind. So entstehen beispielsweise diskrete Ecken und Kanten die für ein sich kontinuierlich bewegendes Auto unmöglich zu bewältigen ist. Somit ist die erste Aufgabe, die Pfade im \textit{RRT*} für das Auto irgendwie abfahrbar zu machen.\\
-Dazu hatte ich am Anfang unterschiedliche Ansätze:
+Es gibt unterschiedliche Vorgehensweisen, einen RRT zu bauen. Besondere Bedeutung hat dabei, wie neu erzeugte Knoten dem Baum hinzugefügt werden. Mein oben erwähnte Kommolitone David Gödicke benutzte in seiner Bachelorarbeit eine spezielle Projektionsmethode, sodass mithilfe von drei Dubinskurves \citep{Dubin61} der neu hinzugefügte Knoten stets durch seinen Vater erreichbar war \citep{Goedicke18}. Leider war die Berechnung dadurch insgesamt zu aufwändig und langsam, was für Echtzeit Szenarien im Straßenverkehr ein hartes Ausschlusskriterium ist, weshalb Goedicke diesen Ansatz nicht empfehlen konnte \citep[vergleiche][Kapitel 7]{Goedicke18}. \\
+Daher entschloss ich mich, Varianten von RRT* zu untersuchen, bei denen das Auto direkt von Knoten zu Knoten fährt. Dadurch benötigt es nur eine Lenkeinstellung zwischen zwei Knoten und die Berechnung wird einfacher.\\
+Doch dadurch entstanden gewisse Einschränkungen, die ich jetzt genauer erläutern werde.\\
+\subsection{RRT*-Pfadplaner für autonome Fahrzeuge}
+Am Anfang dieses Kapitels werde ich diese Einschränkungen und mögliche Lösungsansätze schildern. Anschließend folgt eine Beschreibung der Durchführung mit Sackgassen und Erfolgen. Am Ende werde ich die schlussendlich auf dem Auto ausgeführte Algorithmen zeigen und erklären.  \\
+Ein RRT*, bei dem die Knoten einfach, z.B. mithilfe des euklidischen Abstands, hinzugefügt werden, besitzt Trajektorien zum Ziel, die für ein Auto aufgrund der oben benannten kinematischen Beschränkungen des Autos nicht abfahrbar sind. So entstehen beispielsweise Ecken, die für Auto unmöglich zu bewältigen ist, da es sich nicht auf der Stelle drehen kann. Bei der Lösung dieses Problems muss jedoch auch darauf geachtet werden, dass die Eigenschaften des RRT*, wie Laufzeit und asymptotische Optimalität \citep{KaFra10}, nicht verloren gehen.\\
+Dazu untersuchte ich unterschiedliche Ansätze:
 \begin{enumerate}
-\item RRT* normal ausführen. Sobald ein Pfad zum Ziel gefunden: Diesen so bearbeiten, dass dieser vom Auto zu bewältigen ist
-\item RRT* normal ausführen, jedoch mit geeignetem Algorithmus dafür sorgen, dass das Auto jeden Knoten erreichen kann
-\item Nur Knoten hinzufügen, die von ihrem Vaterknoten aus unter oben genannten Bedingungen stets erreichbar sind
+\item Einen Baum mit RRT* erzeugen, ohne die kinematischen Einschränkungen des Autos zu berücksichtigen. Durch die Eigenschaften des RRT* werden gerade Pfade erzeugt, deren Abfahren kein Problem ist. Wenn Ecken unvermeidbar sind (z.B. beim Herumfahren um Hindernisse) wird durch eine Heuristik dafür gesorgt, dass der Pfad abfahrbar bleibt.
+\item Einen Baum mit RRT* erzeugen. Wenn Erzeugung abgeschlossen: Pfad zum Ziel so bearbeiten, dass dieser vom Auto zu bewältigen ist (keine Ecken)
+\item Einen Baum mit RRT* erzeugen, aber nur Knoten hinzufügen, die von ihrem Vaterknoten aus unter oben genannten Bedingungen stets erreichbar sind
+
 \end{enumerate}
 Das Problem des ersten Ansatzes war, das unter Umständen je nach Umgebung ein Pfad nicht nur wegen bestimmter Ecken und Kanten nicht abfahrbar ist, sondern auch wegen Kurven, die Aufgrund des Lenkradius des Autos nicht zu bewältigen wären. Es wäre zwar möglich, für kurze Zeit die geplante Trajektorie zu verlassen und nach Ende der Kurve wieder zu ihr zu stoßen, allerdings ist es unter diesen Umständen schwierig eine Hindernisfreiheit zu garantieren. \\
-Die zweite Variante war Thema der Bachelorarbeit meines oben bereits erwähnten Kommolitonen David Gödicke \citep{Goedicke18}. Dieser benutze für den Pfad zwischen zwei Kurven Dubins Curves \citep{Dubin61}, bei denen drei Einstellungen aus linkem maximalem Lenkeinschlag, rechtem maximalen Lenkeinschlag und geradeaus fahren dreimal hintereinander verkettet werden . Damit kann zwar jeder Punkt des Arbeitsbereiches erreicht werden, allerdings war die Berechnung zu aufwändig und langsam, was für Echtzeit Szenarien im Straßenverkehr ein hartes Ausschlusskriterium ist \citep[vergleiche][Kapitel 7]{Goedicke18}. \\
+Der zweite Ansatz ist zwar prinzipiell möglich. Ziel des ganzen war jedoch, wie in Kapitel \ref{sec:Problemanalyse} geschildert, das Neuplanen und überprüfen der Trajektorie auf Gültigkeit in einem engen Zeitfenster um auf dynamische Hindernisse zu reagieren. Dies ist mit einem Bearbeiten des Pfades vom Ziel zum Startknoten ineffizient und aufwändig.\\
 Deshalb entschloss ich mich zuerst für die dritte Variante, bei der Knoten nur zum RRT*-Graph unter der Bedingung hinzugefügt werden, dass sie erreichbar sind.
-
-\subsection{RRT*-Pfadplaner für autonome Fahrzeuge}
 \subsubsection{Vorauswahl}
 \label{sec:Vorauswahl}
-[TODO ist eig alles veraltet, muss neu geschrieben werden. Ich kann mit dem Auto jetzt jeden Punkt außerhalb der Wendekreise erreichen...damit fällt alles mit Erreichbarkeit über den Winkel weg, Projektion, Berechnung der Orientierung und Sicherstellen-das-der-Knoten-nicht-zu-nah-ist bleibt aber bestehen...\\
+[TODO ist eig alles veraltet, muss neu geschrieben werden. Ich kann mit dem Auto jetzt jeden Punkt außerhalb der Wendekreise erreichen...damit fällt alles mit Erreichbarkeit über den Winkel weg,alles andere wie Projektion, Berechnung der Orientierung und Sicherstellen-das-der-Knoten-nicht-zu-nah-ist bleibt aber bestehen...\\
 Vor allem müssen neue Grafiken erstellt werden (Mi?)!]
 Diese beinhaltete, bei der Erstellung des RRT* vom Auto nicht erreichbare Knoten gar nicht erst zuzulassen. Das Auto sollte also von einem Knoten zum nächsten mit nur einer Lenkeinstellung direkt fahren können. Dies sollte die Berechnungszeit stark verringern. \\
 Zum Ausschluss der Knoten verwendete ich zuerst eine Heuristik: Ein nächster Nachbar N für einen neu hinzugefügten Knoten K kam nur dann in Frage, falls dieser den neu hinzugefügten Knoten K auch erreichen konnte. Dazu wurde die Ausrichtung des Autos im potenziellen Elternknoten N mit dem Richtungsvektor zwischen den beiden Knoten verglichen. Somit war K gültig, falls der Winkel zwischen der Ausrichtung von N und dem direktem Weg zum Knoten K (Richtungsvektor) einen bestimmten Wert $\gamma$ nicht überschritt.
@@ -106,6 +111,7 @@ $\delta = arccos (\frac{Schrittweite}{2 \dot R})$  \\
 \end{center}
 
 Alle Knoten außerhalb dieses Winkels würden bei der Projektion im Wendekreis des Autos landen, wie in Abbildung \ref{fig:fig5} zu sehen. Diese Knoten(rot) wurden verworfen.\\
+\subsubsection{Projektion}
 Als nächster Schritt wird, wie in Kapitel \ref{RRT*} geschildert, der Knoten K an den nächsten (gültigen) Nachbarn N projiziert und der Vaterknoten bestimmt. Sollte der Knoten näher am Vaterknoten dran sein, als die Schrittweite ist, wird der Knoten nicht projiziert, da sonst alle Knoten zu ihrem Vaterknoten den gleichen Abstand hätten und bestimmte Bereiche somit nicht auf optimalen Weg erreichbar wären. Da innerhalb der Schrittweite durch den maximalen Lenkwinkel des Autos selbst die Knoten, die vom Winkel her gültig sind, nicht erreichbar sein können ist eine zusätzliche Überprüfung für diese Knoten notwendig. \\
 Da der maximale Lenkwinkel eines Autos vorgegeben ist hängt also die Erreichbarkeit des Knotens allein von der Schrittweite ab. Mit dieser kann auch vorgegeben werden, wie um wie viel Grad sich die Ausrichtung des Autos bei einem Schritt ändern darf und ob beispielsweise Kehren erlaubt sind. Dabei muss jedoch beachtet werden: Bei einer zu kleinen Schrittweite werden viele Knoten verworfen und es werden kaum enge Kurven möglich sein. Bei einer zu großen Schrittweite werden sehr kurvige Trajektorien entstehen, sodass z.B. Hinderniserkennung nicht mehr so einfach ist.
 \begin{figure}
@@ -115,7 +121,7 @@ Da der maximale Lenkwinkel eines Autos vorgegeben ist hängt also die Erreichbar
 \caption{Projektion der Punkte auf Schrittweite}
 \end{figure}
 \subsubsection{Bestimmung des Vaterknotens}
-Nachdem der Knoten an seinen nächsten Nachbarn projiziert wurde, wird nun aus allen nächsten Nachbar innerhalb eines Radius R der mit den besten Kosten gewählt. Im Verfahren zur Bestimmung des nächsten Nachbarn, siehe \ref{sec:Vorauswahl}, wurden die Punkte innerhalb der Schrittweite nicht berücksichtigt. Es ist dem Auto nicht möglich, vom Vaterknoten N zum Knoten K zu fahren, wenn K im Wendekreis des Autos liegt. \\
+Nachdem der Knoten an seinen nächsten Nachbarn projiziert wurde, wird nun aus allen nächsten Nachbarn innerhalb eines Radius R der mit den besten Kosten gewählt. Im Verfahren zur Bestimmung des nächsten Nachbarn, siehe \ref{sec:Vorauswahl}, wurden nicht beachtet dass der neue Knoten innerhalb der Wendekreise des Autos liegen könnte. Es ist dem Auto aber nicht möglich, vom Vaterknoten N zum Knoten K zu fahren, wenn K im Wendekreis des Autos liegt. \\
 Für jeden Knoten im Radius R wird geprüft, ob dieser Knoten unseren neuen Knoten K erreichen kann. Das wird ausgerechnet, indem vom potentiellen Vaterknoten N aus zwei Mittelpunkte der Wendekreise bestimmt werden. Wenn der Abstand von K zu diesen Mittelpunkten kleiner ist als der Radius der Wendekreise, liegt K im Wendekreis und ist nicht erreichbar. Damit kommt N als Nachbar nicht in Frage. Falls kein nächster Nachbar im Radius R den Knoten K erreichen kann, wird K verworfen. \\
 Nachdem erfolgreich ein Vaterknoten bestimmt und dem neu hinzugefügtem Knoten K zugewiesen wurde, muss noch die Ausrichtung oder Orientierung bestimmt werden, die das Auto im Knoten K hat.
 \subsubsection{Bestimmung der Orientierung}
@@ -126,8 +132,10 @@ Nachdem erfolgreich ein Vaterknoten bestimmt und dem neu hinzugefügtem Knoten K
 \includegraphics[scale=1]{Bilder/BerechnungOrientierung.png} 
 \caption{Berechnung der Ausrichtung}
 \end{figure}
-Da das Auto im Vaterknoten N eine bestimmte Ausrichtung hat und mit nur einer Lenkeinstellung zum nächsten Knoten K gelangt, ist dort die Ausrichtung dadurch festgelegt und berechnet sich aus der Ausrichtung des Vaterknotens, Winkel $\theta$, und dem Richtungsvektor von N nach K. Der Richtungsvektor kann in einen Winkel relativ zu x-Achse mit Hilfe des Skalarprodukts ausgerechnet werden. Wie in der Zeichnung ~\ref{fig:fig8} zu sehen ist, wird der Winkel des Richtungsvektors zweimal auf die Ausrichtung im Vaterknoten addiert, um die Ausrichtung im neuen Knoten zu erhalten. \\
-
+Da das Auto im Vaterknoten N eine bestimmte Ausrichtung hat und mit nur einer Lenkeinstellung zum nächsten Knoten K gelangt, ist dort die Ausrichtung dadurch festgelegt und berechnet sich aus der Ausrichtung des Vaterknotens, Winkel $\theta$, und dem Winkel zwischen der Ausrichtung des Vaterknotens und dem Richtungsvektor von N nach K. Wie in der Zeichnung ~\ref{fig:fig8} zu sehen ist, berechnet sich die Ausrichtung $\omega$ des neuen Knotens K folgendermaßen:
+\begin{center}
+	$\theta + 2 \pi - 2*\alpha = \omega$
+\end{center}
 \subsection{Metrik und Kostenfunktion}
 \label{sec:Metrik}
 Eine besondere Bedeutung zur Erzeugung einer "guten" Trajektorie kommt der Kostenfunktion zu. Diese sorgt nicht nur dafür, welcher Knoten als Vaterknoten ausgewählt wird, sondern spielt auch beim Neuverknüpfen des Baumes eine Rolle.Somit kann mithilfe der Kostenfunktion für besonders gut abfahrbare oder besonders kurze Pfade gesorgt werden. \\
@@ -145,7 +153,7 @@ Da durch die Orientierung des Vaterknotens die Orientierung des Kindknotens bere
     \end{minipage}% <- sonst wird hier ein Leerzeichen eingefügt
     \hfill
     \begin{minipage}[t]{0.45\linewidth}
-\label{fig:fig7}                 
+\label{fig:fig9}                 
         \centering
         \includegraphics[width=.6\linewidth]{Bilder/B1Insert.png}
         \caption{erweiterte Kostenfunktion}
@@ -153,7 +161,7 @@ Da durch die Orientierung des Vaterknotens die Orientierung des Kindknotens bere
 \end{figure}
 
 
-In Abbildung ~\ref{fig:fig7} hingegen wurde eine bessere Kostenfunktion gewählt, sodass über B1 gehend ein effizienterer, kürzerer Pfad entsteht. Die Kostenfunktion muss dabei die Ausrichtung des Autos beim Vaterknoten N berücksichtigen. [TODO Auswahl] Eine Möglichkeit wäre dann, die tatsächliche zu fahrende Strecke des Autos zu benutzen und dadurch effizientere Pfade zu bevorzugen. Eine andere Möglichkeit ist, zu harte Richtungsänderungen zu bestrafen und kleine $ \Delta \theta$ zu bevorzugen. \\
+In Abbildung ~\ref{fig:fig9} hingegen wurde eine bessere Kostenfunktion gewählt, sodass über B1 gehend ein effizienterer, kürzerer Pfad entsteht. Die Kostenfunktion muss dabei die Ausrichtung des Autos beim Vaterknoten N berücksichtigen. [TODO Auswahl] Eine Möglichkeit wäre dann, die tatsächliche zu fahrende Strecke des Autos zu benutzen und dadurch effizientere Pfade zu bevorzugen. Eine andere Möglichkeit ist, zu harte Richtungsänderungen zu bestrafen und kleine $ \Delta \theta$ zu bevorzugen. \\
 Als Lösung wurde hierbei eine Kombination aus dem euklidischem Abstand und der Winkeldifferenz der Knoten K und N zur Kostenberechnung zu benutzen. Die Kosten berechnen sich dann wie folgt: 
 \begin{center}
 $cost(K) = cost(N) +eukl. Abstand(K,N) * (1+Winkeldifferenz)$
@@ -161,9 +169,21 @@ $cost(K) = cost(N) +eukl. Abstand(K,N) * (1+Winkeldifferenz)$
 Bei einer geraden Strecke wird lediglich der euklidische Abstand als Kosten aufsummiert, bei einer Kehre von 180$^{\circ}$ bis zum vierfachen der euklidischen Kosten (Winkeldifferenz $\pi$ +1).\\
 Nachteil dieser Kostenfunktion ist, dass nicht berücksichtigt wird das starke Kurven weniger "schlimm" sind auf größerer Strecke. Mit anderen Worten, das Fahren genau auf den minimalen Wendekreisen ist meist weniger angenehm als das Fahren auf weiten Kreisen, auch wenn beide Pfade die gleiche Winkeldifferenz haben. Das Problem hierbei ist, dass ein kleinerer Kreis geringere euklidische Kosten hat und demzufolge gegenüber dem größeren Kreis bevorzugt wird.
 \subsubsection{Rewiring}
-[TODO Rewiring neu schreiben, siehe oben. Hat sich geändert, Rewiring muss nicht Rekursiv durchgeführt werden.] Der Knoten K wurde neu in den Baum hinzugefügt. Nun wird überprüft, ob bereits vorhandene Knoten besser erreichbar sind, wenn der Weg über K gewählt wird.
-Dazu werden zunächst im Radius R alle in Frage kommenden Nachbarn ausgewählt. Aussortiert werden alle, die entweder vom Knoten K aus nicht erreichbar sind (gleiche Überprüfung wie oben) oder aber bei denen K keine Verbesserung bewirkt also die Kosten über den Knoten K gleich oder kleiner sind. \\
-Wenn man von den jetzt noch ausgewählten Knoten M einfach K als Vater hinzufügen würde, müsste jeweils die Orientierung der Knoten, der Winkel $\theta$, geändert werden. Das Auto gelangt auf anderem Wege zu diesen Knoten und hat somit eine andere Ausrichtung als vorher. Allerdings kann es dadurch vorkommen, das wenn der Knoten $m \in M$ eine neue Orientierung hat, Kinder von m nicht mehr durch m erreichbar sind [TODO Zeichnung]. Deshalb wird, anstatt die Orientierung zu ändern, einfach ein neuer Knoten hinzugefügt, der zwar die gleicher Koordinaten hat wie m, aber eine andere Orientierung. Dies wird mit allen von K erreichbaren Knoten durchgeführt. Alle somit zum Baum neu hinzugefügten Knoten sind durch K besser erreichbar und können nun selbst zur Neuverknüpfung des Baumes beitragen. Somit wird der Algorithmus des Neuverknüpfens rekursiv auf alle im vorherigen Schritt durch das Rewiring neu hinzugefügten Knotens angewendet. \\
+[TODO Rewiring neu schreiben, siehe oben. Hat sich geändert, Rewiring muss nicht Rekursiv durchgeführt werden.] 
+Die Neuverknüpfung geschieht im RRT, indem, wie in \ref{sec:rewiring} geschildert, der Knoten K allen Knoten im Radius R hinzugefügt wird, bei denen er die Gesamtkosten verbessert. \\
+Dadurch, das im Gegensatz zu einem normalen RRT* nun auch die Ausrichtung eine Rolle spielt, kann der Baum nicht ohne weiteres neu verknüpft werden. Wenn ein Knoten K mit Ausrichtung $\theta$ durch Rewiring einen neuen Vaterknoten bekommt, ändert sich $\theta$. Da aber sowohl die Erreichbarkeit der Kindknoten von K als auch die Kostenfunktion von $\theta$ abhängen, kann es sein, dass nun nicht mehr alle Kindknoten erreichbar sind. \\
+Die erste Lösung zu diesem Problem wäre, die Ausrichtung des Knotens K nicht zu ändern, sondern einen neuen Knoten mit gleichen Koordinaten, aber anderer Ausrichtung hinzuzufügen. Da wir einen neuen Knoten hinzugefügt haben, müssen wir nun auch erneut die Rewiring Operation durchführen. Somit entsteht mit jedem neu hinzugefügten Knoten ein Wasserfalleffekt durch den ganzen Baum, welcher im schlechtesten Fall eine exponentielle Laufzeit hat - ein nicht tragbares Szenario für eine Echtzeitanwendung. \\
+Theoretisch kann ein Auto mit nur einer Lenkeinstellung alle Punkte außerhalb der Wendekreise erreichen. Das Problem der Nichterreichbarkeit könnte also dadurch behoben werden, dass nur Knoten in einem bestimmten Abstand als Vaterknoten erlaubt sind. Die dadurch entstehenden schlechte Trajektorien (z.B. mit 180$^{\circ}$ Kurven) können nicht durch die Wahl einer geeigneten Kostenfunktionen vermieden werden, da die Kostenfunktion auch vom Winkel $\theta$ abhängt - und dieser ist veränderbar. \\
+Deshalb werden für das Rewiring zwei Möglichkeiten vorgeschlagen:
+\begin{enumerate}
+	\item Schlechte Trajektorien werden toleriert, Nichterreichbarkeit durch entsprechende Abstände vermieden [TODO d.h. man überall die gleichen Abstände bzw. Abstände zwischen 2*Lenkradius und Schrittweite]
+	\item Die oben geschilderte Rewiring-Operation wird durchgeführt, allerdings nicht mit allen erreichbaren Knoten im Radius, sondern nur bei dem Knoten, bei denen der Effekt am größten ist, also durch das Rewiring am meisten Kosten gespart werden [TODO Bild zeichnen und einfügen]. Bei dem so neu hinzugefügten Knoten wird auch wieder die Rewiring-Operation durchgeführt, bis ....und hier kam die Erkenntnis: Bis wann eigentlich? Plan war, bis kein Knoten mit geringeren Kosten gefunden wird. Wenn die Rewiring Operation jedoch durch den halben Baum durchgeht, sind die Verbesserungen z.T. so gewaltig, dass Das Neuverknüpfen am Ende kehrt macht und wieder in den Baum reingeht. Außerdem kann ein Knoten mehrfach neu verknüpft werden, da der alte ja nicht gelöscht nicht, sodass bestimmte Knoten mit sehr schlechten Kosten immer als Rewiring-Knoten ausgewüählt werden, weil der Unterschied in den Kosten dann am größten ist. Dafür könnte man eine Liste mit noch nicht neu verknüpften Knoten bilden, und nur aus dieser werden Kanditaten zum Rewiring ausgewählt. Am Ende hat man dann halt ne Liste, die nur aus Randknoten besteht...oder aber Rewiring kann nicht bis an den Rand durchgeführt werden, weil es nicht mehr genügend noch zur Verfügung stehende Knoten innerhalb des Baumes gibt....also erste Möglcihkeit??? 
+\end{enumerate}
+
+
+Der Knoten K wurde neu in den Baum hinzugefügt. Nun wird überprüft, ob bereits vorhandene Knoten besser erreichbar sind, wenn der Weg über K gewählt wird.
+Dazu werden zunächst im Radius R alle in Frage kommenden Nachbarn ausgewählt. Aussortiert werden alle, die entweder vom Knoten K aus nicht erreichbar sind (gleiche Überprüfung wie oben) oder aber bei denen K keine Verbesserung bewirkt, also die Kosten - über den Knoten K - gleich oder kleiner sind. \\
+Wenn man von den jetzt noch ausgewählten Knoten M einfach K als Vater hinzufügen würde, müsste jeweils die Orientierung der Knoten, der Winkel $\theta$, geändert werden. Das Auto gelangt auf anderem Wege zu diesen Knoten und hat somit eine andere Ausrichtung als vorher. Allerdings kann es dadurch vorkommen, das wenn der Knoten $m \in M$ eine neue Orientierung hat, Kinder von m nicht mehr durch m erreichbar sind [TODO Zeichnung]. Deshalb wird, anstatt die Orientierung zu ändern, einfach ein neuer Knoten hinzugefügt, der zwar die gleicher Koordinaten hat wie m, aber eine andere Orientierung. Dies wird mit allen von K erreichbaren Knoten durchgeführt. Alle somit zum Baum neu hinzugefügten Knoten sind durch K besser erreichbar. Eine konsequente Maßnahme wäre, für jeden so neu hinzugefügten Knoten ebenfalls das Rewiring durchzuführen. Dadurch braucht man jedoch sehr viel Zeit, da der ganze Baum z.T. mehrfach neu verknüpft wird. Im schlechtesten Fall wäre die Laufzeit exponentiell, was für einen Echtzeitalgorithmus nicht tragbar ist.Deshalb wird jeweils das Rewiring lediglich auf den Knoten angewendet, der dadurch den größten Vorteil erhält. \\
 Der Vorteil dieses Mechanismus ist, dass mögliche Optimierungen schnell durch den Baum wandern und keine Knoten ungültig werden. Außerdem müssen nicht so viele randomisierte Punkte erzeut werden, was der Laufzeit zu Gute kommt. Nachteile sind allerdings eine geringere Anzahl von räumlich verteilten Punkten (es liegen Punkte "übereinander"). Zudem kann dieses Verfahren viel Zeit beanspruchen, ohne viel Effekt zu haben, wenn besonders viele Punkte im Baum existieren und Bereiche weit abseits der Zielregion neu verknüpft werden.
 
 
