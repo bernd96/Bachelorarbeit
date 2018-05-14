@@ -13,21 +13,14 @@ Ein Forschungsgebiet ist die Entwicklung und Analyse autonomer Autos. Zur oben b
 Diese Bachelorarbeit untersucht einen dieser anderen Algorithmen zur Pfadplanung, \textit{RRT*}, auf seine Tauglichkeit, über eine vorgegebene Fahrbahn mit Hindernissen eine abfahrbare, sichere und möglichst optimale \textit{Trajektorie} zu finden. 
 
 \subsection{Aufbau und Struktur}
-Nach einer kurzen Hinführung zum Thema werden zuallererst die Grundlagen (\ref{sec:Grundlagen}) besprochen, um das Verständnis der nachfolgenden Kapitel zu erleichtern. Danach wird die Umsetzung des Algorithmus auf das Auto sowie die technischen Details und Hintergründe beschrieben (\ref{sec:Umsetzung}). Im vierten Kapitel (\ref{sec:Ergebnisse}) werden die Ergebnisse der Testfahrten vorgestellt und bewertet. Zum Schluss (\ref{sec:Zusammenfassung}) werden in einem Fazit alle Schlussfolgerungen nochmals zusammengefasst und ein Ausblick auf weitere mögliche Forschungsmöglichkeiten gegeben. \\ 
-\subsubsection{Problemanalyse}
+Nach einer kurzen Hinführung zum Thema und Vorstellung des Problems werden zuallererst die Grundlagen(\ref{sec:Grundlagen}) besprochen, um das Verständnis der nachfolgenden Kapitel zu erleichtern. Dies sind neben den grundlegenden Algorithmen auch die verwendete Hardware und Software sowie die zu berücksichtigenden Rahmenbedingungen. Im nächsten Kapitel(\ref{sec:Umsetzung})wird das Problem genauer beschrieben, anschließend folgen Analyse und Bewertung verschiedener Ansätze zur Lösung desselben. Zum Schluss (\ref{sec:Zusammenfassung}) werden in einem Fazit alle Schlussfolgerungen nochmals zusammengefasst und ein Ausblick auf weitere mögliche Forschungsmöglichkeiten gegeben. \\ 
+\subsection{Problemanalyse}
 \label{sec:Problemanalyse}
-Diese Arbeit untersucht die Effizienz des\textit{ RRT*}-Algorithmus unter Anwendung bei autonomen Autos. Dazu fährt das Auto eine vorgegebene Strecke ab.
-\begin{figure}
-\centering
-\includegraphics[scale=0.5]{Bilder/fu_robotics_lab_map_600x400.png} 
-\caption{Das Auto fährt auf der äußeren Strecke einmal im Kreis}
-\end{figure}
- Auf dieser Strecke werden erst statische, dann sich bewegende Hindernisse platziert. \\
-Das Auto soll diese Strecke in möglichst kurzer Zeit mit einem möglichst optimalen Pfad abfahren, ohne eines dieser Hindernisse zu berühren. Dazu sollte das Auto den Algorithmus idealerweise 30 Mal pro Sekunde ausführen, mindestens aber vier Mal pro Sekunde. Dadurch wird gewährleistet, dass der entstehende Pfad fürs Auto sich an bewegende Hindernisse anpasst. \\
-Die Effizienz, Sicherheit und Effektivität des Algorithmus wird bei verschiedenen Eingabeparametern untersucht und bewertet. \\
+[TODO: Vllt. in den abstract?]
+In der Bachelorarbeit von David Goedicke \citep{Goedicke18} wurden die Algorithmen $RRT^X$ und $RRT^*$ zur Berechnung eines abfahrbaren Pfades für ein Modellauto verwendet. Beide Algorithmen waren dazu in der Lage, jedoch war die Berechnungszeit zu hoch für eine Echtzeitanwendung. Dies lag unter anderem auch an den verwendeten Dubin curves und Reeds Shepp curves, die kompliziert zu berechnen sind. In dieser Arbeit wird anstelle der Reed Shepps Curves eine andere Möglichkeit untersucht, die Bewegung zwischen zwei Zuständen im Zustandsraum zu realisieren.
 
-\subsubsection{Anmerkung zur Gestaltung der Arbeit}
-[TODO Plagiat mit Prof abklären (ist ne 1:1 Kopie)]
+
+\subsection{Anmerkung zur Gestaltung der Arbeit}
 Für die im Folgenden verwendeten personenbezogenen
 Ausdrücke wurde, um die Lesbarkeit der Arbeit zu erhöhen,
 ausschließlich die männliche Schreibweise gewählt. Desweiteren werden eine
@@ -63,7 +56,7 @@ k-nearest neighbour algorithm & Algorithmus, der zu einem Punkt P die nächsten 
 radius k-nearest neighbour & Algorithmus, der in einem Radius alle nächsten Nachbarn des Punktes P bestimmt.\\
 Quaternion & 4-dimensionaler Vektor, in dem die Ausrichtung eines Objekts im Raum definiert ist.\\
 \end{tabularx}
-\subsubsection{Wichtige Quellen und deren Beitrag zum Thema}
-Als wichtigste Quellen sind "Rapidly Exploring Random Trees: A new Tool for Path Planning"\citep{Lav98} von Steven LaValle und "Incremental Sampling-based Algorithms for Optimal Motion Planning" \citep{KaFra10} von Sertac Karaman und Emilio Frazzoli zu nennen. Diese führen jeweils die Algorithmen RRT und RRT* ein. Eine besonders am Anfang sehr wichtige Quelle war "Optimal Path Planning using RRT* based Approaches: A Survey and Future Directions"\citep{NoKhaHa16}, welche eine Übersicht über verschiedene Variationen und RRT* in verschiedenen Szenarien gibt. Dies hat mir bei der Orientierung und Eingrenzung des Themas sehr geholfen. [TODO Kapitel erscheint irgendwie sinnlos...kann man da iwie sinn hinzufügen?]\\
+\subsection{Wichtige Quellen und deren Beitrag zum Thema}
+Als wichtigste Quellen sind "Rapidly Exploring Random Trees: A new Tool for Path Planning"\citep{Lav98} von Steven LaValle und "Incremental Sampling-based Algorithms for Optimal Motion Planning" \citep{KaFra10} von Sertac Karaman und Emilio Frazzoli zu nennen. Diese führen jeweils die Algorithmen RRT und RRT* ein. Eine besonders am Anfang sehr wichtige Quelle war "Optimal Path Planning using RRT* based Approaches: A Survey and Future Directions"\citep{NoKhaHa16}, welche eine Übersicht über verschiedene Variationen und RRT* in verschiedenen Szenarien gibt. Dies hat mir bei der Orientierung und Eingrenzung des Themas sehr geholfen. [TODO subsection erscheint irgendwie sinnlos...kann man da iwie sinn hinzufügen?]\\
 Nun werden wir uns den wissenschaftlichen Grundlagen der Arbeit widmen.
 

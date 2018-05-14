@@ -1,93 +1,42 @@
 % !TeX encoding = UTF-8
 \section{Umsetzung}
 \label{sec:Umsetzung}
-Bevor wir uns den notwendigen Anpassungen des \textit{RRT*}-Algorithmus widmen können, müssen wir die kinematischen und physikalischen Beschränkungen des Autos analysieren. Anschließend wird das verwendete Framework ROS - Robot Operating Systems - vorgestellt, wonach wir uns mit der Wahl einer geeigneten Metrik und Kostenfunktion beschäftigen.
-\subsection{Hardwareausstattung der Autos}
-Das Dahlem Center for Machine Learning and Robotics arbeitet mittlerweile mit dem Modellfahrzeug AutoNOMOS Mini v3 (1:10).[TODO Bild anfügen] Der Hauptcomputer des Autos ist ein \textit{Odroid}(XU4 64GB) mit Ubuntu Linux als Betriebssystem und ROS (Robot Operation Systems) zur Steuerung \citep{fubAuto}.\\
-\begin{figure}
-\centering
-\includegraphics[scale=0.8]{Bilder/AutoNOMOS_mini_v3.png} 
-\caption{Überblick über die Module des AutoNOMOS Mini v3}
-\end{figure}
-Motorisiert ist das Auto mit einem bürstenlosen DC-Servomotor FAULHABER 2232. Die Lenkung wird von dem Servomotor HS-645-MG übernommen, beide Motoren werden mithilfe einer \textit{Arduino Nano} Platine gesteuert. \\
-Zur Wahrnehmung der Umgebung besitzt das AutoNOMOS Mini v3 mit dem RPLIDAR A2 360 einen rotierenden Laserscanner, der in der Lage ist, die Umgebung des Autos auf Hindernisse zu überprüfen. Als Rückgabewert liefert der RPLIDAR pro Gradwinkel den Wert, wie weit das nächste Hindernis in dieser Richtung entfernt ist, also insgesamt 360 Werte (einen pro Winkel). \\
-Auf dem oberen Teil des Autos befestigt ist das \textit{Kinect-type stereoscopic system} (Intel RealSense SR300), welches eine Wolke aus 3D Punkten liefert, die dazu benutzt werden kann, Hindernisse zu erkennen. Außerdem kann die Kamera des \textit{Kinect-type} Sensors dazu benutzt werden, Fahrbahnmarkierungen und Objekte direkt vor dem Auto zu lokalisieren.\\
-Der letzte äußere Sensor, auch am oberen Teil des Autos angebracht, ist die Fischaugen-Kamera. Diese zeigt nach oben, zur Decke, und kann dazu benutzt werden bestimmte markante, feststehende Objekte zu lokalisieren, damit das AutoNOMOS Mini v3 sich auch innerhalb von Räumen orientieren kann. Dazu kann eine GPS Navigationseinheit simuliert werden, indem die an der Decke angebrachten vier Lampen in unterschiedlichen Farben leuchten. \\
-Die Sensoren sind entweder via USB 3.0 an der Hauptplatine oder direkt am \textit{Odroid} angeschlossen. \\
-An inneren Sensoren besitzt das AutoNOMOS Mini v3 eine MPU6050, die einen Beschleunigungssensor und ein \textit{Gyroskop} enthält. Mithilfe dieser MPU kann das AutoNOMOS Mini v3 seine Orientierung, seine Richtung im Raum bestimmen. Außerdem können Messungen zur \textit{Odometrie} ergänzt werden.\\
-Das AutoNOMOS Mini v3 wird über eine 14,8 V Batterie mit Energie versorgt.
-
-\subsection{Software: ROS - Robot Operating Systems}
-ROS stellt Bibliotheken und Werkzeuge zur Verfügung, die Software-Entwicklern helfen sollen, Robotik Anwendungen zu kreieren \citep{ROS}. Unter anderem beinhaltet ROS Gerätetreiber, Bibliotheken, Visualisierungswerkzeuge, Paketmanagement und vieles mehr. ROS ist Open Source und unter der BSD Lizenz verfügbar.
-\subsubsection{Architektur}
-Mithilfe von ROS können so genannte \textit{Nodes}, ausführbare Programme, erzeugt werden, die über so genannte \textit{Topics} kommunizieren können. Dies passiert über einen anonymisierten Publisher/Subscriber Mechanismus, das heißt Daten generierende Knoten können auf relevanten \textit{Topics} Nachrichten senden, und interessierte Knoten können von relevanten \textit{Topics} Nachrichten empfangen. \\
-Für jedes \textit{Topic} ist dabei auch die Nachrichtenart definiert, die für dieses \textit{Topic} veröffentlicht und von diesem \textit{Topic} empfangen werden. Dies können neben simplen Datentypen auch komplexe, selbst definierte Datenstrukturen sein. Dabei wird nur dieser eine, vorher festgelegte Datentyp der Nachricht vom \textit{Topic} akzeptiert.
-\textit{Topics} stellen nur eine unidirektionale Verbindung zur Verfügung. Für die Abwicklung von zum Beispiel Remote Procedure Calls sind sogenannte Services zuständig. Diese ermöglichen, eine Antwort auf eine bestimmte Anfrage nach dem Client Server Prinzip zurückzusenden.
-\subsection{APIs und Einbettung zu bereits vorhandene Knoten}
-Das Dahlem Center for Machine Learning and Robotics entwickelte ROS-Pakete für die Steuerung ihrer autonomer Fahrzeuge. Diese Pakete und daraus resultierenden ROS-Nodes können dazu genutzt werden, den von mir entwickelten RRT*-Pfadplaner möglichst gut einzubetten. So kann durch das visuelle indoor GPS die Position des Autos bestimmt werden, die der Pfadplaner für seine Berechnungen braucht. Die resultierende \textit{Trajektorie}, die der Pfadplaner entwickelt, wird dem Low-Level-Planer übergeben, der diese \textit{Trajektorie} in Motorbefehle, also Beschleunigungen und Lenkungen, umsetzt. 
-\subsubsection{Bestimmung der Odometry und visual GPS}
-Zur Ausführung des Algorithmus gehört, dass das Auto sich selbst lokalisieren kann und seine eigene Startposition feststellen kann. Diese wird, mit der aktuellen Ausrichtung des Autos, dazu benutzt um den Startpunkt für den Algorithmus zu setzen. \\
-Das Dahlem Center for Machine Learning and Robotics hat dafür zwei verschiedene Varianten entwickelt, die kombiniert einander ergänzen können. \\
-\begin{enumerate}
-\item Odometrie \\
-Anhand des Lenkwinkels und der Motordrehgeschwindigkeit kann die erwartete Position, Geschwindigkeit und Beschleunigung berechnet werden. Mit dem im Auto verbauten Gyroskop werden Lageänderungen entlang jeder Achse gemessen. Aufgrund mechanischer Beschränkungen und Ungenauigkeiten sind Messungen mithilfe der Odometrie nie ganz exakt und somit kann eine so bestimmte Position mit der Zeit von der tatsächlichen Postition abweichen.
-\item Visual GPS\\
-Da es innerhalb von Gebäuden Schwierigkeiten mit der genauen Positionsbestimmung via GPS gibt, wurde mithilfe von vier Lampen, die an der Decke angebracht wurden, ein visuelles GPS simuliert. Diese vier Lampen leuchten in unterschiedlichen, gut erkennbaren Farben und werden mit der Fischaugenkamera, die zur Decke ausgerichtet ist, erfasst. Anhand der Lage der Lampen zueinander und wie die Fischaugenkamera diese sieht kann die Position des Autos bestimmt werden.\\
-Dazu muss jedoch gesagt werden, dass das eindeutige Erkennen der Lampen nur unter guten Bedingungen (Lichtverhältnisse, alle 4 Lampen im Bild) möglich ist. 
-\end{enumerate}
-
-\subsubsection{Low-Level-Planer}
-Das Dahlem Center for Machine Learning and Robotics entwickelte den Low-Level-Planer "fub controller", der für die Steuerung der Motoren zuständig ist.
-Dieser Planer lauscht auf das \textit{Topic} \verb|"planned_path"|. Auf \verb|"planned_path"| kann eine \textit{Trajektorie} publiziert werden, die dann mithilfe des Low-Level-Planers vom Auto abgefahren wird. Dabei kümmert sich dieser Planer allerdings nicht um etwagige Hindernisse, die mit dem Auto kollidieren könnten, sondern fährt nur die Trajektorie ab. Somit muss der Pfadplaner selbst alle Kollisionen mit Hindernissen ausschließen. \\
-Das Format der \textit{Trajektorie} wurde von der Arbeitsgruppe der FU Berlin definiert und besteht aus
-\begin{itemize}
-\item \verb|std_msgs/Header|: Hier wird die aktuelle Zeit gespeichert.
-\item \verb|string child_frame_id|: [TODO]
-\item \verb|fub_trajectory_msgs/TrajectoryPoint[] trajectory|: Eine Liste aus Trajektorie-Punkten.
-\end{itemize}
-Ein Trajektorien-Punkt symbolisiert einen abzufahrenden Knotenpunkt und wiederum besteht aus
-\begin{itemize}
-\item \verb|geometry_msgs/Pose pose|: Hier sind Position und Orientierung des Autos gespeichert.
-\item \verb|geometry_msgs/Twist velocity|:Hier wird die Geschwindigkeit des Autos an diesem Punkt gespeichert.
-\item \verb|geometry_msgs/Twist acceleration| Hier wird die Beschleunigung des Autos an diesem Punkt gespeichert.
-\end{itemize}
-Die Position wird in x-Position und y-Position angegeben, ausgehend von einer Ecke des Raumes. Die Orientierung wird durch ein \textit{Quaternion} dargestellt, bei dem durch vier Werte die Drehung in jeder Richtung des Raumes genau bestimmt ist. Allerdings genügt uns die Drehung um die z-Achse, also die Drehrichtung über die Vertikalachse, weshalb dieses Quaternion in einen Winkel, der sogenannten Gierung( engl. \textit{yaw}), umgerechnet wird.
-\\
-Nachdem die notwendige Infrastruktur erläutert wurde, folgt eine kurze Betrachtung der kinematischen und physikalischen Einschränkungen, denen das AutoNOMOS Mini v3 unterworfen ist. Anschließend können wir uns endlich dem Kernstück der Arbeit, dem eigentlichen RRT*-Pfadplaner, widmen.
-
-\subsection{Kinematische und physikalische Einschränkungen}
-Im Gegensatz zu holonomischen Fahrzeugen, die sich ohne EInschränkungen in alle Richtungen des Raumes bewegen können, sind die möglichen Pfade eines nicht holonomischen Fahrzeug wie ein Auto nicht so einfach zu berechnen. Deshalb stellen wir zue
-rst ein mathematisches Modell des Autos auf und definieren die Randbedingungen, unter denen es agiert.
-Die mathematischen Definitionen der Randbedingungen und des Autos sind in der Bachelorarbeit von Lukas Gödicke \citep{Goedicke18} gut beschrieben und werden hier (übersetzt) übernommen. \\
-\subsubsection{Randbedingungen}
-Die Position des Autos bezieht sich auf den Mittelpunkt zwischen den Hinterrädern mit den Koordinaten x und y. Der Winkel $\theta \in S,  S=[0,2\pi]$ steht für die Ausrichtung des Autos, der Winkel $\phi \in S$ für die Ausrichtung der Räder (=Lenkwinkel). Wir nehmen an, dass das Auto sich auf einer flachen Ebene bewegt. Somit ist der Arbeitsraum definiert durch $C =  \mathbb{R \times S}$. Ein Zustand des Autos wird beschrieben durch $q \in C = (x,y,\theta)$.\\
-Zur Vereinfachung der Rechnungen wird angenommen, dass die Räder bei Bedarf sich sofort, ohne Zeitverlust, in die gewünschte Position begeben. Da der Lenkwinkel keinen Einfluss auf den Momentanzustand des Autos hat wird dieser in der Zustandsbeschreibung nicht aufgeführt. Zusätzlich kommt noch hinzu, dass das Auto zur Testzwecken bestimmte Geschwindigkeiten nicht überschreiten darf, sodass der minimale Kurvenradius nur durch den Lenkwinkel beschränkt ist und nicht auch noch zusätzlich durch die Geschwindigkeit. \\
-
-\subsubsection{Einschränkungen durch das Auto}
-Ein Auto hat eine Möglichkeit sich fortzubewegen: Es kann beschleunigen. Eine negative Beschleunigung wäre Bremsen oder sogar Rückwärtsfahren. Zusätzlich zu dieser einen Möglichkeit, den Zustand des Autos zu ändern, kann das Auto das Resultat der Beschleunigung ändern, indem der Lenkwinkel angepasst wird. Dieser reicht von $\phi_{max}$ bis $-\phi_{max}$, den maximalen Lenkwinkeln des Autos.
-Je nach Lenkwinkel $i_{\phi}$, Geschwindigkeit $i_g$ und Anfangsausrichtung des Autos $\theta$ ändern sich verschiedene Parameter des Zustandes $q(x,y, \theta) $: \\
-\begin{center}
-$ \dot{x} = i_g cos \phi $ \\
-$ \dot{y} = i_g sin \phi$ \\
-$ \dot{{\theta}} = \frac{i_g}{L} tan (i_{\phi}) $
-\end{center}
-L ist hierbei der Radstand, also der Abstand zwischen Vorder- und Hinterachse.
-
-\subsubsection{Konsequenzen}
-Es gibt unterschiedliche Vorgehensweisen, einen RRT zu bauen. Besondere Bedeutung hat dabei, wie neu erzeugte Knoten dem Baum hinzugefügt werden. Mein oben erwähnte Kommolitone David Gödicke benutzte in seiner Bachelorarbeit eine spezielle Projektionsmethode, sodass mithilfe von drei Dubinskurves \citep{Dubin61} der neu hinzugefügte Knoten stets durch seinen Vater erreichbar war \citep{Goedicke18}. Leider war die Berechnung dadurch insgesamt zu aufwändig und langsam, was für Echtzeit Szenarien im Straßenverkehr ein hartes Ausschlusskriterium ist, weshalb Goedicke diesen Ansatz nicht empfehlen konnte \citep[vergleiche][Kapitel 7]{Goedicke18}. \\
+Es gibt unterschiedliche Vorgehensweisen, einen RRT* zu bauen und neu zu verknüpfen. Besondere Bedeutung hat dabei, wie neu erzeugte Knoten dem Baum hinzugefügt werden. Mein in der Einleitung erwähnter Kommilitone David Gödicke benutzte in seiner Bachelorarbeit zum Erreichen zweier Punkte innerhalb des Baumes Dubin curves \citep{Dubin61} beziehungsweise Reed Sheep curves \citep{reeds1990optimal}, sodass der neu hinzugefügte Knoten stets durch seinen Vater erreichbar war \citep{Goedicke18}. Leider war die Berechnung dadurch insgesamt zu aufwändig und langsam, was für Echtzeit-Szenarien im Straßenverkehr ein hartes Ausschlusskriterium ist, weshalb Goedicke diesen Ansatz nicht empfehlen konnte \citep[vergleiche][Kapitel 7]{Goedicke18}. \\
 Daher entschloss ich mich, Varianten von RRT* zu untersuchen, bei denen das Auto direkt von Knoten zu Knoten fährt. Dadurch benötigt es nur eine Lenkeinstellung zwischen zwei Knoten und die Berechnung wird einfacher.\\
-Doch dadurch entstanden gewisse Einschränkungen, die ich jetzt genauer erläutern werde.\\
-\subsection{RRT*-Pfadplaner für autonome Fahrzeuge}
-Am Anfang dieses Kapitels werde ich diese Einschränkungen und mögliche Lösungsansätze schildern. Anschließend folgt eine Beschreibung der Durchführung mit Sackgassen und Erfolgen. Am Ende werde ich die schlussendlich auf dem Auto ausgeführte Algorithmen zeigen und erklären.  \\
-Ein RRT*, bei dem die Knoten einfach, z.B. mithilfe des euklidischen Abstands, hinzugefügt werden, besitzt Trajektorien zum Ziel, die für ein Auto aufgrund der oben benannten kinematischen Beschränkungen des Autos nicht abfahrbar sind. So entstehen beispielsweise Ecken, die für Auto unmöglich zu bewältigen ist, da es sich nicht auf der Stelle drehen kann. Bei der Lösung dieses Problems muss jedoch auch darauf geachtet werden, dass die Eigenschaften des RRT*, wie Laufzeit und asymptotische Optimalität \citep{KaFra10}, nicht verloren gehen.\\
-Dazu untersuchte ich unterschiedliche Ansätze:
+\begin{figure}
+\label{fig:reachable}
+\centering
+\includegraphics[scale=0.5]{Bilder/Erreichbarkeit_Punkte.png} 
+\caption{Erreichbare und nicht erreichbare Punkte vom Auto aus}
+\end{figure}
+\subsection{Übersicht}
+Hier werden vier verschiedene Ansätze vorgestellt, mit deren Hilfe das Auto mit dem RRT* Algorithmus von der Startposition in den Zielbereich kommt.
 \begin{enumerate}
-\item Einen Baum mit RRT* erzeugen, ohne die kinematischen Einschränkungen des Autos zu berücksichtigen. Durch die Eigenschaften des RRT* werden gerade Pfade erzeugt, deren Abfahren kein Problem ist. Wenn Ecken unvermeidbar sind (z.B. beim Herumfahren um Hindernisse) wird durch eine Heuristik dafür gesorgt, dass der Pfad abfahrbar bleibt.
+\item Erster Ansatz: Nicht erreichbare Knoten werden dem Baum nicht hinzugefügt. Kostenfunktion berücksichtigt Lenkänderungen. Rewiring findet Rekursiv statt.
+\item Zweiter Ansatz: Alle Knoten sind erreichbar, aber nur außerhalb der Wendekreise. Kostenfunktion berücksichtigt Lenkänderungen.
+\item Dritter Ansatz: RRT* ohne Einschränkungen durchgeführt, das heißt alle Knoten sind gültig. Am Ende wird ein Pfad vom Ziel zum Startknoten erstellt, der abfahrbar ist.
+\item Vierter Ansatz: Nicht erreichbare Knoten werden dem Baum nicht hinzugefügt. Kostenfunktion berücksichtigt Lenkänderungen. Rewiring wird nur bei dem Knoten mit der besten Kostenersparnis durchgeführt.
+\end{enumerate}
+Diese 
+ Dabei müssen diese Ansätze folgende Bedingungen erfüllen: \\
+\begin{enumerate}
+\item Garantie der Abfahrbarkeit: Das Auto muss in der Lage sein, der berechneten Trajektorie zu folgen. Da das Auto die Punkte innerhalb der Wendekreise nicht erreichen kann(siehe \ref{fig:reachable}), muss sichergestellt werden dass diese Punkte nicht als Kindknoten gewählt werden können.
+\item Geringe Kosten: Es muss nicht der optimale Pfad gefunden werden, aber er sollte zumindest asymptotisch optimal sein. 
+\item Niedrige Berechnungsdauer: Da der Algorithmus mehrmals pro Sekunde ausgeführt werden soll, sind Ausführzeiten über 250 Millisekunden nicht tolerierbar. Bei Messungen der Ausführzeit muss jedoch auch die Wahl der Datenstruktur, Metrik und die Art der Implementierung berücksichtigt werden, da diese zusätzlich die Laufzeit verändern können.
+\end{enumerate}
+Die vier Ansätze werden anhand der obigen Kriterien untersucht und bewertet.
+
+\begin{enumerate}
+
+
+\subsection{Erster Ansatz}
+
+\item Erster Ansatz: Einen Baum mit RRT* erzeugen, ohne die kinematischen Einschränkungen des Autos zu berücksichtigen. Durch die Eigenschaften des RRT* werden gerade Pfade erzeugt, deren Abfahren kein Problem ist. Wenn Ecken unvermeidbar sind (z.B. beim Herumfahren um Hindernisse) wird durch eine Heuristik dafür gesorgt, dass der Pfad abfahrbar bleibt.
 \item Einen Baum mit RRT* erzeugen. Wenn Erzeugung abgeschlossen: Pfad zum Ziel so bearbeiten, dass dieser vom Auto zu bewältigen ist (keine Ecken)
 \item Einen Baum mit RRT* erzeugen, aber nur Knoten hinzufügen, die von ihrem Vaterknoten aus unter oben genannten Bedingungen stets erreichbar sind
 
 \end{enumerate}
-Das Problem des ersten Ansatzes war, das unter Umständen je nach Umgebung ein Pfad nicht nur wegen bestimmter Ecken und Kanten nicht abfahrbar ist, sondern auch wegen Kurven, die Aufgrund des Lenkradius des Autos nicht zu bewältigen wären. Es wäre zwar möglich, für kurze Zeit die geplante Trajektorie zu verlassen und nach Ende der Kurve wieder zu ihr zu stoßen, allerdings ist es unter diesen Umständen schwierig eine Hindernisfreiheit zu garantieren. \\
+Das Problem des ersten Ansatzes war, dass unter Umständen, je nach Umgebung, ein Pfad nicht abfahrbar ist. Nicht abfahrbar heißt, dass der Pfad Ecken und Kurven besitzt, die aufgrund des Lenkradius des Autos nicht zu bewältigen wären. Es wäre zwar möglich, für kurze Zeit die geplante Trajektorie zu verlassen und nach Ende der Kurve wieder zu ihr zu stoßen, allerdings ist es unter diesen Umständen schwierig eine Hindernisfreiheit zu garantieren. \\
 Der zweite Ansatz ist zwar prinzipiell möglich. Ziel des ganzen war jedoch, wie in Kapitel \ref{sec:Problemanalyse} geschildert, das Neuplanen und überprüfen der Trajektorie auf Gültigkeit in einem engen Zeitfenster um auf dynamische Hindernisse zu reagieren. Dies ist mit einem Bearbeiten des Pfades vom Ziel zum Startknoten ineffizient und aufwändig.\\
 Deshalb entschloss ich mich zuerst für die dritte Variante, bei der Knoten nur zum RRT*-Graph unter der Bedingung hinzugefügt werden, dass sie erreichbar sind.
 \subsubsection{Vorauswahl}
@@ -187,11 +136,7 @@ Wenn man von den jetzt noch ausgewählten Knoten M einfach K als Vater hinzufüg
 Der Vorteil dieses Mechanismus ist, dass mögliche Optimierungen schnell durch den Baum wandern und keine Knoten ungültig werden. Außerdem müssen nicht so viele randomisierte Punkte erzeut werden, was der Laufzeit zu Gute kommt. Nachteile sind allerdings eine geringere Anzahl von räumlich verteilten Punkten (es liegen Punkte "übereinander"). Zudem kann dieses Verfahren viel Zeit beanspruchen, ohne viel Effekt zu haben, wenn besonders viele Punkte im Baum existieren und Bereiche weit abseits der Zielregion neu verknüpft werden.
 
 
-\subsection{Datenstruktur}
-RRT* hat eine amortisierte Laufzeit von O(n log(n)). Um diese Laufzeit auch in der Praxis zu erreichen, muss auf spezielle Datenstrukturen zurückgegriffen werden. Insbesondere müssen mehrfach sowohl der nächste Knoten als auch die nächsten innerhalb eines Radius ermittelt werden. Für die sogenannte \textit{k-nearest neighbour} Suche und \textit{radius k-nearest neighbour} existieren bereits viele wissenschaftliche Untersuchungen und auch empfohlene Datenstrukturen, wie zum Beispiel k-d-Bäume \citep{Bentley75}. Leider benötigt der RRT* Algorithmus eine dynamische Datenstruktur, da Punkte erst nach und nach hinzugefügt werden. Eine weitere Einschränkung waren fehlende Implementierungen, die auf die Anwendungsfälle von RRT* zugeschnitten waren. \\
-TODO Gitter wird nicht verwendet, sondern einfache Liste. Vllt Kombination aus beidem?
-Aufgrund dieser Einschränkungen wurde keine komplizierte, unter Umständen bessere Datenstruktur gewählt. Stattdessen wurde ein einfaches Gitter implementiert, deren Achsen die x- und y-Werte des einzufügenden Punktes repräsentierte. Dadurch fallen Punkte, die nah beeinander sind, in die gleiche oder benachbarte Zellen. Je nach Wahl der Größe der Zellen müssen nur die Knoten der Zelle selbst und der Nachbarzellen überprüft werden. Ein weiterer Vorteil des Gitters ist das schnelle Einfügen eines Knotens: Dadurch dass das Gitter statisch bleibt können Arrays als Rahmen gewählt werden und die Laufzeit zum Einfügen von Knoten liegt bei O(1).\\
-Solange allerdings noch sehr wenige Knoten sich im Gitter befinden, muss unter Umständen das gesamte Gitter nach Nachbarn abgesucht werden, was die Laufzeit stark verschlechtert. Innerhalb einer Zelle sind die Knoten in einer Liste gespeichert. Sollten sehr viele Knoten in eine Zelle fallen, dauert das Durchsuchen dieser Zelle sehr lange.
+
 
 
 \subsection{Dokumentation der Durchführung und entstandener Artefakte}
