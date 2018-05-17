@@ -22,11 +22,11 @@
 
 
 
-% Blind texts, for demonstration only, not part of the actual template
-\usepackage{lipsum}
 \usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{ltablex}
 
-\begin{document}
+	\begin{document}
 
 \coverpage[
     student/id=4866892,
@@ -39,10 +39,10 @@
     thesis/examiner/2={Prof. Dr. Raul Rojas}, % optional
     thesis/date=\today,                    % optional, default: \today
    %title/size=\LARGE,      % set this value to overwrite automatic font size
-   %abstract/separate       % toggle this to move the abstract to its own page
+   abstract/separate       % toggle this to move the abstract to its own page
 ]
-{ % Your abstract here:
-    \lipsum[1]
+{ 
+Diese Arbeit beschäftigt sich mit der Verwendung des RRT* Algorithmus auf einem Modellauto. In der Bachelorarbeit von David Goedicke \citep{Goedicke18} wurden die Algorithmen $RRT^X$ und $RRT^*$ zur Berechnung eines abfahrbaren Pfades für ein Modellauto verwendet. Beide Algorithmen waren dazu in der Lage, jedoch war die Berechnungszeit zu hoch für eine Echtzeitanwendung. Dies lag unter anderem auch an den verwendeten Dubin curves und Reeds Shepp curves, die kompliziert zu berechnen sind. In dieser Arbeit wird anstelle der Reed Shepps Curves untersucht, ob es möglich ist, mit nur einer Lenkeinstellung direkt von Knoten zu Knoten zu fahren. Vier unterschiedliche Ansätze werden vorgestellt, die alle erfolglos versuchen, das Problem zu lösen.
 }
 
 \include{declaration}
@@ -62,7 +62,7 @@
 
 \bibliography{bibliography}
 
-\appendix
-\include{5_appendix}
+%\appendix
+%\include{5_appendix}
 
 \end{document}

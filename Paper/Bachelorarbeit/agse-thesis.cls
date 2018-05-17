@@ -197,8 +197,8 @@
 
     \begin{center}
         \LARGE
-        \textbf{Freie Universität Berlin}
-
+	\includegraphics[width=0.6\textwidth]{Bilder/FU_logo.pdf}
+       
         \vspace{4mm}
 
         \normalsize

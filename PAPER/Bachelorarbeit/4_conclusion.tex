@@ -1,14 +1,20 @@
 % !TeX encoding = UTF-8
 \section{Ausblick und Fazit}
 \label{sec:Zusammenfassung}
-Hier kommt die Zusammenfassung aller Ergebnisse hin, Fazit, Bewertung der Arbeitsweise und der Ergebnisse, was habe ich mitgenommen, was kann ich zurückgeben
+Ziel der Arbeit war es, aufbauend auf der Bachelorarbeit von David Goedicke \citep{Goedicke18} einen Pfadplaner mithilfe von RRT* zu entwickeln, dessen Knoten Positionen des Autos symbolisieren. Dabei wird eine Trajektorie aus Knoten erstellt, von deren Punkten das Auto den jeweils nächsten Punkt mit nur einer Lenkeinstellung erreichen kann. \\
+Es wurde überprüft, ob dadurch die Geschwindigkeit so verbessert werden kann, dass der Algorithmus mehrfach pro Sekunde ausgeführt werden kann, ob die Trajektorie abfahrbar ist und ob ein asymptotisch optimaler Pfad gebildet wird. \\
+Nachdem vier verschiedene Ansätze untersucht wurden, hat sich herausgestellt, dass keiner dieser Ansätze in der Lage war, alle drei Bedingungen zufriedenstellend zu erfüllen. Es wird also nicht empfohlen, den Algorithmus so zu programmieren, dass man mit jeweils einer Lenkeinstellung zum nächsten Punkt kommt.
+
+\begin{enumerate}
+\item Analyse des Problems, Vorstellung eines Lösungsansatzes, dieses Problem zu lösen
+\item Erstellen eines einfachen Prototypen in Python, ohne schwierige Bereiche (Rewiring) zu berücksichtigen
+\item Umschreiben des Prototypen nach C++ zwecks erhoffter Performanceverbesserung
+\item Versuch, Prototyp in die ROS Infrastruktur zu integrieren und zu testen, mehrfaches Scheitern
+\item Überarbeiten der Theorie, nachdem festgestellt wurde dass der Prototyp so nicht funktionieren kann
+\item Mehrfaches neues Überarbeiten der Theorie und anschließend des Prototypens, um auf Probleme in der Theorie zu reagieren
+\end{enumerate}
 
 \subsection{Ausblick}
-Weitere Forschungen, mit Entfernungsnorm rumspielen, z.B. Manhattan Norm anstatt Euklidische Norm: Bessere Laufzeit, Belohnt geradeausfahren und 90 Grad Turns \\
-RRT*-Smart: Sampling zum ziel hin, bei Problemregionen (nahe an Hindernissen) \\
-Bessere, optimierte dynamische Datenstruktur für die Knoten (Vorschläge machen, kd-tree, quadtree, ...)\\
-
-
-[TODO] \\
-Hier werden dann Ergebnisse bekannt gegeben, Bilder, Grafiken angefügt die den Erfolg/Misserfolg des Alg. RRT* deutlich machen.
-...
+Allerdings gibt es im Kontext mit RRT* viele weitere mögliche Forschungsgebiete. David Goedicke hatte in \citep{Goedicke18} RRT* und RRT-Connect mit Reed-Shepp curves untersucht, was aber eine zu hohe Laufzeit hatte. Anstatt die Reed-Shepps curven zu entfernen, kann mithilfe von Heuristiken daran gearbeitet werden, den Aufbau des RRT* zu beschleunigen. Möglich wäre dabei die Verwendung von RRT*-Smart, was in problematischen Regionen mehr Knoten erzeugt und so deutlich schneller einen optimalen Pfad erlangt \citep{IsMaNa12}. Auch ein Online-Planer, der Teile des Baumes wiederverwendet anstatt den Baum zu verwerfen, sollte stark zu Laufzeitverbesserung beitragen.\\
+Wichtig ist aber auch, je nach Einsatzzweck passende Datenstrukturen zu finden, sodass die Laufzeit nicht nur theoretisch möglich ist, sondern auch praktisch verwirklichbar ist. \\
+Eine Möglichkeit, Forschungen in diesem Bereich zu vereinfachen, wäre die Implementation eines sehr allgemein gehaltenen RRT oder RRT* Planers, der dann mit verschiedenen Heuristiken und Modifikationen erweitert werden kann.
