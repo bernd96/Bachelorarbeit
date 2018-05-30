@@ -2,9 +2,7 @@
 \section{Ausblick und Fazit}
 \label{sec:Zusammenfassung}
 Ziel der Arbeit war es, aufbauend auf der Bachelorarbeit von David Goedicke \citep{Goedicke18} einen Pfadplaner mithilfe von RRT* zu entwickeln, dessen Knoten Positionen des Autos symbolisieren. Dabei wird eine Trajektorie aus Knoten erstellt, von deren Punkten das Auto den jeweils nächsten Punkt mit nur einer Lenkeinstellung erreichen kann. \\
-Es wurde überprüft, ob dadurch die Geschwindigkeit so verbessert werden kann, dass der Algorithmus mehrfach pro Sekunde ausgeführt werden kann, ob die Trajektorie abfahrbar ist und ob ein asymptotisch optimaler Pfad gebildet wird. \\
-Nachdem vier verschiedene Ansätze untersucht wurden, hat sich herausgestellt, dass keiner dieser Ansätze in der Lage war, alle drei Bedingungen zufriedenstellend zu erfüllen. Es wird also nicht empfohlen, den Algorithmus so zu programmieren, dass man mit jeweils einer Lenkeinstellung zum nächsten Punkt kommt.
-
+Folgende Schritte wurden dabei durchgeführt:\\
 \begin{enumerate}
 \item Analyse des Problems, Vorstellung eines Lösungsansatzes, dieses Problem zu lösen
 \item Erstellen eines einfachen Prototypen in Python, ohne schwierige Bereiche (Rewiring) zu berücksichtigen
@@ -13,6 +11,10 @@ Nachdem vier verschiedene Ansätze untersucht wurden, hat sich herausgestellt, d
 \item Überarbeiten der Theorie, nachdem festgestellt wurde dass der Prototyp so nicht funktionieren kann
 \item Mehrfaches neues Überarbeiten der Theorie und anschließend des Prototypens, um auf Probleme in der Theorie zu reagieren
 \end{enumerate}
+Es wurde überprüft, ob die Geschwindigkeit so verbessert werden kann, dass der Algorithmus mehrfach pro Sekunde ausgeführt werden kann, ob die Trajektorie abfahrbar ist und ob ein asymptotisch optimaler Pfad gebildet wird. \\
+Nachdem vier verschiedene Ansätze untersucht wurden, hat sich herausgestellt, dass keiner dieser Ansätze in der Lage war, alle drei Bedingungen zufriedenstellend zu erfüllen. Allerdings konnte die Laufzeit beim vierten Ansatz gegenüber dem ersten Ansatz deutlich verbessert werden. Auch konnten die anderen Bedingungen, wie die Abfahrbarkeit der Trajektorie und die asymptotische Optimalität, erfüllt werden. Dennoch wird nicht empfohlen, den RRT*-Algorithmus so zu programmieren, dass man mit jeweils einer Lenkeinstellung zum nächsten Punkt kommt. Die zu hohen Laufzeiten verhindern leider einen praktischen Einsatz dieser Ansätze.
+
+
 
 \subsection{Ausblick}
 Allerdings gibt es im Kontext mit RRT* viele weitere mögliche Forschungsgebiete. David Goedicke hatte in \citep{Goedicke18} RRT* und RRT-Connect mit Reed-Shepp curves untersucht, was aber eine zu hohe Laufzeit hatte. Anstatt die Reed-Shepps curven zu entfernen, kann mithilfe von Heuristiken daran gearbeitet werden, den Aufbau des RRT* zu beschleunigen. Möglich wäre dabei die Verwendung von RRT*-Smart, was in problematischen Regionen mehr Knoten erzeugt und so deutlich schneller einen optimalen Pfad erlangt \citep{IsMaNa12}. Auch ein Online-Planer, der Teile des Baumes wiederverwendet anstatt den Baum zu verwerfen, sollte stark zu Laufzeitverbesserung beitragen.\\

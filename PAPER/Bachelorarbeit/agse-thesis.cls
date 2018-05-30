@@ -88,11 +88,11 @@
     pdfstartview=FitH,
     linktocpage,
 % two lines below = color links
-    colorlinks=true,
-    citecolor=blue!20!black!30!green,
+ %   colorlinks=true,
+%    citecolor=blue!20!black!30!green,
 % two lines below = don't color links
-    %colorlinks=false,
-    %pdfborder={0 0 0},
+    colorlinks=false,
+   pdfborder={0 0 0},
 ]{hyperref}
 
 % Tables

@@ -1,6 +1,6 @@
 % !TeX encoding = UTF-8
 \section{Einleitung}
-Der Traum vom autonomen Fahren reicht bis in die Antike zu den Griechen zurück, deren Gott des Feuers und der Schmiedekunst Hephaistos Androiden und selbst fahrende Automobile konstruierte. Mittlerweile ist die Forschung in diesen Bereichen von der Phantasie in die Wirklichkeit gerückt und so weit fortgeschritten, dass dieser Traum schon bald Wirklichkeit werden könnte. Zuvor müssen jedoch etliche Herausforderungen bewältigt werden. Eine davon ist, das Auto sicher durch den Straßenverkehr zu bringen. Dabei heißt sicher, dass das Auto während der Fahrt weder sich noch andere Verkehrsteilnehmer gefährdet. Neben der Sicherheit ist jedoch auch das möglichst schnelle Erreichen des Ziels wichtig, bei dem das Auto seinen Weg durch eine Umgebung mit statischen und dynamischen, das heißt sich bewegenden, Hindernissen finden muss. In diesem Kontext ist noch zu erwähnen, dass dieser Weg nicht wie bei einem Navigationssystem beispielsweise von Berlin nach Hamburg führt, sondern eher von einer Straßenecke zur nächsten oder über einen Parkplatz. Dies wird durch einen Pfadplaner gewährleistet, der -informell gesprochen - aus der eigenen Position, dem Zielbereich und unter Berücksichtigung aller statischen und sich bewegenden Hindernissen einen sicheren Pfad zum Ziel findet. Dieser Pfad ist dann durch das Auto abfahrbar.\\
+Der Traum des autonomen Fahrens reicht bis in die Antike zu den Griechen zurück, deren Gott des Feuers und der Schmiedekunst Hephaistos Androiden und selbst fahrende Automobile konstruierte. Mittlerweile ist die Forschung in diesen Bereichen von der Phantasie in die Wirklichkeit gerückt und so weit fortgeschritten, dass dieser Traum schon bald Wirklichkeit werden könnte. Zuvor müssen jedoch etliche Herausforderungen bewältigt werden. Eine davon ist, das Auto sicher durch den Straßenverkehr zu bringen. Dabei heißt sicher, dass das Auto während der Fahrt weder sich noch andere Verkehrsteilnehmer gefährdet. Neben der Sicherheit ist jedoch auch das möglichst schnelle Erreichen des Ziels wichtig, bei dem das Auto seinen Weg durch eine Umgebung mit statischen und dynamischen, das heißt sich bewegenden, Hindernissen finden muss. In diesem Kontext ist noch zu erwähnen, dass dieser Weg nicht wie bei einem Navigationssystem beispielsweise von Berlin nach Hamburg führt, sondern eher von einer Straßenecke zur nächsten oder über einen Parkplatz. Dies wird durch einen Pfadplaner gewährleistet, der -informell gesprochen - aus der eigenen Position, dem Zielbereich und unter Berücksichtigung aller statischen und sich bewegenden Hindernissen einen sicheren Pfad zum Ziel findet. Dieser Pfad ist dann durch das Auto abfahrbar.\\
 Um diese Aufgabe zu meistern, existieren unterschiedliche Ansätze, um dem Auto je nach Anwendungsfall bei gegebenen Ziel eine \textit{Trajektorie} vorzuschlagen. Die jeweiligen Algorithmen unterscheiden sich in Ausführungszeit, Genauigkeit, Sicherheit und berechnen unterschiedlich optimale Pfade.  \\
 Das Dahlem Center for Machine Learning and Robotics untersucht maschinelles Lernen und Anwendungen intelligenter Systeme. Dazu haben sich vier Arbeitsgruppen der Freien Universität Berlin zusammengeschlossen:
 \begin{itemize}
@@ -16,15 +16,13 @@ Diese Bachelorarbeit untersucht einen dieser anderen Algorithmen zur Pfadplanung
 Nach einer kurzen Hinführung zum Thema werden zuallererst die Grundlagen(\ref{sec:Grundlagen}) besprochen, um das Verständnis der nachfolgenden Kapitel zu erleichtern. Diese sind neben den grundlegenden Algorithmen auch die verwendete Hardware und Software sowie die zu berücksichtigenden Rahmenbedingungen. Im nächsten Kapitel(\ref{sec:Umsetzung}) wird das Problem genauer beschrieben, anschließend folgen Analyse und Bewertung verschiedener Ansätze zur Lösung desselben. Zum Schluss werden in einem Fazit(\ref{sec:Zusammenfassung}) alle Schlussfolgerungen nochmals zusammengefasst und ein Ausblick auf weitere mögliche Forschungsmöglichkeiten gegeben. \\ 
 
 
-\subsection{Anmerkung zur Gestaltung der Arbeit}
+\subsection{Glossar}
 Für die im Folgenden verwendeten personenbezogenen
 Ausdrücke wurde, um die Lesbarkeit der Arbeit zu erhöhen,
 ausschließlich die männliche Schreibweise gewählt. Des Weiteren werden eine
 Reihe von englischen Bezeichnungen und Fachwörtern verwendet, um einerseits dem
 interessierten Leser das Studium der fast ausschließlich englischen
 Fachliteratur zu erleichtern und andererseits bestehende Fachbegriffe nicht durch die Übersetzung zu verfälschen. Bei diesen Begriffen wird zur Unterscheidung eine kursive Schriftart verwendet.
-
-\subsubsection{Glossar}
 
 \begin{tabularx}{\textwidth}{l|X}
  \textbf{Begriff}  & \textbf{Erklärung}  \\

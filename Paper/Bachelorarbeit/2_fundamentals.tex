@@ -15,7 +15,7 @@ Bei der Entwicklung von \textit{RRT} wurde deshalb viel Wert auf Einfachheit, Al
 Der RRT-Algorithmus baut einen Baum auf, indem zufällig gewählte Punkte unter Berücksichtigung einer Metrik verbunden werden. Der Algorithmus mit dem \textit{RRT} $T$, den Eingabeparametern Größe $K$, Metrik $M$, Bewegungsfunktion $u$ und Startzustand \verb|x_init|  funktioniert folgendermaßen:
 
 \subsubsection{Funktionsweise der Rapidly-Exploring Random Trees}
-\lstset{language=Pascal, stepnumber=1, numbers=left}
+\lstset{keywordstyle=\color{black},stepnumber=1, numbers=left}
 \begin{lstlisting}
 BUILD_RRT(K, M, u, x_init)
 	T.init (x_init)
@@ -44,12 +44,11 @@ Vom nächsten Nachbarn \verb|x_near| aus wird mit \verb|project(x,x_near,u)| ein
 \centering
 \includegraphics[scale=0.5]{Bilder/Extend.png} 
 \caption{Die EXTEND Funktion \citep{Lav00} }
-\label{fig3}
 \end{figure} \\
 Nun wird mit \verb|Collisionfree(x_new, x_near, u)| überprüft, ob \verb|x_new| oder die Bewegung $u$ zu \verb|x_new| hin mit Hindernissen kollidiert oder diesen zu Nahe kommt. Falls dies nicht der Fall ist, werden sowohl der neu entstandene Knoten \verb|x_new| als auch die Kante von \verb|x_near| zu \verb|x_new| dem Baum $T$ hinzugefügt. \\
 Falls  \verb|x_new| oder die Bewegung u zu  \verb|x_new| mit Hindernissen kollidiert oder diesen zu nahe kommt, wird der Knoten  \verb|x_new| verworfen und die Funktion \verb|EXTEND(T,x)| beendet.\\
 
-\subsubsection{Vor- und Nachteile von RRT}
+\subsubsection{Vor- und Nachteile der Rapidly-Exploring Random Trees}
 Die Rapidly-Exploring Random Trees haben einige Eigenschaften, die für die Bewegungsplanung von Robotern von großem Vorteil sind, wie LaValle in  \citep[Kapitel 3 in][]{Lav98} schreibt:
 \begin{enumerate}
 \item Ein \textit{RRT} breitet sich sehr schnell in unerforschte Bereiche des Statusraums aus. Dadurch können Pfade schnell gefunden werden und es wird schnell eine mögliche (wenn auch nicht optimale) Lösung gefunden.
@@ -63,14 +62,13 @@ Leider existieren neben den oben genannten Vorteilen auch etliche Nachteile. Ein
 
 \begin{figure}[htb]
     \centering
-   \label{fig:fig7}   
  \includegraphics[scale=1]{Bilder/RRT_RRT_star.png} 
  \caption{RRT(links) und RRT* (rechts) mit jeweils 20.000 Knoten}
       
 \end{figure}
 
 Deshalb wurde von Sertac Karaman und Emilio Frazzoli aufbauend auf \textit{RRTs} der Algorithmus\textit{ RRT*} eingeführt, welcher diesen Nachteil ausgleicht(siehe Abbildung 2).
-\subsection{RRT*}
+\subsection{Rapidly-Exploring Random Tree Star}
 \label{RRT*}
 Im Gegensatz zu einem \textit{RRT} führt ein \textit{RRT*} die zwei folgenden Neuerungen ein:
 \begin{enumerate}
@@ -78,7 +76,7 @@ Im Gegensatz zu einem \textit{RRT} führt ein \textit{RRT*} die zwei folgenden N
 \item Neuverknüpfung des Baumes
 \end{enumerate}
 Diese Neuerungen resultieren in einer veränderten \verb|EXTEND(T,x)| Funktion, siehe \citep{KaFra10}.
-\subsubsection{Funktionsweise RRT*}
+\subsubsection{Funktionsweise eines Rapidly-Exploring Random Tree Star}
 \begin{lstlisting}
 EXTEND(T,x)
 	x_nearest = NEAREST_NEIGHBORS(x, T, M);
@@ -107,7 +105,7 @@ Es wird \verb|x_min| als der Abstand zum nächsten Knoten gesetzt. Die Funktion 
 Die Liste \verb|X_NEAR| wird auf den besten Vaterknoten, also den mit den geringsten Kosten für \verb|x_new|, überprüft. Dieser beste gefundene Nachbar wird für \verb|x_new| als Vaterknoten gesetzt, also eine Kante zwischen \verb|x_new| und \verb|x_near| gezogen. \\
 \label{sec:rewiring}
 Nachdem so ein Pfad vom Vaterknoten zu \verb|x_new| gebildet wurde, wird der Baum neu verknüpft. Bei jedem Knoten innerhalb des Radius von \verb|x_new| wird überprüft, ob die Kosten mit \verb|x_new| als Vaterknoten geringer werden. Wo immer dies der Fall ist, wird \verb|x_new| als Vaterknoten gesetzt.
-\subsubsection{Vor- und Nachteile der Rapidly-Exploring Random Trees*}
+\subsubsection{Vor- und Nachteile der Rapidly-Exploring Random Trees Star}
 \label{sec:rrt*}
 Eine Verbesserung zu einem \textit{RRT} ist, dass nicht der nächste Nachbar als Vaterknoten gesetzt wird, sondern der mit den besten Kosten. Je nach Wahl des Radius $r$ und Güte der Kostenfunktion kann hier einiges an \glqq Umweg\grqq{} gespart werden. \\
 Der Hauptunterschied ist jedoch die Neuverknüpfung bereits bestehender Knoten über \verb|x_new|. Ein Nachteil des \textit{RRTs} ist, dass Knoten, die aus bereits gut mit Knoten gefüllten Regionen neu hinzugefügt wurden, wenig neues beitragen, also weder neue Regionen entdecken, noch bestehende Pfade verbessern. Dies ändert sich nun, denn jeder von Knoten umgebene, neu hinzugefügte Knoten verbessert die Kosten aller Knoten, die durch \verb|x_new| besser erreichbar sind. Das führt dann sogar soweit, dass ein \textit{RRT*} asymptotisch optimal ist, d.h. bei genügend langer Laufzeit der Pfad zum Optimum konvergiert. Jeder Knoten hilft entweder, den Baum zu expandieren oder sorgt für bessere Pfade innerhalb des Baumes (\citep[vgl. Kapitel 5 in][]{KaFra10}). Je nach Art der Kostenfunktion und dem Samplen neuer Knoten kann der RRT* auch mit bestimmten Eigenschaften ausgestattet werden, z.B. präferiertes Wachsen in bestimmte Richtungen.
@@ -132,17 +130,17 @@ Motorisiert ist das Auto mit einem bürstenlosen DC-Servomotor FAULHABER 2232. D
 Zur Wahrnehmung der Umgebung besitzt das AutoNOMOS Mini v3 mit dem RPLIDAR A2 360 einen rotierenden Laserscanner, der in der Lage ist, die Umgebung des Autos auf Hindernisse zu überprüfen. Als Rückgabewert liefert der RPLIDAR pro Gradwinkel einen Wert in Metern, wie weit das nächste Hindernis in dieser Richtung entfernt ist, insgesamt also 360 Werte. \\
 Auf dem oberen Teil des Autos befestigt ist das \textit{Kinect-type stereoscopic system} (Intel RealSense SR300), welches eine Wolke aus 3D Punkten liefert, die dazu benutzt werden kann, Hindernisse zu erkennen. Außerdem kann die Kamera des \textit{Kinect-type} Sensors dazu benutzt werden, Fahrbahnmarkierungen und Objekte direkt vor dem Auto zu lokalisieren.\\
 Der letzte äußere Sensor, auch am oberen Teil des Autos angebracht, ist die Fischaugen-Kamera. Diese zeigt nach oben zur Decke, und kann dazu benutzt werden bestimmte markante, feststehende Objekte zu lokalisieren, damit das AutoNOMOS Mini v3 sich auch innerhalb von Räumen orientieren kann. Dazu kann eine GPS Navigationseinheit simuliert werden, indem die an der Decke angebrachten vier Lampen in unterschiedlichen Farben leuchten.
-Die Sensoren sind entweder via USB 3.0 an der Hauptplatine oder direkt am \textit{Odroid} angeschlossen. \\
+Die Sensoren sind entweder via USB 3.0 an der Hauptplatine oder direkt am \textit{Odroid} angeschlossen. Dies ist in Abblidung 4 zu sehen.\\
 An inneren Sensoren besitzt das AutoNOMOS Mini v3 eine MPU6050, die einen Beschleunigungssensor und ein \textit{Gyroskop} enthält. Mithilfe dieser MPU kann das AutoNOMOS Mini v3 seine Orientierung, seine Richtung im Raum bestimmen. Außerdem können Messungen zur \textit{Odometrie} ergänzt werden.\\
 Das AutoNOMOS Mini v3 wird über eine 14,8 V Batterie mit Energie versorgt.
 
 \subsection{Software: ROS - Robot Operating Systems}
-ROS stellt Bibliotheken und Werkzeuge zur Verfügung, die Software-Entwicklern helfen sollen, Robotik-Anwendungen zu kreieren \citep{ROS}. Unter anderem beinhaltet ROS Gerätetreiber, Bibliotheken, Visualisierungswerkzeuge, Paketmanagement und vieles mehr. ROS ist quelloffen und unter der BSD Lizenz verfügbar.
-\subsubsection{Architektur}
+ROS stellt Bibliotheken und Werkzeuge zur Verfügung, die Software-Entwicklern helfen sollen, Robotik-Anwendungen zu kreieren \citep{ROS}. Unter anderem beinhaltet ROS Gerätetreiber, Bibliotheken, Visualisierungswerkzeuge, Paketmanagement und vieles mehr. ROS ist quelloffen und unter der BSD Lizenz verfügbar.\\
+
 Mithilfe von ROS können ausführbare Programme, auch Knoten genannt, erzeugt werden, die über so genannte \textit{Topics} kommunizieren können. Dies passiert über einen anonymisierten Publisher/Subscriber Mechanismus, das heißt Daten generierende Knoten können auf relevanten \textit{Topics} Nachrichten senden und Knoten, die Daten benötigen, können von relevanten \textit{Topics} Nachrichten empfangen. \\
 Für jedes \textit{Topic} ist dabei auch die Nachrichtenart definiert, die für dieses \textit{Topic} veröffentlicht und von diesem \textit{Topic} empfangen werden. Diese kann neben simplen Datentypen auch aus komplexen, selbst definierten Datenstrukturen bestehen. Dabei wird nur dieser eine, vorher festgelegte Datentyp der Nachricht vom \textit{Topic} akzeptiert.
 \textit{Topics} stellen nur eine unidirektionale Verbindung zur Verfügung. Für die Abwicklung von zum Beispiel Remote Procedure Calls sind sogenannte Services zuständig. Diese ermöglichen eine Antwort auf eine bestimmte Anfrage nach dem Client Server Prinzip zurückzusenden.
-\subsection{APIs und Einbettung zu bereits vorhandene Knoten}
+\subsection{Schnittstellen und Einbettung zu bereits vorhandene Knoten}
 Das Dahlem Center for Machine Learning and Robotics entwickelte ROS-Pakete für die Steuerung ihrer autonomer Fahrzeuge. Diese Pakete und daraus resultierenden ROS-Nodes können dazu genutzt werden, den von mir entwickelten RRT*-Pfadplaner möglichst gut einzubetten. So kann durch das visuelle indoor GPS die Position des Autos bestimmt werden, die der Pfadplaner für seine Berechnungen braucht. Die resultierende \textit{Trajektorie}, die der Pfadplaner entwickelt, wird dem Low-Level-Planer übergeben, der diese \textit{Trajektorie} in Motorbefehle, also Beschleunigungen und Lenkungen, umsetzt. 
 \subsubsection{Bestimmung der Odometrie und visuelles GPS}
 Zur Ausführung des Algorithmus gehört, dass das Auto sich selbst lokalisieren kann und seine eigene Startposition feststellen kann. Diese wird mit der aktuellen Ausrichtung des Autos dazu benutzt, den Startpunkt für den Algorithmus zu setzen. \\
@@ -161,7 +159,7 @@ Dieser Planer lauscht auf das \textit{Topic} \verb|"planned_path"|. Auf \verb|"p
 Das Format der \textit{Trajektorie} wurde von der Arbeitsgruppe der FU Berlin definiert und besteht aus
 \begin{itemize}
 \item \verb|std_msgs/Header|: Hier wird die aktuelle Zeit gespeichert.
-\item \verb|string child_frame_id|: [TODO] frame id for Twists (velocity and acceleration)
+\item \verb|string child_frame_id|: Koordinatensystem, in dem die Trajektorie eingebettet wird.
 \item \verb|fub_trajectory_msgs/TrajectoryPoint[] trajectory|: Eine Liste aus Trajektorie-Punkten.
 \end{itemize}
 Ein Trajektorien-Punkt symbolisiert einen abzufahrenden Knotenpunkt und besteht wiederum aus
@@ -174,18 +172,20 @@ Die Position wird in x-Position und y-Position ausgehend von einer Ecke des Raum
 \\
 
 \subsection{Datenstruktur}
-Um die Anwendung in Echtzeit zu nutzen, muss die Geschwindigkeit des RRT* Algorithmus sehr hoch sein. Der gesamte Algorithmus, bestehend aus Aufbau des Baumes, Rewiring, dem Finden einer gültigen Trajektorie vom Start zum Ziel und Vermeiden von Hindernissen sollte nicht mehr als 250 Milisekunden brauchen. Dadurch wird gewährleistet, dass auch sich bewegende Hindernisse stets erkannt werden und der Pfad des Autos gültig bleibt. \\
+Um die Anwendung in Echtzeit zu nutzen, muss die Geschwindigkeit des RRT* Algorithmus sehr hoch sein. Der gesamte Algorithmus, bestehend aus Aufbau des Baumes, Rewiring, dem Finden einer gültigen Trajektorie vom Start zum Ziel und Vermeiden von Hindernissen sollte nicht mehr als 250 Millisekunden brauchen. Dadurch wird gewährleistet, dass auch sich bewegende Hindernisse stets erkannt werden und der Pfad des Autos gültig bleibt. \\
 RRT* erzeugt n Punkte. Jeder dieser Punkte sucht zuerst seinen nächsten Nachbarn, dann wird der Punkt an den Baum projiziert und dem Baum hinzugefügt. Am Ende wird der Baum neu verknüpft. \\
 Unter der Voraussetzung, dass die Suche des nächsten Nachbarn in der Zeit O(log n) zu bewerkstelligen ist, hat RRT* eine Laufzeit von O(n log n). Dies ist jedoch nur durch die Wahl einer passenden Datenstruktur zu erreichen, die \textit{k-nearest neighbour} Suche und \textit{radius k-nearest neighbour} in O(log n) durchführen können.\\
-Es existieren bereits viele wissenschaftliche Untersuchungen und auch empfohlene Datenstrukturen, wie zum Beispiel k-d-Bäume \citep{Bentley75}. Leider benötigt der RRT* Algorithmus eine dynamische Datenstruktur, da Punkte erst nach und nach hinzugefügt werden. Das Hinzufügen eines Punktes muss somit auch in logarithmischer Zeit gewährleistet sein. \\
+Es existieren bereits viele wissenschaftliche Untersuchungen und auch empfohlene Datenstrukturen, wie zum Beispiel k-d-Bäume \citep{Bentley75}. Leider benötigt der RRT* Algorithmus eine dynamische Datenstruktur, da Punkte erst nach und nach hinzugefügt werden. Das Hinzufügen eines Punktes muss somit auch in logarithmischer Zeit gewährleistet sein. 
 
-Aufgrund fehlender Implementierungen und Mangel an Zeit zum Erstellungszeitraum dieser Arbeit konnte eine solche Datenstruktur nicht mehr im Zusammenhang mit dieser Arbeit implementiert werden. Der alternative Versuch, mit nanoflann \citep{blanco2014nanoflann}, die Knoten in einen KD-Baum zu verwenden, scheiterte an der fehlenden dynamischen Unterstützung.\\
+Aufgrund fehlender Implementierungen und Mangel an Zeit zum Erstellungszeitraum dieser Arbeit konnte eine solche Datenstruktur nicht mehr im Zusammenhang mit dieser Arbeit implementiert werden. Der alternative Versuch, mit Hilfe der Bibliothek nanoflann \citep{blanco2014nanoflann} die Knoten in einen k-d-Baum zu verwenden, scheiterte an der fehlenden dynamischen Unterstützung.
 
-Deshalb wurde versucht, eine einfachere Datenstruktur mit den ersehnten Eigenschaften zu entwerfen. Dazu wurde ein einfaches Gitter implementiert, deren Achsen die x- und y-Werte des einzufügenden Punktes repräsentierten. Dadurch fallen Punkte, die nah beeinander sind, in die gleiche oder benachbarte Zellen. Je nach Wahl der Größe der Zellen müssen nur die Knoten der Zelle selbst und der Nachbarzellen überprüft werden. Ein weiterer Vorteil des Gitters ist das schnelle Einfügen eines Knotens: Dadurch dass das Gitter statisch bleibt, können Arrays als Rahmen gewählt werden und die Laufzeit zum Einfügen von Knoten liegt bei O(1).\\
-Im optimalen Fall muss bei der \textit{k-nearest neighbour} Suche nur die Zelle, worin der Knoten liegt, sowie alle acht angrenzenden Zellen untersucht werden. Solange sich allerdings nur sehr wenige Knoten im Gitter befinden, muss unter Umständen das gesamte Gitter nach Nachbarn abgesucht werden, was die Laufzeit stark verschlechtert. Innerhalb einer Zelle sind die Knoten in einer Liste gespeichert. Sollten sehr viele Knoten in eine Zelle fallen, dauert das Durchsuchen dieser Zelle sehr lange. Wird also die Zellgröße groß gewählt, dauert das Durchsuchen einer Zelle lange, wird sie klein gewählt, müssen zu viele Zellen durchsucht werden. \\
+Deshalb wurde versucht, eine einfachere Datenstruktur mit den ersehnten Eigenschaften zu entwerfen. Dazu wurde ein einfaches Gitter implementiert, deren Achsen die x- und y-Werte des einzufügenden Punktes repräsentierten. Dadurch fallen Punkte, die nah beieinander sind, in die gleiche oder benachbarte Zellen. Je nach Wahl der Größe der Zellen müssen nur die Knoten der Zelle selbst und der Nachbarzellen überprüft werden. Ein weiterer Vorteil des Gitters ist das schnelle Einfügen eines Knotens: Dadurch dass das Gitter statisch bleibt, können Arrays als Rahmen gewählt werden und die Laufzeit zum Einfügen von Knoten liegt bei O(1).
+
+Im optimalen Fall muss bei der \textit{k-nearest neighbour} Suche nur die Zelle, worin der Knoten liegt, sowie alle acht angrenzenden Zellen untersucht werden. Solange sich allerdings nur sehr wenige Knoten im Gitter befinden, muss unter Umständen das gesamte Gitter nach Nachbarn abgesucht werden, was die Laufzeit stark verschlechtert. Innerhalb einer Zelle sind die Knoten in einer Liste gespeichert. Sollten sehr viele Knoten in eine Zelle fallen, dauert das Durchsuchen dieser Zelle sehr lange. Wird also die Zellgröße groß gewählt, dauert das Durchsuchen einer Zelle lange, wird sie klein gewählt, müssen zu viele Zellen durchsucht werden. 
+
 Aufgrund einer zu hohen Laufzeit und Fehleranfälligkeit wurde das Gitter verworfen und zur Speicherung der Knoten eine einfache Liste gewählt. Dadurch hat der Algorithmus zwar eine Laufzeit von O($n^2$), dafür waren die Fehleranfälligkeit und der zeitliche Implementierungsaufwand nicht so hoch. \\
 \subsection{Sonstige verwendete Software}
-Anfangs wurde in der Programmiersprache Python programmiert. Zur Verbesserung der Geschwindigkeit wurde jedoch schnell zu C++ gewechselt. Als Entwicklungsumgebung wurde Eclipse mit dem CTD-Plugin gewählt. \\
+Anfangs wurde in der Programmiersprache Python programmiert. Zur Verbesserung der Geschwindigkeit wurde jedoch schnell zu C++ gewechselt. Als Entwicklungsumgebung wurde Eclipse mit dem CDT-Plugin gewählt. \\
 Zur Berechnung der Vektorarithmetik wurde die C++ Headerbibliothek Eigen3 verwendet.
 
 Nachdem die notwendige Infrastruktur und verwendete Software erläutert wurde, folgt eine kurze Betrachtung der kinematischen und physikalischen Einschränkungen, denen das AutoNOMOS Mini v3 unterworfen ist. Anschließend wird sich im Folgenden dem Kernstück der Arbeit, dem eigentlichen RRT*-Pfadplaner, gewidmet.
