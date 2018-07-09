@@ -1,0 +1,10 @@
+Christos Katrakazas, Mohammed Quddus, Wen-Hua Chen, Lipika Deka,
+Real-time motion planning methods for autonomous on-road driving: State-of-the-art and future research directions,
+Transportation Research Part C: Emerging Technologies,
+Volume 60,
+2015,
+Pages 416-442,
+ISSN 0968-090X,
+https://doi.org/10.1016/j.trc.2015.09.011.
+(http://www.sciencedirect.com/science/article/pii/S0968090X15003447)
+Keywords: Path planning; Obstacle detection; Trajectory planning; Autonomous vehicles; V2I
